@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+article {
+  width: 50%;
+  margin: auto;
+}
+
+h1, h2, h3, h4, h5, h6, th {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+h1.title {
+  font-size: 64px;
+  letter-spacing: -4px;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: -3px;
+}
+
+h2 {
+  font-size: 32px;
+  letter-spacing: -2px;
+}
+
+th {
+  font-size: 24px;
+}
+
+p, td {
+  font-family: Sanford, serif;
+  font-size: 24px;
+}
+
+code {
+  font-family: Consolas, Inconsolata, monospace;
+  color: #f48;
+}
+
+a {
+  color: #48f;
+}
+
+a:hover {
+  color: #8cf;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr:nth-child(1) {
+  background-color: #48f;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #eee;
+}
+
+th, td {
+  min-width: 150px;
+  padding: 5px 15px;
+  text-align: left;
+}
+
+th.numeric, td.numeric {
+  text-align: right;
+}

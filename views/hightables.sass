@@ -1,0 +1,69 @@
+@mixin heading
+  font-family: Helvetica, Arial, sans-serif
+  font-weight: bold
+
+@mixin text
+  font-family: Georgia, serif
+
+body
+  margin: 0
+  padding: 0
+
+article
+  width: 50%
+  margin: auto
+
+h1, h2, h3, h4, h5, h6, th
+  @include heading
+
+p, td
+  @include text
+
+h1
+  font-size: 48px
+  letter-spacing: -3px
+  &.title
+    font-size: 64px
+    letter-spacing: -4px
+
+h2
+  font-size: 32px
+  letter-spacing: -2px
+
+p
+  font-size: 24px
+  &.summary
+    font-size: 28px
+
+th, td
+  font-size: 20px
+
+code
+  font-family: Consolas, Inconsolata, monospace
+  color: #f48
+
+a
+  color: #48f
+  &:hover
+    color: #8cf
+
+table
+  border-collapse: collapse
+
+tr
+  &:nth-child(1)
+    background-color: #48c
+    color: #fff
+  &:nth-child(even)
+    background-color: #eee
+  &:hover
+    background-color: #ffe
+    color: #000
+
+th, td
+  min-width: 150px
+  padding: 5px 15px
+  text-align: left
+
+th.numeric, td.numeric
+  text-align: right

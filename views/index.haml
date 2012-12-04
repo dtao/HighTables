@@ -1,0 +1,49 @@
+!!!
+%head
+  %title HighTables
+  %link(rel="stylesheet" href="/sass/hightables.css")
+  %script(type="text/javascript" src="/jquery-1.8.3.min.js")
+  %script(type="text/javascript" src="/highcharts-2.3.3.min.js")
+  %script(type="text/javascript" src="/hightables.js")
+
+%body
+  %article
+    %h1.title HighTables
+
+    %p.summary
+      HighTables makes it trivial to render charts from existing HTML tables using
+      <a href="http://jquery.com/">jQuery</a> and
+      <a href="http://www.highcharts.com/">Highcharts</a>.
+
+    %section#pie-charts
+      %h1 Pie Charts
+
+      %p
+        Rendering a pie chart is as simple as adding the class <code>render-to-pie-chart</code> to
+        an existing <code>&lt;table&gt;</code> element. By default, the first column of the table
+        will be used to name the slices of the pie, and the values in the last column will be used
+        to determine the width of each slice.
+
+      %h2 World's Top Oil Producers
+
+      #top-oil-producers-chart
+
+      %table.render-to-pie-chart(data-chart="top-oil-producers-chart")
+        %tr
+          %th Nation
+          %th.numeric Oil Produced
+        %tr
+          %td Russia
+          %td.numeric 10,540,000
+        %tr
+          %td Saudi Arabia
+          %td.numeric 10,270,000
+        %tr
+          %td United States
+          %td.numeric 9,688,000
+        %tr
+          %td Iran
+          %td.numeric 4,252,000
+        %tr
+          %td China
+          %td.numeric 4,073,000
