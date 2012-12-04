@@ -5,6 +5,9 @@
 @mixin text
   font-family: Georgia, serif
 
+@mixin data
+  font-family: Helvetica, Arial, sans-serif
+
 body
   margin: 0
   padding: 0
@@ -16,17 +19,23 @@ article
 h1, h2, h3, h4, h5, h6, th
   @include heading
 
-p, td
+p
   @include text
 
+td
+  @include data
+
 h1
+  color: #444
   font-size: 48px
   letter-spacing: -3px
   &.title
+    color: #000
     font-size: 64px
     letter-spacing: -4px
 
 h2
+  color: #555
   font-size: 32px
   letter-spacing: -2px
 
@@ -60,10 +69,10 @@ tr
     background-color: #ffe
     color: #000
 
+th:nth-child(1), td:nth-child(1)
+  text-align: left
+
 th, td
   min-width: 150px
   padding: 5px 15px
-  text-align: left
-
-th.numeric, td.numeric
   text-align: right

@@ -4,6 +4,9 @@
   %link(rel="stylesheet" href="/sass/hightables.css")
   %script(type="text/javascript" src="/jquery-1.8.3.min.js")
   %script(type="text/javascript" src="/highcharts-2.3.3.min.js")
+  %script(type="text/javascript" src="/table.js")
+  %script(type="text/javascript" src="/piechart.js")
+  %script(type="text/javascript" src="/linechart.js")
   %script(type="text/javascript" src="/hightables.js")
 
 %body
@@ -14,6 +17,87 @@
       HighTables makes it trivial to render charts from existing HTML tables using
       <a href="http://jquery.com/">jQuery</a> and
       <a href="http://www.highcharts.com/">Highcharts</a>.
+
+    %section#line-chart
+      %h1 Line Charts
+
+      %p
+        Rendering a line chart simply requires adding the <code>render-to-line-chart</code> class to
+        an existing <Code>&lt;table&gt;</code> element. By default, the first column will be used to
+        label the X-axis of the chart, and each column after that will be represented as a data
+        series.
+
+      %h2 Web Browser Market Share
+
+      #browser-market-share-chart
+
+      %table.render-to-line-chart(data-chart="browser-market-share-chart")
+        %tbody
+          %tr
+            %th Date
+            %th IE
+            %th Firefox
+            %th Chrome
+          %tr
+            %td 2012-01
+            %td 37.45
+            %td 24.78
+            %td 28.4
+          %tr
+            %td 2012-02
+            %td 35.75
+            %td 24.88
+            %td 29.84
+          %tr
+            %td 2012-03
+            %td 34.81
+            %td 24.98
+            %td 30.87
+          %tr
+            %td 2012-04
+            %td 34.07
+            %td 24.87
+            %td 31.23
+          %tr
+            %td 2012-05
+            %td 32.12
+            %td 25.55
+            %td 32.43
+          %tr
+            %td 2012-06
+            %td 32.31
+            %td 24.56
+            %td 32.76
+          %tr
+            %td 2012-07
+            %td 32.04
+            %td 23.73
+            %td 33.81
+          %tr
+            %td 2012-08
+            %td 32.85
+            %td 22.85
+            %td 33.59
+          %tr
+            %td 2012-09
+            %td 32.7
+            %td 22.4
+            %td 34.21
+          %tr
+            %td 2012-10
+            %td 32.08
+            %td 22.32
+            %td 34.77
+          %tr
+            %td 2012-11
+            %td 31.23
+            %td 22.37
+            %td 35.72
+          %tr
+            %td 2012-12
+            %td 29.84
+            %td 22.24
+            %td 36.66
 
     %section#pie-charts
       %h1 Pie Charts
@@ -31,19 +115,19 @@
       %table.render-to-pie-chart(data-chart="top-oil-producers-chart")
         %tr
           %th Nation
-          %th.numeric Oil Produced
+          %th Oil Produced
         %tr
           %td Russia
-          %td.numeric 10,540,000
+          %td 10,540,000
         %tr
           %td Saudi Arabia
-          %td.numeric 10,270,000
+          %td 10,270,000
         %tr
           %td United States
-          %td.numeric 9,688,000
+          %td 9,688,000
         %tr
           %td Iran
-          %td.numeric 4,252,000
+          %td 4,252,000
         %tr
           %td China
-          %td.numeric 4,073,000
+          %td 4,073,000
