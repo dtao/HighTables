@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <title>HighTables v1</title>
+  <link href='hightables.css' rel='stylesheet' />
+  <script src='jquery-1.8.3.min.js' type='text/javascript'></script>
+  <script src='highcharts-2.3.3.min.js' type='text/javascript'></script>
+  <script src='parse.js' type='text/javascript'></script>
+  <script src='table.js' type='text/javascript'></script>
+  <script src='piechart.js' type='text/javascript'></script>
+  <script src='linechart.js' type='text/javascript'></script>
+  <script src='barchart.js' type='text/javascript'></script>
+  <script src='hightables.js' type='text/javascript'></script>
+</head>
+<body>
+  <article>
+    <h1 class='title'>HighTables</h1>
+    <p class='summary'>
+      HighTables makes it trivial to render charts from existing HTML tables using
+      <a href="http://jquery.com/">jQuery</a> and
+      <a href="http://www.highcharts.com/">Highcharts</a>.
+    </p>
+    <section id='line-chart'>
+      <h1>Line Charts</h1>
+      <p>
+        Rendering a line chart simply requires adding the <code>render-to-line-chart</code> class to
+        an existing <Code>&lt;table&gt;</code> element. By default, the first column will be used to
+        label the X-axis of the chart, and each column after that will be represented as a data
+        series.
+      </p>
+      <h2>Web Browser Market Share</h2>
+      <div id='browser-market-share-chart'></div>
+      <table class='render-to-line-chart' data-chart='browser-market-share-chart'>
+        <tbody>
+          <tr>
+            <th>Date</th>
+            <th>IE</th>
+            <th>Firefox</th>
+            <th>Chrome</th>
+          </tr>
+          <tr>
+            <td>2012-01</td>
+            <td>37.45</td>
+            <td>24.78</td>
+            <td>28.4</td>
+          </tr>
+          <tr>
+            <td>2012-02</td>
+            <td>35.75</td>
+            <td>24.88</td>
+            <td>29.84</td>
+          </tr>
+          <tr>
+            <td>2012-03</td>
+            <td>34.81</td>
+            <td>24.98</td>
+            <td>30.87</td>
+          </tr>
+          <tr>
+            <td>2012-04</td>
+            <td>34.07</td>
+            <td>24.87</td>
+            <td>31.23</td>
+          </tr>
+          <tr>
+            <td>2012-05</td>
+            <td>32.12</td>
+            <td>25.55</td>
+            <td>32.43</td>
+          </tr>
+          <tr>
+            <td>2012-06</td>
+            <td>32.31</td>
+            <td>24.56</td>
+            <td>32.76</td>
+          </tr>
+          <tr>
+            <td>2012-07</td>
+            <td>32.04</td>
+            <td>23.73</td>
+            <td>33.81</td>
+          </tr>
+          <tr>
+            <td>2012-08</td>
+            <td>32.85</td>
+            <td>22.85</td>
+            <td>33.59</td>
+          </tr>
+          <tr>
+            <td>2012-09</td>
+            <td>32.7</td>
+            <td>22.4</td>
+            <td>34.21</td>
+          </tr>
+          <tr>
+            <td>2012-10</td>
+            <td>32.08</td>
+            <td>22.32</td>
+            <td>34.77</td>
+          </tr>
+          <tr>
+            <td>2012-11</td>
+            <td>31.23</td>
+            <td>22.37</td>
+            <td>35.72</td>
+          </tr>
+          <tr>
+            <td>2012-12</td>
+            <td>29.84</td>
+            <td>22.24</td>
+            <td>36.66</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section id='bar-charts'>
+      <h1>Bar Charts</h1>
+      <p>
+        For bar charts, add the class <code>render-to-bar-chart</code> to an existing
+        <code>&lt;table&gt;</code> element. By default, the first column of the table will be used
+        for bar labels, and each remaining column will be rendered as a group of bars.
+      </p>
+      <h2>World's Top Oil Producers</h2>
+      <div id='top-oil-producers-chart'></div>
+      <table class='render-to-bar-chart' data-chart='top-oil-producers-chart'>
+        <tr>
+          <th>Nation</th>
+          <th>Oil Produced</th>
+        </tr>
+        <tr>
+          <td>Russia</td>
+          <td>10,540,000</td>
+        </tr>
+        <tr>
+          <td>Saudi Arabia</td>
+          <td>10,270,000</td>
+        </tr>
+        <tr>
+          <td>United States</td>
+          <td>9,688,000</td>
+        </tr>
+        <tr>
+          <td>Iran</td>
+          <td>4,252,000</td>
+        </tr>
+        <tr>
+          <td>China</td>
+          <td>4,073,000</td>
+        </tr>
+      </table>
+    </section>
+    <section id='pie-charts'>
+      <h1>Pie Charts</h1>
+      <p>
+        Rendering a pie chart is as simple as adding the class <code>render-to-pie-chart</code> to
+        an existing <code>&lt;table&gt;</code> element. By default, the first column of the table
+        will be used to name the slices of the pie, and the values in the last column will be used
+        to determine the width of each slice.
+      </p>
+      <h2>U.S. National Budget in 2011</h2>
+      <div id='us-national-budget'></div>
+      <table class='render-to-pie-chart' data-chart='us-national-budget'>
+        <tr>
+          <th>Category</th>
+          <th>Budget</th>
+        </tr>
+        <tr>
+          <td>Medicare/Medicaid</td>
+          <td>$835</td>
+        </tr>
+        <tr>
+          <td>Social Security</td>
+          <td>$725</td>
+        </tr>
+        <tr>
+          <td>Defense</td>
+          <td>$700</td>
+        </tr>
+        <tr>
+          <td>Discretionary</td>
+          <td>$646</td>
+        </tr>
+        <tr>
+          <td>Other Mandatory</td>
+          <td>$465</td>
+        </tr>
+        <tr>
+          <td>Net Interest</td>
+          <td>$227</td>
+        </tr>
+      </table>
+    </section>
+  </article>
+</body>
