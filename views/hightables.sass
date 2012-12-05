@@ -16,6 +16,10 @@ article
   width: 50%
   margin: auto
 
+section
+  border-top: 1px solid #000
+  margin-bottom: 50px
+
 h1, h2, h3, h4, h5, h6, th
   @include heading
 
@@ -60,7 +64,10 @@ table
   border-collapse: collapse
 
 tr
-  &:nth-child(1)
+  &:first-child
+    background-color: #48c
+    color: #fff
+  &:first-child:hover
     background-color: #48c
     color: #fff
   &:nth-child(even)
@@ -69,7 +76,7 @@ tr
     background-color: #ffe
     color: #000
 
-th:nth-child(1), td:nth-child(1)
+th:first-child, td:first-child
   text-align: left
 
 th, td
