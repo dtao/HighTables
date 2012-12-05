@@ -1,3 +1,9 @@
+$blue:   #48f
+$pink:   #f48
+$yellow: #ffe
+$white:  #fff
+$black:  #000
+
 @mixin heading
   font-family: Helvetica, Arial, sans-serif
   font-weight: bold
@@ -30,16 +36,16 @@ td
   @include data
 
 h1
-  color: #444
+  color: lighten($black, 10%)
   font-size: 48px
   letter-spacing: -3px
   &.title
-    color: #000
+    color: $black
     font-size: 64px
     letter-spacing: -4px
 
 h2
-  color: #555
+  color: lighten($black, 15%)
   font-size: 32px
   letter-spacing: -2px
 
@@ -53,12 +59,28 @@ th, td
 
 code
   font-family: Consolas, Inconsolata, monospace
-  color: #f48
+  color: $pink
 
 a
-  color: #48f
+  color: $blue
   &:hover
-    color: #8cf
+    color: lighten($blue, 10%)
+
+ul.table-of-contents
+  list-style: none
+  padding-left: 0
+
+  li
+    @include heading
+    display: inline-block
+    font-size: 28px
+    margin-right: 14px
+
+    a
+      color: $pink
+      text-decoration: none
+      &:hover
+        color: lighten($pink, 10%)
 
 table
   border-collapse: collapse
@@ -66,17 +88,15 @@ table
   margin: auto
 
 tr
-  &:first-child
-    background-color: #48c
-    color: #fff
+  &:first-child,
   &:first-child:hover
-    background-color: #48c
-    color: #fff
+    background-color: darken($blue, 10%)
+    color: $white
   &:nth-child(even)
-    background-color: #eee
+    background-color: darken($white, 10%)
   &:hover
-    background-color: #ffe
-    color: #000
+    background-color: $yellow
+    color: $black
 
 th:first-child, td:first-child
   text-align: left
