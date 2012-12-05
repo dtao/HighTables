@@ -3,12 +3,8 @@ window.HighTables = window.HighTables || {};
 HighTables.PieChart = function() {
   var pieCharts = [];
 
-  function getChartId(table) {
-    return $(table).data("chart");
-  }
-
   function getSeriesName(table) {
-    return $(table).find("tr:first").find("th:last").text();
+    return table.firstRow().find("th:last").text();
   }
 
   function getLabel(row) {
@@ -16,16 +12,16 @@ HighTables.PieChart = function() {
   }
 
   function getValue(row) {
-    return parseFloat($(row).find("td:last").text().replace(/,/g, ""));
+    return HighTables.Parse.number($(row).find("td:last").text());
   }
 
   function getSeriesData(table) {
-    return $(table).find("tr:gt(0)").map(function() {
+    return table.bodyRows().map(function() {
       var label = getLabel(this);
       var value = getValue(this);
       // jQuery.map flattens arrays by default for some reason.
       return [[label, value]];
-    }).toArray();
+    });
   }
 
   function getSeries(table) {
@@ -39,14 +35,14 @@ HighTables.PieChart = function() {
     }];
   }
 
-  function renderFromTable(table) {
-    var chartId = getChartId(table);
+  function renderFromTable(element) {
+    var table   = new HighTables.Table(element);
     var series  = getSeries(table);
 
     pieCharts.push(new Highcharts.Chart({
       chart: {
         backgroundColor: "transparent",
-        renderTo: chartId,
+        renderTo: table.chartId(),
         type: "pie"
       },
       title: false,

@@ -13,11 +13,15 @@ $(document).ready(function() {
     ]
   });
 
-  $("table.render-to-pie-chart").each(function() {
-    HighTables.PieChart.renderFromTable(this);
-  });
-
   $("table.render-to-line-chart").each(function() {
     HighTables.LineChart.renderFromTable(this);
+  });
+
+  $("table.render-to-bar-chart").each(function() {
+    HighTables.BarChart.renderFromTable(this);
+  });
+
+  $("table.render-to-pie-chart").each(function() {
+    HighTables.PieChart.renderFromTable(this);
   });
 });
