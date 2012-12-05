@@ -26,7 +26,7 @@ HighTables.BarChart = function() {
     lineCharts.push(new Highcharts.Chart({
       chart: {
         backgroundColor: "transparent",
-        renderTo: table.chartId(),
+        renderTo: table.getOrCreateChart().attr("id"),
         type: "bar"
       },
       xAxis: { categories: categories },

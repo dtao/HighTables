@@ -42,7 +42,7 @@ HighTables.PieChart = function() {
     pieCharts.push(new Highcharts.Chart({
       chart: {
         backgroundColor: "transparent",
-        renderTo: table.chartId(),
+        renderTo: table.getOrCreateChart().attr("id"),
         type: "pie"
       },
       title: false,

@@ -2,7 +2,7 @@ window.HighTables = window.HighTables || {};
 
 HighTables.Table = function(element) {
   var table = $(element);
-  var chartId;
+  var chart;
   var firstRow;
   var bodyRows;
   var columnCount;
@@ -16,11 +16,13 @@ HighTables.Table = function(element) {
     }
   }
 
-  this.chartId = function() {
-    if (!chartId) {
-      chartId = table.data("chart");
+  this.getOrCreateChart = function() {
+    if (!chart) {
+      chart = $("<div>").addClass("chart");
+      chart.attr("id", "chart-" + $(".chart").length + 1);
+      chart.insertBefore(table);
     }
-    return chartId;
+    return chart;
   };
 
   this.firstRow = function() {
