@@ -15,12 +15,14 @@
       <a href="http://www.highcharts.com/">Highcharts</a>.
     </p>
     <ul class='table-of-contents'>
-      <li><a href="#line-charts">Line Charts</a></li>
-      <li><a href="#bar-charts">Bar Charts</a></li>
+      <li><a href="#line-charts">Line & Area Charts</a></li>
+      <li><a href="#bar-charts">Bar & Column Charts</a></li>
       <li><a href="#pie-charts">Pie Charts</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#api">API</a></li>
     </ul>
     <section id='line-charts'>
-      <h1>Line Charts</h1>
+      <h1>Line & Area Charts</h1>
       <p>
         Rendering a line chart simply requires adding the <code>render-to-line-chart</code> class to
         an existing <Code>&lt;table&gt;</code> element. By default, the first column will be used to
@@ -29,86 +31,151 @@
       </p>
       <h2>Web Browser Market Share</h2>
       <table class='render-to-line-chart'>
-        <tbody>
-          <tr>
-            <th>Month</th>
-            <th>IE</th>
-            <th>Firefox</th>
-            <th>Chrome</th>
-          </tr>
-          <tr>
-            <td>2012-01</td>
-            <td>37.45</td>
-            <td>24.78</td>
-            <td>28.4</td>
-          </tr>
-          <tr>
-            <td>2012-02</td>
-            <td>35.75</td>
-            <td>24.88</td>
-            <td>29.84</td>
-          </tr>
-          <tr>
-            <td>2012-03</td>
-            <td>34.81</td>
-            <td>24.98</td>
-            <td>30.87</td>
-          </tr>
-          <tr>
-            <td>2012-04</td>
-            <td>34.07</td>
-            <td>24.87</td>
-            <td>31.23</td>
-          </tr>
-          <tr>
-            <td>2012-05</td>
-            <td>32.12</td>
-            <td>25.55</td>
-            <td>32.43</td>
-          </tr>
-          <tr>
-            <td>2012-06</td>
-            <td>32.31</td>
-            <td>24.56</td>
-            <td>32.76</td>
-          </tr>
-          <tr>
-            <td>2012-07</td>
-            <td>32.04</td>
-            <td>23.73</td>
-            <td>33.81</td>
-          </tr>
-          <tr>
-            <td>2012-08</td>
-            <td>32.85</td>
-            <td>22.85</td>
-            <td>33.59</td>
-          </tr>
-          <tr>
-            <td>2012-09</td>
-            <td>32.7</td>
-            <td>22.4</td>
-            <td>34.21</td>
-          </tr>
-          <tr>
-            <td>2012-10</td>
-            <td>32.08</td>
-            <td>22.32</td>
-            <td>34.77</td>
-          </tr>
-          <tr>
-            <td>2012-11</td>
-            <td>31.23</td>
-            <td>22.37</td>
-            <td>35.72</td>
-          </tr>
-          <tr>
-            <td>2012-12</td>
-            <td>29.84</td>
-            <td>22.24</td>
-            <td>36.66</td>
-          </tr>
-        </tbody>
+        <tr>
+          <th>Month</th>
+          <th>IE</th>
+          <th>Firefox</th>
+          <th>Chrome</th>
+        </tr>
+        <tr>
+          <td>2012-01</td>
+          <td>37.45</td>
+          <td>24.78</td>
+          <td>28.4</td>
+        </tr>
+        <tr>
+          <td>2012-02</td>
+          <td>35.75</td>
+          <td>24.88</td>
+          <td>29.84</td>
+        </tr>
+        <tr>
+          <td>2012-03</td>
+          <td>34.81</td>
+          <td>24.98</td>
+          <td>30.87</td>
+        </tr>
+        <tr>
+          <td>2012-04</td>
+          <td>34.07</td>
+          <td>24.87</td>
+          <td>31.23</td>
+        </tr>
+        <tr>
+          <td>2012-05</td>
+          <td>32.12</td>
+          <td>25.55</td>
+          <td>32.43</td>
+        </tr>
+        <tr>
+          <td>2012-06</td>
+          <td>32.31</td>
+          <td>24.56</td>
+          <td>32.76</td>
+        </tr>
+        <tr>
+          <td>2012-07</td>
+          <td>32.04</td>
+          <td>23.73</td>
+          <td>33.81</td>
+        </tr>
+        <tr>
+          <td>2012-08</td>
+          <td>32.85</td>
+          <td>22.85</td>
+          <td>33.59</td>
+        </tr>
+        <tr>
+          <td>2012-09</td>
+          <td>32.7</td>
+          <td>22.4</td>
+          <td>34.21</td>
+        </tr>
+        <tr>
+          <td>2012-10</td>
+          <td>32.08</td>
+          <td>22.32</td>
+          <td>34.77</td>
+        </tr>
+        <tr>
+          <td>2012-11</td>
+          <td>31.23</td>
+          <td>22.37</td>
+          <td>35.72</td>
+        </tr>
+        <tr>
+          <td>2012-12</td>
+          <td>29.84</td>
+          <td>22.24</td>
+          <td>36.66</td>
+        </tr>
+      </table>
+      <p>
+        To make an area chart instead of a line chart, add the <code>render-to-area-chart</code>
+        class instead.
+      </p>
+      <p>
+        You can also add multiple classes, which will render multiple charts. The
+        <code>render-to-stack-chart</code> class will result in an area chart with stacked areas.
+      </p>
+      <h2>Mobile OS Market Share</h2>
+      <table class='render-to-area-chart render-to-stack-chart'>
+        <tr>
+          <th>Quarter</th>
+          <th>iOS</th>
+          <th>Android</th>
+          <th>BlackBerry</th>
+          <th>Windows Phone</th>
+        </tr>
+        <tr>
+          <td>2011 Q1</td>
+          <td>16,883</td>
+          <td>36,350</td>
+          <td>13,004</td>
+          <td>1,600</td>
+        </tr>
+        <tr>
+          <td>2011 Q2</td>
+          <td>19,629</td>
+          <td>46,776</td>
+          <td>12,652</td>
+          <td>1,724</td>
+        </tr>
+        <tr>
+          <td>2011 Q3</td>
+          <td>17,295</td>
+          <td>60,490</td>
+          <td>12,701</td>
+          <td>1,702</td>
+        </tr>
+        <tr>
+          <td>2011 Q4</td>
+          <td>35,456</td>
+          <td>75,906</td>
+          <td>13,185</td>
+          <td>2,759</td>
+        </tr>
+        <tr>
+          <td>2012 Q1</td>
+          <td>33,121</td>
+          <td>81,067</td>
+          <td>9,939</td>
+          <td>2,713</td>
+        </tr>
+        <tr>
+          <td>2012 Q2</td>
+          <td>28,935</td>
+          <td>98,529</td>
+          <td>7,991</td>
+          <td>4,087</td>
+        </tr>
+        <tr>
+          <td>2012 Q3</td>
+          <td>23,550</td>
+          <td>122,480</td>
+          <td>8,947</td>
+          <td>4,058</td>
+        </tr>
       </table>
     </section>
     <section id='bar-charts'>
@@ -118,8 +185,11 @@
         <code>&lt;table&gt;</code> element. By default, the first column of the table will be used
         for bar labels, and each remaining column will be rendered as a group of bars.
       </p>
+      <p>
+        Add the <code>render-to-column-chart</code> class for a column chart instead of a bar chart.
+      </p>
       <h2>World's Top Oil Producers</h2>
-      <table class='render-to-bar-chart'>
+      <table class='render-to-bar-chart render-to-column-chart'>
         <tr>
           <th>Nation</th>
           <th>Oil Produced</th>
@@ -191,6 +261,20 @@
           <td>$227</td>
         </tr>
       </table>
+    </section>
+    <section id='installation'>
+      <h1>Installation</h1>
+      <p>
+        To use HighTables on your website, simply include jQuery and Highcharts (in any order) and
+        then include hightables.min.js <em>after</em> those libraries:
+      </p>
+      <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt;&#x000A;&lt;script type=&quot;text/javascript&quot; src=&quot;highcharts.min.js&quot;&gt;&lt;/script&gt;&#x000A;&lt;script type=&quot;text/javascript&quot; src=&quot;hightables.min.js&quot;&gt;&lt;/script&gt;</pre>
+    </section>
+    <section id='api'>
+      <h1>API</h1>
+      <p>
+        Coming soon?
+      </p>
     </section>
   </article>
 </body>

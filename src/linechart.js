@@ -18,12 +18,14 @@ HighTables.LineChart = function() {
     return series;
   }
 
-  function renderFromTable(element) {
+  function renderFromTable(element, options) {
+    options = options || {};
+
     var table      = new HighTables.Table(element);
     var categories = getCategories(table);
     var series     = getSeries(table);
 
-    lineCharts.push(new Highcharts.Chart({
+    lineCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),
@@ -33,7 +35,7 @@ HighTables.LineChart = function() {
       yAxis: { title: false },
       title: false,
       series: series
-    }));
+    }, options)));
   }
 
   return {

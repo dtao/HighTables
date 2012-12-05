@@ -1,6 +1,7 @@
 $blue:   #48f
 $pink:   #f48
 $yellow: #ffe
+$orange: #f84
 $white:  #fff
 $black:  #000
 
@@ -13,6 +14,9 @@ $black:  #000
 
 @mixin data
   font-family: Helvetica, Arial, sans-serif
+
+@mixin source
+  font-family: Consolas, Inconsolata, monospace
 
 body
   margin: 0
@@ -58,8 +62,15 @@ th, td
   font-size: 20px
 
 code
-  font-family: Consolas, Inconsolata, monospace
+  @include source
   color: $pink
+
+pre
+  @include source
+  background-color: darken($white, 50%)
+  color: $white
+  font-size: 24px
+  padding: 12px
 
 a
   color: $blue
@@ -80,7 +91,14 @@ ul.table-of-contents
       color: $pink
       text-decoration: none
       &:hover
-        color: lighten($pink, 10%)
+        color: lighten($pink, 20%)
+        text-decoration: underline
+
+    &:nth-child(even)
+      a
+        color: $orange
+        &:hover
+          color: lighten($orange, 20%)
 
 table
   border-collapse: collapse
