@@ -34,7 +34,7 @@
       %table.render-to-line-chart
         %tbody
           %tr
-            %th Date
+            %th Month
             %th IE
             %th Firefox
             %th Chrome
@@ -113,21 +113,27 @@
         %tr
           %th Nation
           %th Oil Produced
+          %th CO<sub>2</sub> Emissions
         %tr
           %td Russia
           %td 10,540,000
+          %td 1,688,688
         %tr
           %td Saudi Arabia
           %td 10,270,000
+          %td 493,726
         %tr
           %td United States
           %td 9,688,000
+          %td 5,492,170
         %tr
           %td Iran
           %td 4,252,000
+          %td 574,667
         %tr
           %td China
           %td 4,073,000
+          %td 8,240,958
 
     %section#pie-charts
       %h1 Pie Charts
@@ -138,12 +144,12 @@
         will be used to name the slices of the pie, and the values in the last column will be used
         to determine the width of each slice.
 
-      %h2 U.S. National Budget in 2011
+      %h2 U.S. National Budget
 
       %table.render-to-pie-chart
         %tr
           %th Category
-          %th Budget
+          %th Budget (in billions)
         %tr
           %td Medicare/Medicaid
           %td $835

@@ -1,7 +1,7 @@
 guard "haml", :output => "dist", :input => "src" do
-  watch /^.+\.haml$/
+  watch /^src\/.+\.haml$/
 end
 
 guard "sass", :output => "dist" do
-  watch /^.+\.sass$/
+  watch /^src\/.+\.sass$/
 end

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
-  <title>HighTables v1</title>
+  <title>HighTables</title>
   <link href='hightables.css' rel='stylesheet' />
   <script src='jquery-1.8.3.min.js' type='text/javascript'></script>
   <script src='highcharts-2.3.3.min.js' type='text/javascript'></script>
@@ -31,7 +31,7 @@
       <table class='render-to-line-chart'>
         <tbody>
           <tr>
-            <th>Date</th>
+            <th>Month</th>
             <th>IE</th>
             <th>Firefox</th>
             <th>Chrome</th>
@@ -123,26 +123,32 @@
         <tr>
           <th>Nation</th>
           <th>Oil Produced</th>
+          <th>CO<sub>2</sub> Emissions</th>
         </tr>
         <tr>
           <td>Russia</td>
           <td>10,540,000</td>
+          <td>1,688,688</td>
         </tr>
         <tr>
           <td>Saudi Arabia</td>
           <td>10,270,000</td>
+          <td>493,726</td>
         </tr>
         <tr>
           <td>United States</td>
           <td>9,688,000</td>
+          <td>5,492,170</td>
         </tr>
         <tr>
           <td>Iran</td>
           <td>4,252,000</td>
+          <td>574,667</td>
         </tr>
         <tr>
           <td>China</td>
           <td>4,073,000</td>
+          <td>8,240,958</td>
         </tr>
       </table>
     </section>
@@ -154,11 +160,11 @@
         will be used to name the slices of the pie, and the values in the last column will be used
         to determine the width of each slice.
       </p>
-      <h2>U.S. National Budget in 2011</h2>
+      <h2>U.S. National Budget</h2>
       <table class='render-to-pie-chart'>
         <tr>
           <th>Category</th>
-          <th>Budget</th>
+          <th>Budget (in billions)</th>
         </tr>
         <tr>
           <td>Medicare/Medicaid</td>
