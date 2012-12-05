@@ -1,10 +1,9 @@
-require "coffee_script"
 require "haml"
 require "sass"
 require "yui/compressor"
 
 SASS_FILES = %w{hightables}.map { |f| "#{f}.sass" }
-COFFEESCRIPT_FILES = %w{parse table linechart barchart piechart hightables}.map { |f| "#{f}.coffee" }
+JAVASCRIPT_FILES = %w{parse table linechart barchart piechart hightables}.map { |f| "#{f}.js" }
 
 def read_src_file(filename)
   return File.read(File.join(File.dirname(__FILE__), "src", filename))
@@ -36,8 +35,7 @@ namespace :build do
 
   desc "Concatenate and minify JavaScript assets into a single file"
   task :js do
-    coffeescript = COFFEESCRIPT_FILES.map { |filename| read_src_file(filename) }.join("\n")
-    javascript = CoffeeScript.compile(coffeescript)
+    javascript = JAVASCRIPT_FILES.map { |filename| read_src_file(filename) }.join("\n")
     write_dist_file("hightables.min.js", YUI::JavaScriptCompressor.new(:munge => true).compress(javascript))
   end
 end

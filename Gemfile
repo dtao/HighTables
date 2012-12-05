@@ -1,8 +1,15 @@
 source :rubygems
 
+gem "haml"
+gem "sass"
+
 group :development do
-  gem "coffee-script"
-  gem "haml"
-  gem "sass"
+  gem "guard"
+  gem "guard-haml"
+  gem "guard-sass"
+
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
   gem "yui-compressor"
 end
