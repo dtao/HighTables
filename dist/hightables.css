@@ -52,7 +52,9 @@ a {
     color: #88ccff; }
 
 table {
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  min-width: 75%;
+  margin: auto; }
 
 tr:first-child {
   background-color: #4488cc;
