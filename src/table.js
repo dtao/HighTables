@@ -2,11 +2,17 @@ window.HighTables = window.HighTables || {};
 
 HighTables.Table = function(element) {
   var table = $(element);
+  var options;
   var chart;
   var firstRow;
   var bodyRows;
   var columnCount;
   var rowCount;
+
+  var OPTIONS_MAP = {
+    "title": function(value) { return { title: { text: value } }; },
+    "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; }
+  };
 
   function getCellValue(cell, numeric) {
     if (numeric) {
@@ -16,6 +22,20 @@ HighTables.Table = function(element) {
     }
   }
 
+  function getOptions() {
+    var options = {};
+
+    var dataAttr;
+    for (var key in OPTIONS_MAP) {
+      dataAttr = table.attr("data-" + key);
+      if (dataAttr) {
+        $.extend(options, OPTIONS_MAP[key](dataAttr));
+      }
+    }
+
+    return options;
+  }
+
   this.getOrCreateChart = function() {
     if (!chart) {
       chart = $("<div>").addClass("chart");
@@ -23,6 +43,14 @@ HighTables.Table = function(element) {
       chart.insertBefore(table);
     }
     return chart;
+  };
+
+  this.options = function() {
+    if (!options) {
+      options = getOptions();
+    }
+
+    return options;
   };
 
   this.firstRow = function() {
