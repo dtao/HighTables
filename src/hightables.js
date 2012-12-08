@@ -43,4 +43,11 @@ $(document).ready(function() {
   $("table.render-to-pie-chart").each(function() {
     HighTables.PieChart.renderFromTable(this);
   });
+
+  // Sorry, Highcharts!
+  if (!HighTables.includeHighchartsLinks) {
+    $("tspan").filter(function() {
+      return $.trim(this.textContent) === "Highcharts.com";
+    }).remove();
+  }
 });

@@ -23,8 +23,15 @@ body
   padding: 0
 
 article
-  width: 50%
   margin: auto
+  min-width: 50%
+
+  @media all and (max-width: 799px)
+    width: 75%
+    zoom: 50%
+
+  @media all and (min-width: 800px)
+    width: 750px
 
 section
   border-top: 1px solid #000
@@ -108,7 +115,7 @@ table
 tr
   &:first-child,
   &:first-child:hover
-    background-color: darken($blue, 10%)
+    background-color: darken($blue, 30%)
     color: $white
   &:nth-child(even)
     background-color: darken($white, 10%)
