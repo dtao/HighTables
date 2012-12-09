@@ -10,9 +10,19 @@ HighTables.Table = function(element) {
   var rowCount;
 
   var OPTIONS_MAP = {
+    "options": function(value) { return safeEval(value); },
     "title": function(value) { return { title: { text: value } }; },
     "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; }
   };
+
+  function safeEval(name) {
+    var parts = name.split(".");
+    var result = window;
+    while (parts.length > 0) {
+      result = result[parts.shift()];
+    }
+    return (typeof result === "function") ? result() : result;
+  }
 
   function getCellValue(cell, numeric) {
     if (numeric) {

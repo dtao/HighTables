@@ -1,7 +1,7 @@
 window.HighTables = window.HighTables || {};
 
 HighTables.LineChart = function() {
-  var lineCharts = [];
+  HighTables.lineCharts = [];
 
   function getCategories(table) {
     return table.getColumnData(0, { numeric: false });
@@ -25,7 +25,7 @@ HighTables.LineChart = function() {
     var categories = getCategories(table);
     var series     = getSeries(table);
 
-    lineCharts.push(new Highcharts.Chart($.extend(true, {
+    HighTables.lineCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),

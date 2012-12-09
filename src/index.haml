@@ -19,6 +19,7 @@
       %li <a href="#line-charts">Line & Area Charts</a>
       %li <a href="#bar-charts">Bar & Column Charts</a>
       %li <a href="#pie-charts">Pie Charts</a>
+      %li <a href="#options">Options</a>
       %li <a href="#installation">Installation</a>
       %li <a href="#api">API</a>
 
@@ -232,6 +233,27 @@
         %tr
           %td Net Interest
           %td $227
+
+    %section#options
+      %h1 Options
+
+      %p
+        Support for custom chart options is pretty limited right now. From
+        <a href="http://en.wikipedia.org/wiki/Dogfooding">dogfooding</a>, I've only had need for
+        (and thus only built) the following customizable options:
+
+      %ul
+        %li
+          <strong>Title</strong>: to give a chart a title, add the <code>data-title</code> attribute
+          to the underlying table.
+        %li
+          <strong>X Interval</strong>: to specify a tick interval for the X-axis, use the
+          <code>data-x-interval</code> attribute.
+      
+      %p
+        In addition to these options, however, there is support for a more general customization
+        mechanism: add the <code>data-options</code> attribute, and specify the name of a JavaScript
+        function which returns an object with any Highcharts options you like.
 
     %section#installation
       %h1 Installation
