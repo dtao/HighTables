@@ -26,6 +26,14 @@ article
   margin: auto
   min-width: 50%
 
+  h1
+    color: $black
+    font-size: 64px
+    letter-spacing: -4px
+
+  p
+    font-size: 28px
+
   @media all and (max-width: 799px)
     width: 75%
     zoom: 50%
@@ -37,6 +45,19 @@ section
   border-top: 1px solid #000
   margin-bottom: 50px
 
+  h1
+    color: lighten($black, 15%)
+    font-size: 48px
+    letter-spacing: -3px
+
+  h2
+    color: lighten($black, 25%)
+    font-size: 32px
+    letter-spacing: -2px
+
+  p, li
+    font-size: 24px
+
 h1, h2, h3, h4, h5, h6, th
   @include heading
 
@@ -45,25 +66,6 @@ p
 
 td
   @include data
-
-h1
-  color: lighten($black, 10%)
-  font-size: 48px
-  letter-spacing: -3px
-  &.title
-    color: $black
-    font-size: 64px
-    letter-spacing: -4px
-
-h2
-  color: lighten($black, 15%)
-  font-size: 32px
-  letter-spacing: -2px
-
-p, li
-  font-size: 24px
-  &.summary
-    font-size: 28px
 
 th, td, pre
   font-size: 20px
