@@ -5,7 +5,7 @@ require "yui/compressor"
 
 CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
 SASS_FILES       = %w{hightables}.map { |f| "#{f}.sass" }
-JAVASCRIPT_FILES = %w{hightables parse table linechart barchart piechart}.map { |f| "#{f}.js" }
+JAVASCRIPT_FILES = %w{init parse table linechart barchart piechart}.map { |f| "#{f}.js" }
 SECTIONS         = [
   { :id => "line-charts", :title => "Line Charts" },
   { :id => "area-charts", :title => "Area Charts" },
