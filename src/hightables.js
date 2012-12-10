@@ -1,5 +1,8 @@
 $(document).ready(function() {
   Highcharts.setOptions({
+    credits: {
+      enabled: false
+    },
     colors: [
       "#4488FF",
       "#50B432", 
@@ -44,10 +47,9 @@ $(document).ready(function() {
     HighTables.PieChart.renderFromTable(this);
   });
 
-  // Sorry, Highcharts!
-  if (!HighTables.includeHighchartsLinks) {
-    $("tspan").filter(function() {
-      return $.trim(this.textContent) === "Highcharts.com";
-    }).remove();
+  if (HighTables.includeHighchartsLinks) {
+    Highcharts.setOptions({
+      credits: { enabled: true }
+    });
   }
 });
