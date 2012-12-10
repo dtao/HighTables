@@ -1,5 +1,5 @@
 HighTables.BarChart = function() {
-  HighTables.barCharts = [];
+  var barCharts = HighTables.charts["bar"] = [];
 
   function getCategories(table) {
     return table.getRowData(0, { numeric: false });
@@ -23,7 +23,7 @@ HighTables.BarChart = function() {
     var categories = getCategories(table);
     var series     = getSeries(table);
 
-    HighTables.barCharts.push(new Highcharts.Chart($.extend(true, {
+    barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),

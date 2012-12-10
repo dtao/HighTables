@@ -1,3 +1,7 @@
+window.HighTables = {};
+
+HighTables.charts = {};
+
 $(document).ready(function() {
   Highcharts.setOptions({
     credits: {

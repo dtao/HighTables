@@ -5,7 +5,7 @@ require "yui/compressor"
 
 CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
 SASS_FILES       = %w{hightables}.map { |f| "#{f}.sass" }
-JAVASCRIPT_FILES = %w{parse table linechart barchart piechart hightables}.map { |f| "#{f}.js" }
+JAVASCRIPT_FILES = %w{hightables parse table linechart barchart piechart}.map { |f| "#{f}.js" }
 SECTIONS         = [
   { :id => "line-charts", :title => "Line Charts" },
   { :id => "area-charts", :title => "Area Charts" },
@@ -80,8 +80,7 @@ namespace :build do
 
   desc "Concatenate and minify JavaScript assets into a single file"
   task :js do
-    javascript = "window.HighTables = {};\n\n" +
-      JAVASCRIPT_FILES.map { |filename| read_file("src", filename) }.join("\n")
+    javascript = JAVASCRIPT_FILES.map { |filename| read_file("src", filename) }.join("\n")
     write_file("dist", "hightables.js", javascript)
     write_file("dist", "hightables.min.js", YUI::JavaScriptCompressor.new(:munge => true).compress(javascript))
   end

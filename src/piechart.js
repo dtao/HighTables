@@ -1,5 +1,5 @@
 HighTables.PieChart = function() {
-  HighTables.pieCharts = [];
+  var pieCharts = HighTables.charts["pie"] = [];
 
   function getSeriesName(table) {
     return table.firstRow().find("th:last").text();
@@ -37,7 +37,7 @@ HighTables.PieChart = function() {
     var table   = new HighTables.Table(element);
     var series  = getSeries(table);
 
-    HighTables.pieCharts.push(new Highcharts.Chart({
+    pieCharts.push(new Highcharts.Chart({
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),

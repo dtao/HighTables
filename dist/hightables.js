@@ -1,5 +1,63 @@
 window.HighTables = {};
 
+HighTables.charts = {};
+
+$(document).ready(function() {
+  Highcharts.setOptions({
+    credits: {
+      enabled: false
+    },
+    colors: [
+      "#4488FF",
+      "#50B432", 
+      "#ED561B",
+      "#DDDF00",
+      "#24CBE5",
+      "#64E572",
+      "#FF9655",
+      "#FFF263",
+      "#6AF9C4"
+    ]
+  });
+
+  $("table.render-to-line-chart").each(function() {
+    HighTables.LineChart.renderFromTable(this);
+  });
+
+  $("table.render-to-area-chart").each(function() {
+    HighTables.LineChart.renderFromTable(this, {
+      chart: { type: "area" }
+    });
+  });
+
+  $("table.render-to-stack-chart").each(function() {
+    HighTables.LineChart.renderFromTable(this, {
+      chart: { type: "area" },
+      plotOptions: { area: { stacking: "normal" } }
+    });
+  });
+
+  $("table.render-to-bar-chart").each(function() {
+    HighTables.BarChart.renderFromTable(this);
+  });
+
+  $("table.render-to-bar-chart").each(function() {
+    HighTables.BarChart.renderFromTable(this, {
+      chart: { type: "column" }
+    });
+  });
+
+  $("table.render-to-pie-chart").each(function() {
+    HighTables.PieChart.renderFromTable(this);
+  });
+
+  if (HighTables.includeHighchartsLinks) {
+    Highcharts.setOptions({
+      credits: { enabled: true }
+    });
+  }
+});
+
 HighTables.Parse = function() {
   function parseNumber(number) {
     return parseFloat(number.replace(/^\$|,/g, ""));
@@ -126,7 +184,7 @@ HighTables.Table = function(element) {
 };
 
 HighTables.LineChart = function() {
-  HighTables.lineCharts = [];
+  var lineCharts = HighTables.charts["line"] = [];
 
   function getCategories(table) {
     return table.getColumnData(0, { numeric: false });
@@ -150,7 +208,7 @@ HighTables.LineChart = function() {
     var categories = getCategories(table);
     var series     = getSeries(table);
 
-    HighTables.lineCharts.push(new Highcharts.Chart($.extend(true, {
+    lineCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),
@@ -169,7 +227,7 @@ HighTables.LineChart = function() {
 }();
 
 HighTables.BarChart = function() {
-  HighTables.barCharts = [];
+  var barCharts = HighTables.charts["bar"] = [];
 
   function getCategories(table) {
     return table.getRowData(0, { numeric: false });
@@ -193,7 +251,7 @@ HighTables.BarChart = function() {
     var categories = getCategories(table);
     var series     = getSeries(table);
 
-    HighTables.barCharts.push(new Highcharts.Chart($.extend(true, {
+    barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),
@@ -212,7 +270,7 @@ HighTables.BarChart = function() {
 }();
 
 HighTables.PieChart = function() {
-  HighTables.pieCharts = [];
+  var pieCharts = HighTables.charts["pie"] = [];
 
   function getSeriesName(table) {
     return table.firstRow().find("th:last").text();
@@ -250,7 +308,7 @@ HighTables.PieChart = function() {
     var table   = new HighTables.Table(element);
     var series  = getSeries(table);
 
-    HighTables.pieCharts.push(new Highcharts.Chart({
+    pieCharts.push(new Highcharts.Chart({
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),
@@ -265,59 +323,3 @@ HighTables.PieChart = function() {
     renderFromTable: renderFromTable
   };
 }();
-
-$(document).ready(function() {
-  Highcharts.setOptions({
-    credits: {
-      enabled: false
-    },
-    colors: [
-      "#4488FF",
-      "#50B432", 
-      "#ED561B",
-      "#DDDF00",
-      "#24CBE5",
-      "#64E572",
-      "#FF9655",
-      "#FFF263",
-      "#6AF9C4"
-    ]
-  });
-
-  $("table.render-to-line-chart").each(function() {
-    HighTables.LineChart.renderFromTable(this);
-  });
-
-  $("table.render-to-area-chart").each(function() {
-    HighTables.LineChart.renderFromTable(this, {
-      chart: { type: "area" }
-    });
-  });
-
-  $("table.render-to-stack-chart").each(function() {
-    HighTables.LineChart.renderFromTable(this, {
-      chart: { type: "area" },
-      plotOptions: { area: { stacking: "normal" } }
-    });
-  });
-
-  $("table.render-to-bar-chart").each(function() {
-    HighTables.BarChart.renderFromTable(this);
-  });
-
-  $("table.render-to-bar-chart").each(function() {
-    HighTables.BarChart.renderFromTable(this, {
-      chart: { type: "column" }
-    });
-  });
-
-  $("table.render-to-pie-chart").each(function() {
-    HighTables.PieChart.renderFromTable(this);
-  });
-
-  if (HighTables.includeHighchartsLinks) {
-    Highcharts.setOptions({
-      credits: { enabled: true }
-    });
-  }
-});
