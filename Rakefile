@@ -75,6 +75,7 @@ namespace :build do
       Sass.compile(sass, :syntax => :sass),
       CSS_FILES.map { |filename| read_file("src", filename) }.join("\n")
     ].join("\n")
+    write_file("dist", "hightables.css", css)
     write_file("dist", "hightables.min.css", YUI::CssCompressor.new.compress(css))
   end
 
