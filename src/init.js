@@ -41,7 +41,7 @@ $(document).ready(function() {
     HighTables.BarChart.renderFromTable(this);
   });
 
-  $("table.render-to-bar-chart").each(function() {
+  $("table.render-to-column-chart").each(function() {
     HighTables.BarChart.renderFromTable(this, {
       chart: { type: "column" }
     });
