@@ -1,5 +1,3 @@
-window.HighTables = window.HighTables || {};
-
 HighTables.BarChart = function() {
   HighTables.barCharts = [];
 

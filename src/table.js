@@ -1,5 +1,3 @@
-window.HighTables = window.HighTables || {};
-
 HighTables.Table = function(element) {
   var table = $(element);
   var options;

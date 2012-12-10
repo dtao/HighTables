@@ -46,7 +46,9 @@ namespace :build do
 
   desc "Concatenate and minify JavaScript assets into a single file"
   task :js do
-    javascript = JAVASCRIPT_FILES.map { |filename| read_src_file(filename) }.join("\n")
+    javascript = "window.HighTables = {};\n\n" +
+      JAVASCRIPT_FILES.map { |filename| read_src_file(filename) }.join("\n")
+    write_dist_file("hightables.js", javascript)
     write_dist_file("hightables.min.js", YUI::JavaScriptCompressor.new(:munge => true).compress(javascript))
   end
 end
