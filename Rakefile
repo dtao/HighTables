@@ -56,7 +56,8 @@ namespace :build do
 
   desc "Compile README file from docs (without examples)"
   task :readme do
-    docs = SECTIONS.map { |section| read_file("doc", "#{section[:id]}.md") }.join("\n")
+    docs = read_file("doc", "intro.md") + "\n" +
+      SECTIONS.map { |section| read_file("doc", "#{section[:id]}.md") }.join("\n")
     write_file("README.md", docs)
   end
 
