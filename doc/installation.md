@@ -1,5 +1,5 @@
 Installation
-============
+------------
 
 To use HighTables on your website, simply include jQuery and Highcharts (in any order) and then include hightables.min.js <em>after</em> those libraries:
 
