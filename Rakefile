@@ -1,6 +1,8 @@
 require "haml"
 require "sass"
+require "nokogiri"
 require "redcarpet"
+require "pygments"
 require "yui/compressor"
 
 CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
@@ -65,7 +67,12 @@ namespace :build do
   task :html do
     haml = read_file("src", "index.haml")
     html = Haml::Engine.new(haml).render(self, :sections => SECTIONS)
-    write_file("dist", "index.html", html)
+    hdoc = Nokogiri::HTML.parse(html)
+    hdoc.css("pre").each do |node|
+      lang = node.css("code").attr("class")
+      node.inner_html = Pygments.highlight(node.content, :lexer => lang)
+    end
+    write_file("dist", "index.html", hdoc.to_html)
   end
 
   desc "Compile SASS, then concatenate and minify into a single CSS file"
