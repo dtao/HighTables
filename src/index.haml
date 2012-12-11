@@ -6,6 +6,21 @@
   %script(type="text/javascript" src="http://code.highcharts.com/highcharts.js")
   %script(type="text/javascript" src="hightables.min.js")
 
+  :javascript
+    Highcharts.setOptions({
+      colors: [
+        "#4488FF",
+        "#50B432", 
+        "#ED561B",
+        "#DDDF00",
+        "#24CBE5",
+        "#64E572",
+        "#FF9655",
+        "#FFF263",
+        "#6AF9C4"
+      ]
+    });
+
 %body
   %article
     = render_content(:intro)
