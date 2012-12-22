@@ -4,6 +4,18 @@ HighTables
 HighTables makes it trivial to render charts from existing HTML tables using
 [jQuery](http://jquery.com/) and [Highcharts](http://www.highcharts.com).
 
+Installation
+------------
+
+To use HighTables on your website, simply include jQuery and Highcharts (in any order) and then
+include hightables.min.js <em>after</em> those libraries:
+
+```html
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="highcharts.min.js"></script>
+<script type="text/javascript" src="hightables.min.js"></script>
+```
+
 Basic Usage
 -----------
 
@@ -65,18 +77,6 @@ the following customizable options:
 In addition to these options, however, there is support for a more general customization mechanism:
 add the `data-options` attribute, and specify the name of a JavaScript function which returns an
 object with any Highcharts options you like.
-
-Installation
-------------
-
-To use HighTables on your website, simply include jQuery and Highcharts (in any order) and then
-include hightables.min.js <em>after</em> those libraries:
-
-```html
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="highcharts.min.js"></script>
-<script type="text/javascript" src="hightables.min.js"></script>
-```
 
 API
 ---
