@@ -38,6 +38,9 @@ article
     width: 75%
     zoom: 50%
 
+    table
+      display: none
+
   @media all and (min-width: 800px)
     width: 750px
 
@@ -94,21 +97,15 @@ ul.table-of-contents
   li
     @include heading
     display: inline-block
-    font-size: 28px
-    margin-right: 14px
+    font-size: 20px
+    margin-right: 8px
 
     a
-      color: $pink
+      color: $orange
       text-decoration: none
       &:hover
-        color: lighten($pink, 20%)
+        color: lighten($orange, 20%)
         text-decoration: underline
-
-    &:nth-child(even)
-      a
-        color: $orange
-        &:hover
-          color: lighten($orange, 20%)
 
 table
   border-collapse: collapse

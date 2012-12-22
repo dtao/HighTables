@@ -1,0 +1,23 @@
+- id: basic-usage
+  title: "Basic Usage"
+
+- id: line-charts
+  title: "Line Charts"
+
+- id: area-charts
+  title: "Area Charts"
+
+- id: bar-charts
+  title: "Bar & Column Charts"
+
+- id: pie-charts
+  title: "Pie Charts"
+
+- id: options
+  title: "Options"
+
+- id: installation
+  title: "Installation"
+
+- id: api
+  title: "API"

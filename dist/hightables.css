@@ -14,7 +14,9 @@ article {
   @media all and (max-width: 799px) {
     article {
       width: 75%;
-      zoom: 50%; } }
+      zoom: 50%; }
+      article table {
+        display: none; } }
   @media all and (min-width: 800px) {
     article {
       width: 750px; } }
@@ -70,18 +72,14 @@ ul.table-of-contents {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     display: inline-block;
-    font-size: 28px;
-    margin-right: 14px; }
+    font-size: 20px;
+    margin-right: 8px; }
     ul.table-of-contents li a {
-      color: #ff4488;
+      color: #ff8844;
       text-decoration: none; }
       ul.table-of-contents li a:hover {
-        color: #ffaac9;
+        color: #ffc9aa;
         text-decoration: underline; }
-    ul.table-of-contents li:nth-child(even) a {
-      color: #ff8844; }
-      ul.table-of-contents li:nth-child(even) a:hover {
-        color: #ffc9aa; }
 
 table {
   border-collapse: collapse;

@@ -1,3 +1,4 @@
+require "yaml"
 require "haml"
 require "sass"
 require "nokogiri"
@@ -8,15 +9,7 @@ require "yui/compressor"
 CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
 SASS_FILES       = %w{hightables}.map { |f| "#{f}.sass" }
 JAVASCRIPT_FILES = %w{init parse table linechart barchart piechart}.map { |f| "#{f}.js" }
-SECTIONS         = [
-  { :id => "line-charts", :title => "Line Charts" },
-  { :id => "area-charts", :title => "Area Charts" },
-  { :id => "bar-charts", :title => "Bar & Column Charts" },
-  { :id => "pie-charts", :title => "Pie Charts" },
-  { :id => "options", :title => "Options" },
-  { :id => "installation", :title => "Installation" },
-  { :id => "api", :title => "API" }
-]
+SECTIONS         = YAML.load_file(File.join(File.dirname(__FILE__), "doc", "sections.yml"))
 
 def read_file(dir, filename)
   File.read(File.join(File.dirname(__FILE__), dir, filename))
@@ -59,7 +52,7 @@ namespace :build do
   desc "Compile README file from docs (without examples)"
   task :readme do
     docs = read_file("doc", "intro.md") + "\n" +
-      SECTIONS.map { |section| read_file("doc", "#{section[:id]}.md") }.join("\n")
+      SECTIONS.map { |section| read_file("doc", "#{section['id']}.md") }.join("\n")
     write_file("README.md", docs)
   end
 

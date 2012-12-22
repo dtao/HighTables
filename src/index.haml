@@ -28,9 +28,9 @@
     %ul.table-of-contents
       - sections.each do |section|
         %li
-          %a(href="##{section[:id]}")= section[:title]
+          %a(href="##{section['id']}")= section["title"]
 
     - sections.each do |section|
-      %section(id="#{section[:id]}")
-        = render_content(section[:id])
-        = render_example(section[:id])
+      %section(id="#{section['id']}")
+        = render_content(section["id"])
+        = render_example(section["id"])
