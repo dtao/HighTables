@@ -13,6 +13,19 @@ $(document).ready(function() {
     HighTables.LineChart.renderTo(this);
   });
 
+  $(".area-chart").each(function() {
+    HighTables.LineChart.renderTo(this, {
+      chart: { type: "area" }
+    });
+  });
+
+  $(".stack-chart").each(function() {
+    HighTables.LineChart.renderTo(this, {
+      chart: { type: "area" },
+      plotOptions: { area: { stacking: "normal" } }
+    });
+  });
+
   $("table.render-to-line-chart").each(function() {
     HighTables.LineChart.renderFromTable(this);
   });
@@ -30,6 +43,16 @@ $(document).ready(function() {
     });
   });
 
+  $(".bar-chart").each(function() {
+    HighTables.BarChart.renderTo(this);
+  });
+
+  $(".column-chart").each(function() {
+    HighTables.BarChart.renderTo(this, {
+      chart: { type: "column" }
+    });
+  });
+
   $("table.render-to-bar-chart").each(function() {
     HighTables.BarChart.renderFromTable(this);
   });
@@ -38,6 +61,10 @@ $(document).ready(function() {
     HighTables.BarChart.renderFromTable(this, {
       chart: { type: "column" }
     });
+  });
+
+  $(".pie-chart").each(function() {
+    HighTables.PieChart.renderTo(this);
   });
 
   $("table.render-to-pie-chart").each(function() {

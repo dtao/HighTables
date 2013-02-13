@@ -16,27 +16,38 @@ HighTables.BarChart = function() {
     return series;
   }
 
-  function renderFromTable(element, options) {
+  function render(table, chart, options) {
     options = options || {};
 
-    var table      = new HighTables.Table(element);
     var categories = getCategories(table);
     var series     = getSeries(table);
 
     barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
-        renderTo: table.getOrCreateChart().attr("id"),
+        renderTo: chart[0],
         type: "bar"
       },
       xAxis: { categories: categories },
       yAxis: { title: false },
       title: false,
       series: series
-    }, table.options(), options)));
+    }, options)));
+  }
+
+  function renderTo(element, options) {
+    var chart = new HighTables.Chart(element);
+    var table = new HighTables.Table(element.getTable()[0]);
+    return render(table, chart.element, $.extend({}, chart.options(), options));
+  }
+
+  function renderFromTable(element, options) {
+    var table = new HighTables.Table(element);
+    return render(table, table.getOrCreateChart(), $.extend({}, table.options(), options));
   }
 
   return {
+    renderTo: renderTo,
     renderFromTable: renderFromTable
   };
 }();

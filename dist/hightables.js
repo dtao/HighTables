@@ -13,6 +13,19 @@ $(document).ready(function() {
     HighTables.LineChart.renderTo(this);
   });
 
+  $(".area-chart").each(function() {
+    HighTables.LineChart.renderTo(this, {
+      chart: { type: "area" }
+    });
+  });
+
+  $(".stack-chart").each(function() {
+    HighTables.LineChart.renderTo(this, {
+      chart: { type: "area" },
+      plotOptions: { area: { stacking: "normal" } }
+    });
+  });
+
   $("table.render-to-line-chart").each(function() {
     HighTables.LineChart.renderFromTable(this);
   });
@@ -30,6 +43,16 @@ $(document).ready(function() {
     });
   });
 
+  $(".bar-chart").each(function() {
+    HighTables.BarChart.renderTo(this);
+  });
+
+  $(".column-chart").each(function() {
+    HighTables.BarChart.renderTo(this, {
+      chart: { type: "column" }
+    });
+  });
+
   $("table.render-to-bar-chart").each(function() {
     HighTables.BarChart.renderFromTable(this);
   });
@@ -38,6 +61,10 @@ $(document).ready(function() {
     HighTables.BarChart.renderFromTable(this, {
       chart: { type: "column" }
     });
+  });
+
+  $(".pie-chart").each(function() {
+    HighTables.PieChart.renderTo(this);
   });
 
   $("table.render-to-pie-chart").each(function() {
@@ -272,27 +299,38 @@ HighTables.BarChart = function() {
     return series;
   }
 
-  function renderFromTable(element, options) {
+  function render(table, chart, options) {
     options = options || {};
 
-    var table      = new HighTables.Table(element);
     var categories = getCategories(table);
     var series     = getSeries(table);
 
     barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
-        renderTo: table.getOrCreateChart().attr("id"),
+        renderTo: chart[0],
         type: "bar"
       },
       xAxis: { categories: categories },
       yAxis: { title: false },
       title: false,
       series: series
-    }, table.options(), options)));
+    }, options)));
+  }
+
+  function renderTo(element, options) {
+    var chart = new HighTables.Chart(element);
+    var table = new HighTables.Table(element.getTable()[0]);
+    return render(table, chart.element, $.extend({}, chart.options(), options));
+  }
+
+  function renderFromTable(element, options) {
+    var table = new HighTables.Table(element);
+    return render(table, table.getOrCreateChart(), $.extend({}, table.options(), options));
   }
 
   return {
+    renderTo: renderTo,
     renderFromTable: renderFromTable
   };
 }();
@@ -332,24 +370,35 @@ HighTables.PieChart = function() {
     }];
   }
 
-  function renderFromTable(element, options) {
+  function render(table, chart, options) {
     options = options || {};
 
-    var table   = new HighTables.Table(element);
     var series  = getSeries(table);
 
     pieCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
-        renderTo: table.getOrCreateChart().attr("id"),
+        renderTo: chart[0],
         type: "pie"
       },
       title: false,
       series: series
-    }, table.options(), options)));
+    }, options)));
+  }
+
+  function renderTo(element, options) {
+    var chart = new HighTables.Chart(element);
+    var table = new HighTables.Table(chart.getTable()[0]);
+    return render(table, chart.element, $.extend({}, chart.options(), options));
+  }
+
+  function renderFromTable(element, options) {
+    var table = new HighTables.Table(element);
+    return render(table, table.getOrCreateChart(), $.extend({}, table.options(), options));
   }
 
   return {
+    renderTo: renderTo,
     renderFromTable: renderFromTable
   };
 }();
