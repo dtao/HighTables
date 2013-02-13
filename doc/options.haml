@@ -11,13 +11,14 @@
 %p For instance, the following chart is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:
 
 %pre
-  :preserve
-    function customOptions() {
-      return {
-        title: { text: "Custom Title" },
-        plotOptions: { pie: { shadow: false } }
-      };
-    }
+  %code.javascript
+    :preserve
+      function customOptions() {
+        return {
+          title: { text: "Custom Title" },
+          plotOptions: { pie: { shadow: false } }
+        };
+      }
 
 %table.render-to-pie-chart(data-options="customOptions")
   %tr

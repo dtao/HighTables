@@ -1,10 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
 <head>
-  <title>HighTables</title>
-  <link href='hightables.min.css' rel='stylesheet' />
-  <script src='http://code.jquery.com/jquery-1.8.3.min.js' type='text/javascript'></script>
-  <script src='http://code.highcharts.com/highcharts.js' type='text/javascript'></script>
-  <script src='hightables.js' type='text/javascript'></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HighTables</title>
+<link href="hightables.min.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script><script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script><script src="hightables.js" type="text/javascript"></script><script type="text/javascript">
+    //<![CDATA[
+      Highcharts.setOptions({
+        colors: [
+          "#4488FF",
+          "#50B432", 
+          "#ED561B",
+          "#DDDF00",
+          "#24CBE5",
+          "#64E572",
+          "#FF9655",
+          "#FFF263",
+          "#6AF9C4"
+        ]
+      });
+    //]]>
+  </script>
 </head>
 <body>
   <article><h1>HighTables</h1>
@@ -67,10 +83,10 @@ label the X-axis of the chart, and each column after that will be represented as
       <h3>
         Web Browser Market Share
       </h3>
-      <div class='line-chart' data-table='.web-browser-market-share'></div>
-      <table class='web-browser-market-share'>
-        <tr>
-          <th>Month</th>
+      <div class="line-chart" data-table=".web-browser-market-share"></div>
+      <table class="web-browser-market-share">
+<tr>
+<th>Month</th>
           <th>IE</th>
           <th>Firefox</th>
           <th>Chrome</th>
@@ -307,10 +323,11 @@ the following customizable options:</p>
 <li>
 <strong>X Interval</strong>: to specify a tick interval for the X-axis, use the <code>data-x-interval</code> attribute.</li>
 </ul>
-
-<p>In addition to these options, however, there is support for a more general customization mechanism: add the <code>data-options</code> attribute, and specify the name of a JavaScript function which returns an object with any Highcharts options you like.</p>
+<p>In addition to these options, however, there is support for a more general customization mechanism:
+add the <code>data-options</code> attribute, and specify the name of a JavaScript function which returns an
+object with any Highcharts options you like.</p>
       <h3>Options Example</h3>
-<script type='text/javascript'>
+<script type="text/javascript">
   //<![CDATA[
     function customOptions() {
       return {
@@ -319,42 +336,44 @@ the following customizable options:</p>
       };
     }
   //]]>
-</script>
-<p>For instance, the following chart is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
-<pre>function customOptions() {&#x000A;  return {&#x000A;    title: { text: "Custom Title" },&#x000A;    plotOptions: { pie: { shadow: false } }&#x000A;  };&#x000A;}&#x000A;</pre>
-<table class='render-to-pie-chart' data-options='customOptions'>
-  <tr>
-    <th>Category</th>
+</script><p>For instance, the following chart is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
+<pre><div class="highlight"><pre><span class="kd">function</span> <span class="nx">customOptions</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"Custom Title"</span> <span class="p">},</span>
+    <span class="nx">plotOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">pie</span><span class="o">:</span> <span class="p">{</span> <span class="nx">shadow</span><span class="o">:</span> <span class="kc">false</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</pre></div></pre>
+<table class="render-to-pie-chart" data-options="customOptions">
+<tr>
+<th>Category</th>
     <th>Budget (in billions)</th>
   </tr>
-  <tr>
-    <td>Medicare/Medicaid</td>
+<tr>
+<td>Medicare/Medicaid</td>
     <td>$835</td>
   </tr>
-  <tr>
-    <td>Social Security</td>
+<tr>
+<td>Social Security</td>
     <td>$725</td>
   </tr>
-  <tr>
-    <td>Defense</td>
+<tr>
+<td>Defense</td>
     <td>$700</td>
   </tr>
-  <tr>
-    <td>Discretionary</td>
+<tr>
+<td>Discretionary</td>
     <td>$646</td>
   </tr>
-  <tr>
-    <td>Other Mandatory</td>
+<tr>
+<td>Other Mandatory</td>
     <td>$465</td>
   </tr>
-  <tr>
-    <td>Net Interest</td>
+<tr>
+<td>Net Interest</td>
     <td>$227</td>
   </tr>
-</table>
-    </section>
-    <section id='installation'>
-      <h2>Installation</h2>
+</table></section><section id="api"><h2>API</h2>
 
 <p>So far there isn't much you can do to interact with HighTables programmatically. This will almost
 certainly change, but for now there's really only one thing you can do: disable the default hiding

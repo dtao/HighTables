@@ -8,7 +8,7 @@ require "yui/compressor"
 
 CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
 SASS_FILES       = %w{hightables}.map { |f| "#{f}.sass" }
-JAVASCRIPT_FILES = %w{init parse table linechart barchart piechart}.map { |f| "#{f}.js" }
+JAVASCRIPT_FILES = %w{init parse base table chart linechart barchart piechart}.map { |f| "#{f}.js" }
 SECTIONS         = YAML.load_file(File.join(File.dirname(__FILE__), "doc", "sections.yml"))
 
 def read_file(dir, filename)
@@ -62,7 +62,7 @@ namespace :build do
     html = Haml::Engine.new(haml).render(self, :sections => SECTIONS)
     hdoc = Nokogiri::HTML.parse(html)
     hdoc.css("pre").each do |node|
-      lang = node.css("code").attr("class")
+      lang = node.css("code").attribute("class")
       node.inner_html = Pygments.highlight(node.content, :lexer => lang)
     end
     write_file("dist", "index.html", hdoc.to_html)
