@@ -1,0 +1,43 @@
+%h3 Options Example
+
+:javascript
+  function customOptions() {
+    return {
+      title: { text: "Custom Title" },
+      plotOptions: { pie: { shadow: false } }
+    };
+  }
+
+%p For instance, the following chart is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:
+
+%pre
+  :preserve
+    function customOptions() {
+      return {
+        title: { text: "Custom Title" },
+        plotOptions: { pie: { shadow: false } }
+      };
+    }
+
+%table.render-to-pie-chart(data-options="customOptions")
+  %tr
+    %th Category
+    %th Budget (in billions)
+  %tr
+    %td Medicare/Medicaid
+    %td $835
+  %tr
+    %td Social Security
+    %td $725
+  %tr
+    %td Defense
+    %td $700
+  %tr
+    %td Discretionary
+    %td $646
+  %tr
+    %td Other Mandatory
+    %td $465
+  %tr
+    %td Net Interest
+    %td $227
