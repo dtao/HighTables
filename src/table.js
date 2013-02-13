@@ -1,26 +1,12 @@
 HighTables.Table = function(element) {
-  var table = $(element);
-  var options;
+  $.extend(this, new HighTables.Base(element));
+
+  var table = this.element;
   var chart;
   var firstRow;
   var bodyRows;
   var columnCount;
   var rowCount;
-
-  var OPTIONS_MAP = {
-    "options": function(value) { return safeEval(value); },
-    "title": function(value) { return { title: { text: value } }; },
-    "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; }
-  };
-
-  function safeEval(name) {
-    var parts = name.split(".");
-    var result = window;
-    while (parts.length > 0) {
-      result = result[parts.shift()];
-    }
-    return (typeof result === "function") ? result() : result;
-  }
 
   function getCellValue(cell, numeric) {
     if (numeric) {
@@ -30,20 +16,6 @@ HighTables.Table = function(element) {
     }
   }
 
-  function getOptions() {
-    var options = {};
-
-    var dataAttr;
-    for (var key in OPTIONS_MAP) {
-      dataAttr = table.attr("data-" + key);
-      if (dataAttr) {
-        $.extend(options, OPTIONS_MAP[key](dataAttr));
-      }
-    }
-
-    return options;
-  }
-
   this.getOrCreateChart = function() {
     if (!chart) {
       chart = $("<div>").addClass("chart");
@@ -51,14 +23,6 @@ HighTables.Table = function(element) {
       chart.insertBefore(table);
     }
     return chart;
-  };
-
-  this.options = function() {
-    if (!options) {
-      options = getOptions();
-    }
-
-    return options;
   };
 
   this.firstRow = function() {

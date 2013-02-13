@@ -9,6 +9,10 @@ $(document).ready(function() {
     }
   });
 
+  $(".line-chart").each(function() {
+    HighTables.LineChart.renderTo(this);
+  });
+
   $("table.render-to-line-chart").each(function() {
     HighTables.LineChart.renderFromTable(this);
   });

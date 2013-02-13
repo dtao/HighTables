@@ -9,6 +9,10 @@ $(document).ready(function() {
     }
   });
 
+  $(".line-chart").each(function() {
+    HighTables.LineChart.renderTo(this);
+  });
+
   $("table.render-to-line-chart").each(function() {
     HighTables.LineChart.renderFromTable(this);
   });
@@ -57,14 +61,10 @@ HighTables.Parse = function() {
   };
 }();
 
-HighTables.Table = function(element) {
-  var table = $(element);
+HighTables.Base = function(element) {
+  element = $(element);
+
   var options;
-  var chart;
-  var firstRow;
-  var bodyRows;
-  var columnCount;
-  var rowCount;
 
   var OPTIONS_MAP = {
     "options": function(value) { return safeEval(value); },
@@ -81,26 +81,47 @@ HighTables.Table = function(element) {
     return (typeof result === "function") ? result() : result;
   }
 
-  function getCellValue(cell, numeric) {
-    if (numeric) {
-      return HighTables.Parse.number(cell.text());
-    } else {
-      return cell.text();
-    }
-  }
-
   function getOptions() {
     var options = {};
 
     var dataAttr;
     for (var key in OPTIONS_MAP) {
-      dataAttr = table.attr("data-" + key);
+      dataAttr = element.attr("data-" + key);
       if (dataAttr) {
         $.extend(options, OPTIONS_MAP[key](dataAttr));
       }
     }
 
     return options;
+  };
+
+  this.options = function() {
+    if (!options) {
+      options = getOptions();
+    }
+
+    return options;
+  };
+
+  this.element = element;
+};
+
+HighTables.Table = function(element) {
+  $.extend(this, new HighTables.Base(element));
+
+  var table = this.element;
+  var chart;
+  var firstRow;
+  var bodyRows;
+  var columnCount;
+  var rowCount;
+
+  function getCellValue(cell, numeric) {
+    if (numeric) {
+      return HighTables.Parse.number(cell.text());
+    } else {
+      return cell.text();
+    }
   }
 
   this.getOrCreateChart = function() {
@@ -110,14 +131,6 @@ HighTables.Table = function(element) {
       chart.insertBefore(table);
     }
     return chart;
-  };
-
-  this.options = function() {
-    if (!options) {
-      options = getOptions();
-    }
-
-    return options;
   };
 
   this.firstRow = function() {
@@ -172,6 +185,20 @@ HighTables.Table = function(element) {
   };
 };
 
+HighTables.Chart = function(element) {
+  $.extend(this, new HighTables.Base(element));
+
+  var chart = this.element;
+  var table;
+
+  this.getTable = function() {
+    if (!table) {
+      table = $(chart.attr("data-table"));
+    }
+    return table;
+  };
+};
+
 HighTables.LineChart = function() {
   var lineCharts = HighTables.charts["line"] = [];
 
@@ -190,27 +217,38 @@ HighTables.LineChart = function() {
     return series;
   }
 
-  function renderFromTable(element, options) {
+  function render(table, chart, options) {
     options = options || {};
 
-    var table      = new HighTables.Table(element);
     var categories = getCategories(table);
     var series     = getSeries(table);
 
     lineCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
-        renderTo: table.getOrCreateChart().attr("id"),
+        renderTo: chart[0],
         type: "line"
       },
       xAxis: { categories: categories },
       yAxis: { title: false },
       title: false,
       series: series
-    }, table.options(), options)));
+    }, options)));
+  }
+
+  function renderTo(element, options) {
+    var chart = new HighTables.Chart(element);
+    var table = new HighTables.Table(chart.getTable()[0]);
+    return render(table, chart.element, $.extend({}, chart.options(), options));
+  }
+
+  function renderFromTable(element, options) {
+    var table = new HighTables.Table(element);
+    return render(table, table.getOrCreateChart(), $.extend({}, table.options(), options));
   }
 
   return {
+    renderTo: renderTo,
     renderFromTable: renderFromTable
   };
 }();
