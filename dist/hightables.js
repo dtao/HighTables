@@ -250,7 +250,7 @@ HighTables.BarChart = function() {
       yAxis: { title: false },
       title: false,
       series: series
-    }, options)));
+    }, table.options(), options)));
   }
 
   return {
@@ -293,11 +293,13 @@ HighTables.PieChart = function() {
     }];
   }
 
-  function renderFromTable(element) {
+  function renderFromTable(element, options) {
+    options = options || {};
+
     var table   = new HighTables.Table(element);
     var series  = getSeries(table);
 
-    pieCharts.push(new Highcharts.Chart({
+    pieCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
         backgroundColor: "transparent",
         renderTo: table.getOrCreateChart().attr("id"),
@@ -305,7 +307,7 @@ HighTables.PieChart = function() {
       },
       title: false,
       series: series
-    }));
+    }, table.options(), options)));
   }
 
   return {

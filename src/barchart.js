@@ -33,7 +33,7 @@ HighTables.BarChart = function() {
       yAxis: { title: false },
       title: false,
       series: series
-    }, options)));
+    }, table.options(), options)));
   }
 
   return {
