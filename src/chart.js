@@ -6,7 +6,7 @@ HighTables.Chart = function(element) {
 
   this.getTable = function() {
     if (!table) {
-      table = $(chart.attr("data-table"));
+      table = $(chart.attr("data-source"));
     }
     return table;
   };

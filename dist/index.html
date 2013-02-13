@@ -38,7 +38,7 @@
         <a href="#line-charts">Line Charts</a>
       </li>
       <li>
-        <a href="#area-charts">Area Charts</a>
+        <a href="#area-charts">Area &amp; Stack Charts</a>
       </li>
       <li>
         <a href="#bar-charts">Bar &amp; Column Charts</a>
@@ -55,8 +55,8 @@
     </ul>
 <section id="installation"><h2>Installation</h2>
 
-<p>To use HighTables on your website, simply include jQuery and Highcharts (in any order) and then
-include hightables.min.js <em>after</em> those libraries:</p>
+<p>To use HighTables on your website, simply include hightables.min.js <em>after</em> including jQuery
+and Highcharts:</p>
 
 <pre><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"highcharts.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -69,8 +69,8 @@ include hightables.min.js <em>after</em> those libraries:</p>
 
 <ol>
 <li>Add an extra HighTables-defined class to your <code>&lt;table&gt;</code> element, such as <code>render-to-line-chart</code>.
-A chart will be rendered automatically (above the table by default) when the page loads. The
-biggest benefit to this approach is that it is <strong>dead simple</strong>.</li>
+A chart will be rendered automatically, just above the table, when the page loads. The biggest
+benefit to this approach is that it is <strong>dead simple</strong>.</li>
 <li>Create a <code>&lt;div&gt;</code> element with a HighTables-defined class, such as <code>pie-chart</code>. This approach
 requires also specifying a data source via the <code>data-source</code> attribute, whose value should be a
 valid jQuery selector (such as <code>"#foo"</code> or <code>".bar"</code>) for the <code>&lt;table&gt;</code> element used to render the
@@ -83,7 +83,7 @@ label the X-axis of the chart, and each column after that will be represented as
       <h3>
         Web Browser Market Share
       </h3>
-      <div class="line-chart" data-table=".web-browser-market-share"></div>
+      <div class="line-chart" data-source=".web-browser-market-share"></div>
       <table class="web-browser-market-share">
 <tr>
 <th>Month</th>
@@ -166,11 +166,8 @@ label the X-axis of the chart, and each column after that will be represented as
 </table></section><section id="area-charts"><h2>Area Charts</h2>
 
 <p>To make an area chart instead of a line chart, add the <code>render-to-area-chart</code> class to a <code>&lt;table&gt;</code>
-element, or create a <code>&lt;div&gt;</code> with the class <code>area-chart</code>.</p>
-
-<p>Useful to know is that you can also easily render multiple charts from a single table. For example,
-adding the <code>render-to-stack-chart</code> class to a <code>&lt;table&gt;</code> element (or creating another <code>&lt;div&gt;</code> with
-the <code>stack-chart</code> class) will produce an area chart with stacked areas.</p>
+element, or create a <code>&lt;div&gt;</code> with the class <code>area-chart</code>. For a stack chart, use
+<code>render-to-stack-chart</code> (for a <code>&lt;table&gt;</code> element) or <code>stack-chart</code> (for a <code>&lt;div&gt;</code>).</p>
       <h3>
         Mobile OS Market Share
       </h3>
@@ -238,7 +235,7 @@ the <code>stack-chart</code> class) will produce an area chart with stacked area
 bar labels, and each remaining column will be rendered as a group of bars.</p>
 
 <p>The <code>render-to-column-chart</code> (for a <code>&lt;table&gt;</code>) and <code>column-chart</code> classes (for a <code>&lt;div&gt;</code>) produce a
-bar chart with vertical bars, a.k.a. a column chart.</p>
+bar chart with vertical bars, i.e., a column chart.</p>
       <h3>
         World's Top Oil Producers
       </h3>
@@ -313,19 +310,20 @@ determine the width of each slice.</p>
         </tr>
 </table></section><section id="options"><h2>Options</h2>
 
-<p>Support for custom chart options is pretty limited right now. From
-<a href="http://en.wikipedia.org/wiki/Dogfooding">dogfooding</a>, I've only had need for (and thus only built)
-the following customizable options:</p>
+<p>Support for custom chart options is pretty limited right now:</p>
 
 <ul>
 <li>
-<strong>Title</strong>: to give a chart a title, add the <code>data-title</code> attribute to the underlying table.</li>
+<strong>Title</strong>: to give a chart a title, add the <code>data-title</code> attribute to the element responsible for
+rendering the element (the <code>&lt;table&gt;</code> or the <code>&lt;div&gt;</code>).</li>
 <li>
 <strong>X Interval</strong>: to specify a tick interval for the X-axis, use the <code>data-x-interval</code> attribute.</li>
+<li>
+<strong>Y Interval</strong>: to specify a tick interval for the Y-axis, use the <code>data-y-interval</code> attribute.</li>
 </ul>
-<p>In addition to these options, however, there is support for a more general customization mechanism:
-add the <code>data-options</code> attribute, and specify the name of a JavaScript function which returns an
-object with any Highcharts options you like.</p>
+<p>In addition to these options, there is support for a more general customization mechanism: add the
+<code>data-options</code> attribute, and specify the name of a JavaScript function which returns an object with
+any Highcharts options you like.</p>
       <h3>Options Example</h3>
 <script type="text/javascript">
   //<![CDATA[

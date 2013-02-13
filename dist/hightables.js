@@ -69,7 +69,8 @@ HighTables.Base = function(element) {
   var OPTIONS_MAP = {
     "options": function(value) { return safeEval(value); },
     "title": function(value) { return { title: { text: value } }; },
-    "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; }
+    "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; },
+    "y-interval": function(value) { return { yAxis: { tickInterval: parseInt(value) } }; }
   };
 
   function safeEval(name) {
@@ -193,7 +194,7 @@ HighTables.Chart = function(element) {
 
   this.getTable = function() {
     if (!table) {
-      table = $(chart.attr("data-table"));
+      table = $(chart.attr("data-source"));
     }
     return table;
   };

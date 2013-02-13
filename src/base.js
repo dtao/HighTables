@@ -6,7 +6,8 @@ HighTables.Base = function(element) {
   var OPTIONS_MAP = {
     "options": function(value) { return safeEval(value); },
     "title": function(value) { return { title: { text: value } }; },
-    "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; }
+    "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; },
+    "y-interval": function(value) { return { yAxis: { tickInterval: parseInt(value) } }; }
   };
 
   function safeEval(name) {
