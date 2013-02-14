@@ -5,7 +5,7 @@ HighTables.charts = {};
 $(document).ready(function() {
   Highcharts.setOptions({
     credits: {
-      enabled: HighTables.includeHighchartsLinks
+      enabled: !!HighTables.includeHighchartsLinks
     }
   });
 
