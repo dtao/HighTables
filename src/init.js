@@ -40,7 +40,7 @@ $(document).ready(function() {
   function renderChartFromConfig(engine, config) {
     for (var chartType in config) {
       renderCharts("." + chartType + "-chart", engine, config[chartType]);
-      renderChartsFromTables(".render-to-" + chartType + "-table", engine, config[chartType]);
+      renderChartsFromTables("table.render-to-" + chartType + "-chart", engine, config[chartType]);
     }
   }
 
