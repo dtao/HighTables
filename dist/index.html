@@ -29,6 +29,9 @@
     <a href="http://jquery.com/">jQuery</a> and <a href="http://www.highcharts.com">Highcharts</a>.</p>
     <ul class="table-of-contents">
 <li>
+        <a href="#quick-example">Quick Example</a>
+      </li>
+      <li>
         <a href="#installation">Installation</a>
       </li>
       <li>
@@ -53,7 +56,167 @@
         <a href="#api">API</a>
       </li>
     </ul>
-<section id="installation"><h2>Installation</h2>
+<section id="quick-example"><h2>
+        Quick Example
+      </h2>
+      <script type="text/javascript">
+        //<![CDATA[
+          function showBatmanBoxOfficePerformanceTable() {
+            $(".batman-box-office-performance").parent().slideDown(500);
+          }
+        //]]>
+      </script><p>Here's a quick example of what you can do with HighTables.</p>
+      <h3>
+        Domestic Box Office Performance of Chris Nolan's <em>Batman</em> Movie Franchise
+      </h3>
+      <div class="spline-chart small-chart" data-source=".batman-box-office-performance" data-title="Daily Revenue" data-value-columns="1,3,5" data-y-min="0"></div>
+      <div class="spline-chart small-chart" data-source=".batman-box-office-performance" data-title="Total Revenue" data-value-columns="2,4,6" data-y-min="0"></div>
+      <div class="clear"></div>
+      <p>
+        The graphs above were rendered automatically (i.e., without any custom JavaScript) from
+        <a href="javascript:void(0);" onclick="showBatmanBoxOfficePerformanceTable()">a hidden HTML
+        table</a>.
+      </p>
+      <div class="hidden">
+        <table class="batman-box-office-performance">
+<tr>
+<th>Days Released</th>
+            <th>Batman Begins</th>
+            <th>Batman Begins (Total)</th>
+            <th>The Dark Knight</th>
+            <th>The Dark Knight (Total)</th>
+            <th>The Dark Knight Rises</th>
+            <th>The Dark Knight Rises (Total)</th>
+          </tr>
+<tr>
+<td>1</td>
+            <td>$15,068,368</td>
+            <td>$15,068,368</td>
+            <td>$67,165,092</td>
+            <td>$67,165,092</td>
+            <td>$75,754,897</td>
+            <td>$75,754,897</td>
+          </tr>
+<tr>
+<td>2</td>
+            <td>$9,083,178</td>
+            <td>$24,151,546</td>
+            <td>$47,650,240</td>
+            <td>$114,815,332</td>
+            <td>$44,931,966</td>
+            <td>$120,686,863</td>
+          </tr>
+<tr>
+<td>3</td>
+            <td>$15,072,242</td>
+            <td>$39,223,788</td>
+            <td>$43,596,151</td>
+            <td>$158,411,483</td>
+            <td>$40,200,432</td>
+            <td>$160,887,295</td>
+          </tr>
+<tr>
+<td>4</td>
+            <td>$18,017,047</td>
+            <td>$57,240,835</td>
+            <td>$24,493,313</td>
+            <td>$182,904,796</td>
+            <td>$19,389,129</td>
+            <td>$180,276,424</td>
+          </tr>
+<tr>
+<td>5</td>
+            <td>$15,656,151</td>
+            <td>$72,896,986</td>
+            <td>$20,868,722</td>
+            <td>$203,773,518</td>
+            <td>$17,762,472</td>
+            <td>$198,038,896</td>
+          </tr>
+<tr>
+<td>6</td>
+            <td>$6,627,412</td>
+            <td>$79,524,398</td>
+            <td>$18,377,288</td>
+            <td>$222,150,806</td>
+            <td>$13,770,092</td>
+            <td>$211,808,988</td>
+          </tr>
+<tr>
+<td>7</td>
+            <td>$5,404,419</td>
+            <td>$84,928,817</td>
+            <td>$16,464,405</td>
+            <td>$238,615,211</td>
+            <td>$13,202,371</td>
+            <td>$225,011,359</td>
+          </tr>
+<tr>
+<td>8</td>
+            <td>$5,518,167</td>
+            <td>$90,446,984</td>
+            <td>$23,232,292</td>
+            <td>$261,847,503</td>
+            <td>$17,734,545</td>
+            <td>$242,745,904</td>
+          </tr>
+<tr>
+<td>9</td>
+            <td>$4,475,440</td>
+            <td>$94,922,424</td>
+            <td>$28,272,494</td>
+            <td>$290,119,997</td>
+            <td>$24,712,417</td>
+            <td>$267,458,321</td>
+          </tr>
+<tr>
+<td>10</td>
+            <td>$8,269,743</td>
+            <td>$103,192,167</td>
+            <td>$23,661,680</td>
+            <td>$313,781,677</td>
+            <td>$19,654,489</td>
+            <td>$287,112,810</td>
+          </tr>
+<tr>
+<td>11</td>
+            <td>$10,664,330</td>
+            <td>$113,856,497</td>
+            <td>$10,518,116</td>
+            <td>$324,299,793</td>
+            <td>$8,160,046</td>
+            <td>$295,272,856</td>
+          </tr>
+<tr>
+<td>12</td>
+            <td>$8,655,316</td>
+            <td>$122,511,813</td>
+            <td>$9,629,366</td>
+            <td>$333,929,159</td>
+            <td>$8,773,116</td>
+            <td>$304,045,972</td>
+          </tr>
+<tr>
+<td>13</td>
+            <td>$4,010,038</td>
+            <td>$126,521,851</td>
+            <td>$8,755,141</td>
+            <td>$342,684,300</td>
+            <td>$7,333,325</td>
+            <td>$311,379,297</td>
+          </tr>
+<tr>
+<td>14</td>
+            <td>$3,727,338</td>
+            <td>$130,249,189</td>
+            <td>$8,402,546</td>
+            <td>$351,086,846</td>
+            <td>$6,818,467</td>
+            <td>$318,197,764</td>
+          </tr>
+</table>
+</div>
+    </section><section id="installation"><h2>Installation</h2>
 
 <p>To use HighTables on your website, simply include hightables.min.js <em>after</em> including jQuery
 and Highcharts:</p>
@@ -80,6 +243,9 @@ chart.</li>
 <p>Render a line chart by adding the <code>render-to-line-chart</code> class to an existing <code>&lt;table&gt;</code> element or
 creating a <code>&lt;div&gt;</code> element with the <code>line-chart</code> class. By default, the first column will be used to
 label the X-axis of the chart, and each column after that will be represented as a data series.</p>
+
+<p>For a <a href="http://en.wikipedia.org/wiki/Spline_(mathematics">spline</a>), or smoothed line, use the
+<code>render-to-spline-chart</code> (for a <code>&lt;table&gt;</code>) or <code>spline-chart</code> class (for a <code>&lt;div&gt;</code>).</p>
       <h3>
         Web Browser Market Share
       </h3>

@@ -10,6 +10,7 @@ CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
 SASS_FILES       = %w{hightables}.map { |f| "#{f}.sass" }
 JAVASCRIPT_FILES = %w{init parse base table chart linechart barchart piechart}.map { |f| "#{f}.js" }
 SECTIONS         = YAML.load_file(File.join(File.dirname(__FILE__), "doc", "sections.yml"))
+README_SECTIONS  = SECTIONS.reject { |s| s["exclude-from-readme"] }
 
 def read_file(dir, filename)
   File.read(File.join(File.dirname(__FILE__), dir, filename))
@@ -27,9 +28,17 @@ def renderer
   @renderer ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true)
 end
 
+def content_exists?(section_id)
+  return File.exist?(File.join(File.dirname(__FILE__), "doc", "#{section_id}.md"))
+end
+
 def render_content(section_id)
-  markdown = read_file("doc", "#{section_id}.md")
-  renderer.render(markdown)  
+  if content_exists?(section_id)
+    markdown = read_file("doc", "#{section_id}.md")
+    return renderer.render(markdown)
+  end
+
+  ""
 end
 
 def example_exists?(section_id)
@@ -52,7 +61,7 @@ namespace :build do
   desc "Compile README file from docs (without examples)"
   task :readme do
     docs = read_file("doc", "intro.md") + "\n" +
-      SECTIONS.map { |section| read_file("doc", "#{section['id']}.md") }.join("\n")
+      README_SECTIONS.map { |section| read_file("doc", "#{section['id']}.md") }.join("\n")
     write_file("README.md", docs)
   end
 

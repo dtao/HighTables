@@ -13,6 +13,12 @@ $(document).ready(function() {
     HighTables.LineChart.renderTo(this);
   });
 
+  $(".spline-chart").each(function() {
+    HighTables.LineChart.renderTo(this, {
+      chart: { type: "spline" }
+    });
+  });
+
   $(".area-chart").each(function() {
     HighTables.LineChart.renderTo(this, {
       chart: { type: "area" }
@@ -28,6 +34,12 @@ $(document).ready(function() {
 
   $("table.render-to-line-chart").each(function() {
     HighTables.LineChart.renderFromTable(this);
+  });
+
+  $("table.render-to-spline-chart").each(function() {
+    HighTables.LineChart.renderFromTable(this, {
+      chart: { type: "spline" }
+    });
   });
 
   $("table.render-to-area-chart").each(function() {

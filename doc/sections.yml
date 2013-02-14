@@ -1,3 +1,7 @@
+- id: quick-example
+  title: "Quick Example"
+  exclude-from-readme: true
+
 - id: installation
   title: "Installation"
 
