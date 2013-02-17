@@ -168,10 +168,12 @@ HighTables.Table = function(element) {
   var rowCount;
 
   function getCellValue(cell, numeric) {
+    var text = cell.text() || cell.find("input").val();
+
     if (numeric) {
-      return HighTables.Parse.number(cell.text());
+      return HighTables.Parse.number(text);
     } else {
-      return cell.text();
+      return text;
     }
   }
 
@@ -213,7 +215,7 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnHeader = function(index) {
-    return this.firstRow().find("th:nth-child(" + (index + 1) + ")").text();
+    return getCellValue(this.firstRow().find("th:nth-child(" + (index + 1) + ")"));
   };
 
   this.getColumnData = function(index, options) {
@@ -225,7 +227,7 @@ HighTables.Table = function(element) {
   };
 
   this.getRowHeader = function(index) {
-    return table.find("tr:nth-child(" + (index + 1) + ")").find("td:first").text();
+    return getCellValue(table.find("tr:nth-child(" + (index + 1) + ")").find("td:first"));
   };
 
   this.getRowData = function(index, options) {
