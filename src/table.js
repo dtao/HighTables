@@ -45,7 +45,7 @@ HighTables.Table = function(element) {
 
   this.columnCount = function() {
     if (!columnCount) {
-      columnCount = this.firstRow().find("th").length;
+      columnCount = this.firstRow().find("td,th").length;
     }
     return columnCount;
   };
@@ -58,7 +58,7 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnHeader = function(index) {
-    return getCellValue(this.firstRow().find("th:nth-child(" + (index + 1) + ")"));
+    return getCellValue(this.firstRow().find("td:nth-child(" + (index + 1) + "),th:nth-child(" + (index + 1) + ")"));
   };
 
   this.getColumnData = function(index, options) {
