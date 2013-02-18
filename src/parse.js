@@ -1,6 +1,6 @@
 HighTables.Parse = function() {
   function parseNumber(number) {
-    return parseFloat(number.replace(/^\$|,/g, ""));
+    return parseFloat(number && number.replace(/^\$|,/g, ""));
   }
 
   function parseIntegers(integers) {
