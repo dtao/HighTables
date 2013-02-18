@@ -37,7 +37,7 @@ HighTables.BarChart = function() {
 
   function renderTo(element, options) {
     var chart = new HighTables.Chart(element);
-    var table = new HighTables.Table(element.getTable()[0]);
+    var table = new HighTables.Table(chart.getTable()[0]);
     return render(table, chart.element, $.extend({}, chart.options(), options));
   }
 
