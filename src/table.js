@@ -65,7 +65,7 @@ HighTables.Table = function(element) {
     options = options || { numeric: true };
     return this.bodyRows().map(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      return getCellValue(cell, options.numeric);
+      return getCellValue(cell, options.numeric) || 0.0;
     });
   };
 
@@ -76,7 +76,7 @@ HighTables.Table = function(element) {
   this.getRowData = function(index, options) {
     options = options || { numeric: true };
     return table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").map(function() {
-      return getCellValue($(this), options.numeric);
+      return getCellValue($(this), options.numeric) || 0.0;
     });
   };
 };

@@ -14,12 +14,16 @@ HighTables.PieChart = function() {
   }
 
   function getSeriesData(table) {
-    return table.bodyRows().map(function() {
+    var seriesData = [];
+    table.bodyRows().each(function() {
       var label = getLabel(table, this);
       var value = getValue(table, this);
-      // jQuery.map flattens arrays by default for some reason.
-      return [[label, value]];
+
+      if (label && !isNaN(value)) {
+        seriesData.push([label, value]);
+      }
     });
+    return seriesData;
   }
 
   function getSeries(table) {
