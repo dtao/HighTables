@@ -2,21 +2,21 @@ HighTables.PieChart = function() {
   var pieCharts = HighTables.charts["pie"] = [];
 
   function getSeriesName(table) {
-    return table.firstRow().find("th:last").text();
+    return table.getCellValue(table.firstRow().find("th:last"));
   }
 
-  function getLabel(row) {
-    return $(row).find("td:first").text();
+  function getLabel(table, row) {
+    return table.getCellValue($(row).find("td:first"));
   }
 
-  function getValue(row) {
-    return HighTables.Parse.number($(row).find("td:last").text());
+  function getValue(table, row) {
+    return table.getCellValue($(row).find("td:last"), { numeric: true });
   }
 
   function getSeriesData(table) {
     return table.bodyRows().map(function() {
-      var label = getLabel(this);
-      var value = getValue(this);
+      var label = getLabel(table, this);
+      var value = getValue(table, this);
       // jQuery.map flattens arrays by default for some reason.
       return [[label, value]];
     });

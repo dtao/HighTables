@@ -18,6 +18,8 @@ HighTables.Table = function(element) {
     }
   }
 
+  this.getCellValue = getCellValue;
+
   this.getOrCreateChart = function() {
     if (!chart) {
       chart = $("<div>").addClass("chart");
