@@ -23,6 +23,8 @@
   </script>
 </head>
 <body>
+  <a href="https://github.com/you">
+    <img alt="Fork me on GitHub" class="github-ribbon" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
   <article><h1>HighTables</h1>
     
     <p>HighTables makes it trivial to render charts from existing HTML tables using
@@ -218,13 +220,14 @@
 </div>
     </section><section id="installation"><h2>Installation</h2>
 
-<p>To use HighTables on your website, simply include hightables.min.js <em>after</em> including jQuery
-and Highcharts:</p>
+<p>To use HighTables on your website, simply include <a href="https://raw.github.com/dtao/HighTables/master/dist/hightables.min.js">hightables.min.js</a> (or <a href="https://raw.github.com/dtao/HighTables/master/dist/hightables.js">hightables.js</a>) <em>after</em> including jQuery and Highcharts:</p>
 
 <pre><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"highcharts.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"hightables.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div></pre>
+
+<p><small>Note: do <em>not</em> use the URLs of the above links as the <code>src</code> of your <code>&lt;script&gt;</code> tag. Unless I'm mistaken, GitHub does not want to be used as a CDN. Just serve the file from your own server.</small></p>
       
     </section><section id="basic-usage"><h2>Basic Usage</h2>
 
