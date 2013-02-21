@@ -6,20 +6,21 @@ require "redcarpet"
 require "pygments"
 require "yui/compressor"
 
+HERE             = File.dirname(__FILE__)
 CSS_FILES        = %w{pygments}.map { |f| "#{f}.css" }
 SASS_FILES       = %w{hightables}.map { |f| "#{f}.sass" }
 JAVASCRIPT_FILES = %w{init parse base table chart linechart barchart piechart}.map { |f| "#{f}.js" }
-SECTIONS         = YAML.load_file(File.join(File.dirname(__FILE__), "doc", "sections.yml"))
+SECTIONS         = YAML.load_file(File.join(HERE, "doc", "sections.yml"))
 README_SECTIONS  = SECTIONS.reject { |s| s["exclude-from-readme"] }
 
 def read_file(dir, filename)
-  File.read(File.join(File.dirname(__FILE__), dir, filename))
+  File.read(File.join(HERE, dir, filename))
 end
 
 def write_file(*args)
   filename, content = args[-2, 2]
   dirs = args.take(args.length - 2)
-  File.open(File.join(File.dirname(__FILE__), *dirs, filename), "w") do |stream|
+  File.open(File.join(HERE, *dirs, filename), "w") do |stream|
     stream.write(content)
   end
 end
@@ -29,7 +30,7 @@ def renderer
 end
 
 def content_exists?(section_id)
-  return File.exist?(File.join(File.dirname(__FILE__), "doc", "#{section_id}.md"))
+  return File.exist?(File.join(HERE, "doc", "#{section_id}.md"))
 end
 
 def render_content(section_id)
@@ -42,7 +43,7 @@ def render_content(section_id)
 end
 
 def example_exists?(section_id)
-  return File.exist?(File.join(File.dirname(__FILE__), "doc", "#{section_id}.haml"))
+  return File.exist?(File.join(HERE, "doc", "#{section_id}.haml"))
 end
 
 def render_example(section_id)
@@ -94,4 +95,9 @@ namespace :build do
     write_file("dist", "hightables.js", javascript)
     write_file("dist", "hightables.min.js", YUI::JavaScriptCompressor.new(:munge => true).compress(javascript))
   end
+end
+
+desc "A convenience task to open the documentation in your default browser"
+task :open do
+  `open #{File.join(HERE, "dist", "index.html")}`
 end
