@@ -3,8 +3,16 @@
 :javascript
   function customOptions() {
     return {
-      title: { text: "Custom Title" },
-      plotOptions: { pie: { shadow: false } }
+      title: { text: "U.S. National Budget, Gloomy Autumn Donut Version" },
+      colors: ["#74A6BD", "#7195A3", "#D4E7ED", "#EB8540", "#B06A3B", "#AB988B"],
+      plotOptions: {
+        pie: {
+          borderColor: "#000",
+          borderWidth: 3,
+          innerSize: "25%",
+          shadow: false
+        }
+      }
     };
   }
 
@@ -15,12 +23,22 @@
     :preserve
       function customOptions() {
         return {
-          title: { text: "Custom Title" },
-          plotOptions: { pie: { shadow: false } }
+          title: { text: "U.S. National Budget, Gloomy Autumn Donut Version" },
+          colors: ["#74A6BD", "#7195A3", "#D4E7ED", "#EB8540", "#B06A3B", "#AB988B"],
+          plotOptions: {
+            pie: {
+              borderColor: "#000",
+              borderWidth: 3,
+              innerSize: "25%",
+              shadow: false
+            }
+          }
         };
       }
 
-%table.render-to-pie-chart(data-options="customOptions")
+.pie-chart(data-source=".us-national-budget" data-options="customOptions")
+
+%table.us-national-budget
   %tr
     %th Category
     %th Budget (in billions)

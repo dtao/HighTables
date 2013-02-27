@@ -2,9 +2,6 @@
   title: "Quick Example"
   exclude-from-readme: true
 
-- id: installation
-  title: "Installation"
-
 - id: basic-usage
   title: "Basic Usage"
 
@@ -19,6 +16,9 @@
 
 - id: pie-charts
   title: "Pie Charts"
+
+- id: installation
+  title: "Installation"
 
 - id: options
   title: "Options"

@@ -34,9 +34,6 @@
         <a href="#quick-example">Quick Example</a>
       </li>
       <li>
-        <a href="#installation">Installation</a>
-      </li>
-      <li>
         <a href="#basic-usage">Basic Usage</a>
       </li>
       <li>
@@ -50,6 +47,9 @@
       </li>
       <li>
         <a href="#pie-charts">Pie Charts</a>
+      </li>
+      <li>
+        <a href="#installation">Installation</a>
       </li>
       <li>
         <a href="#options">Options</a>
@@ -69,7 +69,7 @@
         //]]>
       </script><p>Here's a quick example of what you can do with HighTables.</p>
       <h3>
-        Domestic Box Office Performance of Chris Nolan's <em>Batman</em> Movie Franchise
+        Domestic Box Office Performance of the <em>Batman</em> Movie Franchise
       </h3>
       <div class="spline-chart small-chart" data-source=".batman-box-office-performance" data-title="Daily Revenue" data-value-columns="1,3,5" data-y-min="0"></div>
       <div class="spline-chart small-chart" data-source=".batman-box-office-performance" data-title="Total Revenue" data-value-columns="2,4,6" data-y-min="0"></div>
@@ -218,42 +218,33 @@
           </tr>
 </table>
 </div>
-    </section><section id="installation"><h2>Installation</h2>
-
-<p>To use HighTables on your website, simply include <a href="https://raw.github.com/dtao/HighTables/master/dist/hightables.min.js">hightables.min.js</a> (or <a href="https://raw.github.com/dtao/HighTables/master/dist/hightables.js">hightables.js</a>) <em>after</em> including jQuery and Highcharts:</p>
-
-<pre><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"highcharts.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"hightables.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div></pre>
-
-<p><small>Note: do <em>not</em> use the URLs of the above links as the <code>src</code> of your <code>&lt;script&gt;</code> tag. Unless I'm mistaken, GitHub does not want to be used as a CDN. Just serve the file from your own server.</small></p>
-      
     </section><section id="basic-usage"><h2>Basic Usage</h2>
 
 <p>To render a chart from any table on your page using HighTables, you have two options:</p>
 
 <ol>
-<li>Add an extra HighTables-defined class to your <code>&lt;table&gt;</code> element, such as <code>render-to-line-chart</code>.
-A chart will be rendered automatically, just above the table, when the page loads. The biggest
-benefit to this approach is that it is <strong>dead simple</strong>.</li>
-<li>Create a <code>&lt;div&gt;</code> element with a HighTables-defined class, such as <code>pie-chart</code>. This approach
-requires also specifying a data source via the <code>data-source</code> attribute, whose value should be a
-valid jQuery selector (such as <code>"#foo"</code> or <code>".bar"</code>) for the <code>&lt;table&gt;</code> element used to render the
-chart.</li>
-</ol></section><section id="line-charts"><h2>Line Charts</h2>
+<li><p>Add a <code>render-to-[*]-chart</code> class to your <code>&lt;table&gt;</code> element (where <code>[*]</code> is a valid chart type, e.g. <code>line</code>). A chart will be rendered automatically, just above the table, when the page loads.</p></li>
+<li><p>Create a <code>&lt;div&gt;</code> element with a <code>[*]-chart</code> class, and specify a data source via the <code>data-source</code> attribute. The value of <code>data-source</code> should be a valid jQuery selector (such as <code>"#foo"</code> or <code>".bar"</code>) which identifies the <code>&lt;table&gt;</code> element used to render the chart.</p></li>
+</ol>
+<p>The second approach is more flexible than the first as it allows you to render multiple charts from the same table with different custom options. It also decouples the logic used to render your tables from your charting logic, making it possible to (for example) load tables asynchronously from one website and render charts from them on a completely different website.</p>
+      
+    </section><section id="line-charts"><h2>Line Charts</h2>
 
-<p>Render a line chart by adding the <code>render-to-line-chart</code> class to an existing <code>&lt;table&gt;</code> element or
-creating a <code>&lt;div&gt;</code> element with the <code>line-chart</code> class. By default, the first column will be used to
-label the X-axis of the chart, and each column after that will be represented as a data series.</p>
+<ul>
+<li>
+<code>&lt;table&gt;</code> class: <code>render-to-line-chart</code>
+</li>
+<li>
+<code>&lt;div&gt;</code> class: <code>line-chart</code>
+</li>
+</ul>
+<p>By default, the first column will be used to label the X-axis of the chart, and each column after that will be represented as a data series.</p>
 
-<p>For a <a href="http://en.wikipedia.org/wiki/Spline_%28mathematics%29">spline</a>, or smoothed line, use the
-<code>render-to-spline-chart</code> (for a <code>&lt;table&gt;</code>) or <code>spline-chart</code> class (for a <code>&lt;div&gt;</code>).</p>
+<p>For a <a href="http://en.wikipedia.org/wiki/Spline_%28mathematics%29">spline</a>, or smoothed line, use <code>spline</code> instead of <code>line</code>.</p>
       <h3>
         Web Browser Market Share
       </h3>
-      <div class="line-chart" data-source=".web-browser-market-share"></div>
-      <table class="web-browser-market-share">
+      <table class="render-to-line-chart render-to-spline-chart">
 <tr>
 <th>Month</th>
           <th>IE</th>
@@ -334,15 +325,19 @@ label the X-axis of the chart, and each column after that will be represented as
         </tr>
 </table></section><section id="area-charts"><h2>Area Charts</h2>
 
-<p>To make an area chart instead of a line chart, add the <code>render-to-area-chart</code> class to a <code>&lt;table&gt;</code>
-element, or create a <code>&lt;div&gt;</code> with the class <code>area-chart</code>. For a stack chart, use
-<code>render-to-stack-chart</code> (for a <code>&lt;table&gt;</code> element) or <code>stack-chart</code> (for a <code>&lt;div&gt;</code>).</p>
+<ul>
+<li>
+<code>&lt;table&gt;</code> class: <code>render-to-area-chart</code>
+</li>
+<li>
+<code>&lt;div&gt;</code> class: <code>area-chart</code>
+</li>
+</ul>
+<p>Area charts work basically the same as line charts. For a stack chart, use <code>stack</code> instead of <code>area</code>.</p>
       <h3>
         Mobile OS Market Share
       </h3>
-      <div class="area-chart" data-source=".mobile-os-market-share"></div>
-      <div class="stack-chart" data-source=".mobile-os-market-share"></div>
-      <table class="mobile-os-market-share">
+      <table class="render-to-area-chart render-to-stack-chart">
 <tr>
 <th>Quarter</th>
           <th>iOS</th>
@@ -401,12 +396,17 @@ element, or create a <code>&lt;div&gt;</code> with the class <code>area-chart</c
         </tr>
 </table></section><section id="bar-charts"><h2>Bar &amp; Column Charts</h2>
 
-<p>Add the class <code>render-to-bar-chart</code> to an existing <code>&lt;table&gt;</code> element or create a <code>&lt;div&gt;</code> with the
-<code>bar-chart</code> class to create a bar chart. By default, the first column of the table will be used for
-bar labels, and each remaining column will be rendered as a group of bars.</p>
+<ul>
+<li>
+<code>&lt;table&gt;</code> class: <code>render-to-bar-chart</code>
+</li>
+<li>
+<code>&lt;div&gt;</code> class: <code>bar-chart</code>
+</li>
+</ul>
+<p>By default, the first column of the table will be used for bar labels, and each remaining column will be rendered as a group of bars.</p>
 
-<p>The <code>render-to-column-chart</code> (for a <code>&lt;table&gt;</code>) and <code>column-chart</code> classes (for a <code>&lt;div&gt;</code>) produce a
-bar chart with vertical bars, i.e., a column chart.</p>
+<p>Use <code>column</code> instead of <code>bar</code> to produce a bar chart with vertical bars, i.e., a column chart.</p>
       <h3>
         World's Top Oil Producers
       </h3>
@@ -443,15 +443,19 @@ bar chart with vertical bars, i.e., a column chart.</p>
         </tr>
 </table></section><section id="pie-charts"><h2>Pie Charts</h2>
 
-<p>You can also render pie charts by adding the <code>render-to-pie-chart</code> class to an existing <code>&lt;table&gt;</code>
-element or creating a <code>&lt;div&gt;</code> with the <code>pie-chart</code> class. By default, the first column of the table
-will be used to name the slices of the pie, and the values in the last column will be used to
-determine the width of each slice.</p>
+<ul>
+<li>
+<code>&lt;table&gt;</code> class: <code>render-to-pie-chart</code>
+</li>
+<li>
+<code>&lt;div&gt;</code> class: <code>pie-chart</code>
+</li>
+</ul>
+<p>By default, the first column of the table will be used to name the slices of the pie, and the values in the last column will be used to determine the width of each slice.</p>
       <h3>
         U.S. National Budget
       </h3>
-      <div class="pie-chart" data-source=".us-national-budget"></div>
-      <table class="us-national-budget">
+      <table class="render-to-pie-chart">
 <tr>
 <th>Category</th>
           <th>Budget (in billions)</th>
@@ -480,41 +484,66 @@ determine the width of each slice.</p>
 <td>Net Interest</td>
           <td>$227</td>
         </tr>
-</table></section><section id="options"><h2>Options</h2>
+</table></section><section id="installation"><h2>Installation</h2>
+
+<p>To use HighTables on your website, simply include <a href="http://dtao.github.com/HighTables/hightables.min.js">hightables.min.js</a> (or <a href="http://dtao.github.com/HighTables/hightables.js">hightables.js</a>) <em>after</em> including jQuery and Highcharts:</p>
+
+<pre><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"highcharts.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"hightables.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div></pre>
+      
+    </section><section id="options"><h2>Options</h2>
 
 <p>Support for custom chart options is pretty limited right now:</p>
 
 <ul>
 <li>
-<strong>Title</strong>: to give a chart a title, add the <code>data-title</code> attribute to the element responsible for
-rendering the element (the <code>&lt;table&gt;</code> or the <code>&lt;div&gt;</code>).</li>
+<strong>Title</strong>: to give a chart a title, add the <code>data-title</code> attribute to the element responsible for rendering the element (the <code>&lt;table&gt;</code> or the <code>&lt;div&gt;</code>).</li>
 <li>
-<strong>X Interval</strong>: to specify a tick interval for the X-axis, use the <code>data-x-interval</code> attribute.</li>
+<strong>X-Axis</strong>: to specify a minimum and tick interval for the X-axis, use the <code>data-x-min</code> and <code>data-x-interval</code> attributes.</li>
 <li>
-<strong>Y Interval</strong>: to specify a tick interval for the Y-axis, use the <code>data-y-interval</code> attribute.</li>
+<strong>Y-Axis</strong>: to specify a minimum and tick interval for the Y-axis, use the <code>data-y-min</code> and <code>data-y-interval</code> attributes.</li>
+<li>
+<strong>Columns</strong>: to use only certain columns for a table's data, set the <code>data-value-columns</code> attribute to a comma-delimited list of the (zero-based) column indices you want to use.</li>
 </ul>
-<p>In addition to these options, there is support for a more general customization mechanism: add the
-<code>data-options</code> attribute, and specify the name of a JavaScript function which returns an object with
-any Highcharts options you like.</p>
+<p>In addition to these options, there is support for a more general customization mechanism: add the <code>data-options</code> attribute, and specify the name of a JavaScript function which returns an object with any Highcharts options you like.</p>
       <h3>Options Example</h3>
 <script type="text/javascript">
   //<![CDATA[
     function customOptions() {
       return {
-        title: { text: "Custom Title" },
-        plotOptions: { pie: { shadow: false } }
+        title: { text: "U.S. National Budget, Gloomy Autumn Donut Version" },
+        colors: ["#74A6BD", "#7195A3", "#D4E7ED", "#EB8540", "#B06A3B", "#AB988B"],
+        plotOptions: {
+          pie: {
+            borderColor: "#000",
+            borderWidth: 3,
+            innerSize: "25%",
+            shadow: false
+          }
+        }
       };
     }
   //]]>
 </script><p>For instance, the following chart is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
 <pre><div class="highlight"><pre><span class="kd">function</span> <span class="nx">customOptions</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">{</span>
-    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"Custom Title"</span> <span class="p">},</span>
-    <span class="nx">plotOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">pie</span><span class="o">:</span> <span class="p">{</span> <span class="nx">shadow</span><span class="o">:</span> <span class="kc">false</span> <span class="p">}</span> <span class="p">}</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"U.S. National Budget, Gloomy Autumn Donut Version"</span> <span class="p">},</span>
+    <span class="nx">colors</span><span class="o">:</span> <span class="p">[</span><span class="s2">"#74A6BD"</span><span class="p">,</span> <span class="s2">"#7195A3"</span><span class="p">,</span> <span class="s2">"#D4E7ED"</span><span class="p">,</span> <span class="s2">"#EB8540"</span><span class="p">,</span> <span class="s2">"#B06A3B"</span><span class="p">,</span> <span class="s2">"#AB988B"</span><span class="p">],</span>
+    <span class="nx">plotOptions</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">pie</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">borderColor</span><span class="o">:</span> <span class="s2">"#000"</span><span class="p">,</span>
+        <span class="nx">borderWidth</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">innerSize</span><span class="o">:</span> <span class="s2">"25%"</span><span class="p">,</span>
+        <span class="nx">shadow</span><span class="o">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
   <span class="p">};</span>
 <span class="p">}</span>
 </pre></div></pre>
-<table class="render-to-pie-chart" data-options="customOptions">
+<div class="pie-chart" data-options="customOptions" data-source=".us-national-budget"></div>
+<table class="us-national-budget">
 <tr>
 <th>Category</th>
     <th>Budget (in billions)</th>
@@ -545,9 +574,15 @@ any Highcharts options you like.</p>
   </tr>
 </table></section><section id="api"><h2>API</h2>
 
-<p>So far there isn't much you can do to interact with HighTables programmatically. This will almost
-certainly change, but for now there's really only one thing you can do: disable the default hiding
-of Highcharts links:</p>
+<p>HighTables will automatically render charts when the page loads. However, you can also render charts manually, e.g. if the content of your page is dynamic and/or you want to make charts update and re-render based on user actions.</p>
+
+<p>To render a chart directly above a table, call <code>HighTables.renderChartFromTable(table)</code>, where <code>table</code> is a raw <code>&lt;table&gt;</code> DOM element (not a jQuery object) with an appropriate <code>render-to-[*]-chart</code> class.</p>
+
+<p>To render a chart within any arbitrary <code>&lt;div&gt;</code> with a <code>[*]-chart</code> class, call <code>HighTables.renderChart(div)</code>.</p>
+
+<p>You can also immediately re-render all charts on a page by calling <code>HighTables.renderCharts()</code>.</p>
+
+<p>So far there isn't much you can do to customize the HighTables library's default behavior. This will almost certainly change, but for now there's really only one configurable default option: the display of Highcharts links (off by default). To show Highcharts some love and turn the display on:</p>
 
 <pre><div class="highlight"><pre><span class="nx">HighTables</span><span class="p">.</span><span class="nx">includeHighchartsLinks</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </pre></div></pre>
