@@ -109,12 +109,11 @@ th, td {
   padding: 5px 15px;
   text-align: right; }
 
-.small-chart {
+.side-by-side-charts div[class*='-chart'] {
   float: left;
   width: 50%;
   box-sizing: border-box; }
-
-.clear {
+.side-by-side-charts:after {
   clear: both; }
 
 .hidden {

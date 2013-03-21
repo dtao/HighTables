@@ -11,9 +11,9 @@
 %h3
   Domestic Box Office Performance of the <em>Batman</em> Movie Franchise
 
-.spline-chart.small-chart(data-source=".batman-box-office-performance" data-title="Daily Revenue" data-y-min="0" data-value-columns="1,3,5")
-.spline-chart.small-chart(data-source=".batman-box-office-performance" data-title="Total Revenue" data-y-min="0" data-value-columns="2,4,6")
-.clear
+.side-by-side-charts
+  .spline-chart(data-source=".batman-box-office-performance" data-title="Daily Revenue" data-y-min="0" data-value-columns="1,3,5")
+  .spline-chart(data-source=".batman-box-office-performance" data-title="Total Revenue" data-y-min="0" data-value-columns="2,4,6")
 
 %p
   The graphs above were rendered automatically (i.e., without any custom JavaScript) from

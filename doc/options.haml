@@ -3,7 +3,7 @@
 :javascript
   function customOptions() {
     return {
-      title: { text: "U.S. National Budget, Gloomy Autumn Donut Version" },
+      title: { text: "Gloomy Autumn Donut Version" },
       colors: ["#74A6BD", "#7195A3", "#D4E7ED", "#EB8540", "#B06A3B", "#AB988B"],
       plotOptions: {
         pie: {
@@ -23,7 +23,7 @@
     :preserve
       function customOptions() {
         return {
-          title: { text: "U.S. National Budget, Gloomy Autumn Donut Version" },
+          title: { text: "Gloomy Autumn Donut Version" },
           colors: ["#74A6BD", "#7195A3", "#D4E7ED", "#EB8540", "#B06A3B", "#AB988B"],
           plotOptions: {
             pie: {
@@ -36,7 +36,9 @@
         };
       }
 
-.pie-chart(data-source=".us-national-budget" data-options="customOptions")
+.side-by-side-charts
+  .pie-chart(data-source=".us-national-budget" data-title="Original Version")
+  .pie-chart(data-source=".us-national-budget" data-options="customOptions")
 
 %table.us-national-budget
   %tr

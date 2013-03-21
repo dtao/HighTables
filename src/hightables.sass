@@ -137,13 +137,14 @@ th, td
   padding: 5px 15px
   text-align: right
 
-.small-chart
-  float: left
-  width: 50%
-  box-sizing: border-box
+.side-by-side-charts
+  div[class*='-chart']
+    float: left
+    width: 50%
+    box-sizing: border-box
 
-.clear
-  clear: both
+  &:after
+    clear: both
 
 .hidden
   display: none
