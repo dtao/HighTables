@@ -411,15 +411,19 @@ HighTables.PieChart = function() {
     return table.getCellValue($(row).find("td:first"));
   }
 
-  function getValue(table, row) {
-    return table.getCellValue($(row).find("td:last"), { numeric: true });
+  function getValue(table, row, options) {
+    if (options.valueColumns) {
+      return table.getCellValue($(row).find("td:nth-child(" + options.valueColumns[0] + ")"), { numeric: true });
+    } else {
+      return table.getCellValue($(row).find("td:last-child"), { numeric: true });
+    }
   }
 
-  function getSeriesData(table) {
+  function getSeriesData(table, options) {
     var seriesData = [];
     table.bodyRows().each(function() {
       var label = getLabel(table, this);
-      var value = getValue(table, this);
+      var value = getValue(table, this, options);
 
       if (label && !isNaN(value)) {
         seriesData.push([label, value]);
@@ -428,9 +432,9 @@ HighTables.PieChart = function() {
     return seriesData;
   }
 
-  function getSeries(table) {
-    var name = getSeriesName(table);
-    var data = getSeriesData(table);
+  function getSeries(table, options) {
+    var name = getSeriesName(table, options);
+    var data = getSeriesData(table, options);
 
     return [{
       type: "pie",
@@ -442,7 +446,7 @@ HighTables.PieChart = function() {
   function render(table, chart, options) {
     options = options || {};
 
-    var series  = getSeries(table);
+    var series  = getSeries(table, options);
 
     pieCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
