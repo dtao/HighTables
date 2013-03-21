@@ -403,8 +403,16 @@ HighTables.BarChart = function() {
 HighTables.PieChart = function() {
   var pieCharts = HighTables.charts["pie"] = [];
 
-  function getSeriesName(table) {
-    return table.getCellValue(table.firstRow().find("th:last"));
+  function getCellSelector(options) {
+    if (options.valueColumns) {
+      return "nth-child(" + options.valueColumns[0] + ")";
+    } else {
+      return "last-child";
+    }
+  }
+
+  function getSeriesName(table, options) {
+    return table.getCellValue(table.firstRow().find("th:" + getCellSelector(options)));
   }
 
   function getLabel(table, row) {
@@ -412,11 +420,7 @@ HighTables.PieChart = function() {
   }
 
   function getValue(table, row, options) {
-    if (options.valueColumns) {
-      return table.getCellValue($(row).find("td:nth-child(" + options.valueColumns[0] + ")"), { numeric: true });
-    } else {
-      return table.getCellValue($(row).find("td:last-child"), { numeric: true });
-    }
+    return table.getCellValue($(row).find("td:" + getCellSelector(options)), { numeric: true });
   }
 
   function getSeriesData(table, options) {
