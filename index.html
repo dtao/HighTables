@@ -63,21 +63,27 @@
       </h2>
       <script type="text/javascript">
         //<![CDATA[
-          function showBatmanBoxOfficePerformanceTable() {
-            $(".batman-box-office-performance").parent().slideDown(500);
+          function showOrHideBatmanBoxOfficePerformanceTable(link) {
+            var $table = $(".batman-box-office-performance");
+            if ($table.is(":visible")) {
+              $table.parent().slideUp(500);
+              $(link).text("show");
+            } else {
+              $table.parent().slideDown(500);
+              $(link).text("hide");
+            }
           }
         //]]>
       </script><p>Here's a quick example of what you can do with HighTables.</p>
       <h3>
         Domestic Box Office Performance of the <em>Batman</em> Movie Franchise
       </h3>
-      <div class="spline-chart small-chart" data-source=".batman-box-office-performance" data-title="Daily Revenue" data-value-columns="1,3,5" data-y-min="0"></div>
-      <div class="spline-chart small-chart" data-source=".batman-box-office-performance" data-title="Total Revenue" data-value-columns="2,4,6" data-y-min="0"></div>
-      <div class="clear"></div>
+      <div class="side-by-side">
+        <div class="spline-chart" data-source=".batman-box-office-performance" data-title="Daily Revenue" data-value-columns="1,3,5" data-y-min="0"></div>
+        <div class="spline-chart" data-source=".batman-box-office-performance" data-title="Total Revenue" data-value-columns="2,4,6" data-y-min="0"></div>
+      </div>
       <p>
-        The graphs above were rendered automatically (i.e., without any custom JavaScript) from
-        <a href="javascript:void(0);" onclick="showBatmanBoxOfficePerformanceTable()">a hidden HTML
-        table</a>.
+        The graphs above were rendered automatically (i.e., without any custom JavaScript) from a hidden HTML (<a href="javascript:void(0);" onclick="showOrHideBatmanBoxOfficePerformanceTable(this);">show</a>).
       </p>
       <div class="hidden">
         <table class="batman-box-office-performance">
@@ -220,31 +226,52 @@
 </div>
     </section><section id="basic-usage"><h2>Basic Usage</h2>
 
-<p>To render a chart from any table on your page using HighTables, you have two options:</p>
+<p>To render a chart from any table on your page using HighTables, you have two options.</p>
 
-<ol>
-<li><p>Add a <code>render-to-[*]-chart</code> class to your <code>&lt;table&gt;</code> element (where <code>[*]</code> is a valid chart type, e.g. <code>line</code>). A chart will be rendered automatically, just above the table, when the page loads.</p></li>
-<li><p>Create a <code>&lt;div&gt;</code> element with a <code>[*]-chart</code> class, and specify a data source via the <code>data-source</code> attribute. The value of <code>data-source</code> should be a valid jQuery selector (such as <code>"#foo"</code> or <code>".bar"</code>) which identifies the <code>&lt;table&gt;</code> element used to render the chart.</p></li>
-</ol>
+<h3>Table-based approach</h3>
+
+<div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-[type]-chart"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</pre></div>
+
+<p>Replace <code>[type]</code> above with a valid chart type, e.g. <code>line</code>. A chart will be rendered automatically, just above the table, when the page loads.</p>
+
+<h3>Div-based approach</h3>
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[type]-chart"</span> <span class="na">data-source=</span><span class="s">"#chart-data"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- elsewhere on the page --&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"chart-data"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</pre></div>
+
+<p>The value of <code>data-source</code> should be a valid CSS selector (such as <code>"#foo"</code> or <code>".bar"</code>) which identifies the <code>&lt;table&gt;</code> element used to render the chart.</p>
+
 <p>The second approach is more flexible than the first as it allows you to render multiple charts from the same table with different custom options. It also decouples the logic used to render your tables from your charting logic, making it possible to (for example) load tables asynchronously from one website and render charts from them on a completely different website.</p>
       
     </section><section id="line-charts"><h2>Line Charts</h2>
 
-<ul>
-<li>
-<code>&lt;table&gt;</code> class: <code>render-to-line-chart</code>
-</li>
-<li>
-<code>&lt;div&gt;</code> class: <code>line-chart</code>
-</li>
-</ul>
+<div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-line-chart"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="c">&lt;!-- OR: --&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"line-chart"</span> <span class="na">data-source=</span><span class="s">"#line-chart-source"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- elsewhere --&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"line-chart-source"</span><span class="nt">&gt;</span><span class="c">&lt;!-- ... --&gt;</span><span class="nt">&lt;/table&gt;</span>
+</pre></div>
+
 <p>By default, the first column will be used to label the X-axis of the chart, and each column after that will be represented as a data series.</p>
 
 <p>For a <a href="http://en.wikipedia.org/wiki/Spline_%28mathematics%29">spline</a>, or smoothed line, use <code>spline</code> instead of <code>line</code>.</p>
       <h3>
         Web Browser Market Share
       </h3>
-      <table class="render-to-line-chart render-to-spline-chart">
+      <table class="render-to-line-chart">
 <tr>
 <th>Month</th>
           <th>IE</th>
@@ -325,19 +352,23 @@
         </tr>
 </table></section><section id="area-charts"><h2>Area Charts</h2>
 
-<ul>
-<li>
-<code>&lt;table&gt;</code> class: <code>render-to-area-chart</code>
-</li>
-<li>
-<code>&lt;div&gt;</code> class: <code>area-chart</code>
-</li>
-</ul>
+<div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-area-chart"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="c">&lt;!-- OR: --&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"area-chart"</span> <span class="na">data-source=</span><span class="s">"#area-chart-source"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- elsewhere --&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"area-chart-source"</span><span class="nt">&gt;</span><span class="c">&lt;!-- ... --&gt;</span><span class="nt">&lt;/table&gt;</span>
+</pre></div>
+
 <p>Area charts work basically the same as line charts. For a stack chart, use <code>stack</code> instead of <code>area</code>.</p>
       <h3>
         Mobile OS Market Share
       </h3>
-      <table class="render-to-area-chart render-to-stack-chart">
+      <table class="render-to-stack-chart">
 <tr>
 <th>Quarter</th>
           <th>iOS</th>
@@ -396,14 +427,18 @@
         </tr>
 </table></section><section id="bar-charts"><h2>Bar &amp; Column Charts</h2>
 
-<ul>
-<li>
-<code>&lt;table&gt;</code> class: <code>render-to-bar-chart</code>
-</li>
-<li>
-<code>&lt;div&gt;</code> class: <code>bar-chart</code>
-</li>
-</ul>
+<div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-bar-chart"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="c">&lt;!-- OR: --&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar-chart"</span> <span class="na">data-source=</span><span class="s">"#bar-chart-source"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- elsewhere --&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"bar-chart-source"</span><span class="nt">&gt;</span><span class="c">&lt;!-- ... --&gt;</span><span class="nt">&lt;/table&gt;</span>
+</pre></div>
+
 <p>By default, the first column of the table will be used for bar labels, and each remaining column will be rendered as a group of bars.</p>
 
 <p>Use <code>column</code> instead of <code>bar</code> to produce a bar chart with vertical bars, i.e., a column chart.</p>
@@ -443,14 +478,18 @@
         </tr>
 </table></section><section id="pie-charts"><h2>Pie Charts</h2>
 
-<ul>
-<li>
-<code>&lt;table&gt;</code> class: <code>render-to-pie-chart</code>
-</li>
-<li>
-<code>&lt;div&gt;</code> class: <code>pie-chart</code>
-</li>
-</ul>
+<div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-pie-chart"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="c">&lt;!-- OR: --&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pie-chart"</span> <span class="na">data-source=</span><span class="s">"#pie-chart-source"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- elsewhere --&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"pie-chart-source"</span><span class="nt">&gt;</span><span class="c">&lt;!-- ... --&gt;</span><span class="nt">&lt;/table&gt;</span>
+</pre></div>
+
 <p>By default, the first column of the table will be used to name the slices of the pie, and the values in the last column will be used to determine the width of each slice.</p>
       <h3>
         U.S. National Budget
@@ -488,10 +527,10 @@
 
 <p>To use HighTables on your website, simply include <a href="http://dtao.github.com/HighTables/hightables.min.js">hightables.min.js</a> (or <a href="http://dtao.github.com/HighTables/hightables.js">hightables.js</a>) <em>after</em> including jQuery and Highcharts:</p>
 
-<pre><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"highcharts.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"hightables.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div></pre>
+</pre></div>
       
     </section><section id="options"><h2>Options</h2>
 
@@ -513,7 +552,7 @@
   //<![CDATA[
     function customOptions() {
       return {
-        title: { text: "U.S. National Budget, Gloomy Autumn Donut Version" },
+        title: { text: "Gloomy Autumn Donut Version" },
         colors: ["#74A6BD", "#7195A3", "#D4E7ED", "#EB8540", "#B06A3B", "#AB988B"],
         plotOptions: {
           pie: {
@@ -526,10 +565,10 @@
       };
     }
   //]]>
-</script><p>For instance, the following chart is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
-<pre><div class="highlight"><pre><span class="kd">function</span> <span class="nx">customOptions</span><span class="p">()</span> <span class="p">{</span>
+</script><p>For instance, the chart on the right below is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">customOptions</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">{</span>
-    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"U.S. National Budget, Gloomy Autumn Donut Version"</span> <span class="p">},</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"Gloomy Autumn Donut Version"</span> <span class="p">},</span>
     <span class="nx">colors</span><span class="o">:</span> <span class="p">[</span><span class="s2">"#74A6BD"</span><span class="p">,</span> <span class="s2">"#7195A3"</span><span class="p">,</span> <span class="s2">"#D4E7ED"</span><span class="p">,</span> <span class="s2">"#EB8540"</span><span class="p">,</span> <span class="s2">"#B06A3B"</span><span class="p">,</span> <span class="s2">"#AB988B"</span><span class="p">],</span>
     <span class="nx">plotOptions</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">pie</span><span class="o">:</span> <span class="p">{</span>
@@ -541,8 +580,11 @@
     <span class="p">}</span>
   <span class="p">};</span>
 <span class="p">}</span>
-</pre></div></pre>
-<div class="pie-chart" data-options="customOptions" data-source=".us-national-budget"></div>
+</pre></div>
+<div class="side-by-side">
+  <div class="pie-chart" data-source=".us-national-budget" data-title="Original Version"></div>
+  <div class="pie-chart" data-options="customOptions" data-source=".us-national-budget"></div>
+</div>
 <table class="us-national-budget">
 <tr>
 <th>Category</th>
@@ -584,9 +626,38 @@
 
 <p>So far there isn't much you can do to customize the HighTables library's default behavior. This will almost certainly change, but for now there's really only one configurable default option: the display of Highcharts links (off by default). To show Highcharts some love and turn the display on:</p>
 
-<pre><div class="highlight"><pre><span class="nx">HighTables</span><span class="p">.</span><span class="nx">includeHighchartsLinks</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div></pre>
-      
+<div class="highlight"><pre><span class="nx">HighTables</span><span class="p">.</span><span class="nx">includeHighchartsLinks</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div>
+      <h3>API Example</h3>
+<script type="text/javascript">
+  //<![CDATA[
+    function loadTableViaAjax() {
+      $("#api-example-data").empty().addClass("loading").load("table.html", function() {
+        this.className = "";
+        HighTables.renderChart(document.getElementById("api-example-chart"));
+      });
+    }
+  //]]>
+</script><p>
+  Click the button below to load an HTML table via AJAX and render a chart from it.
+  <button onclick="loadTableViaAjax();">Load Table</button>
+</p>
+<div class="side-by-side">
+  <div class="line-chart" data-source="#api-example-data table" id="api-example-chart"></div>
+  <div id="api-example-data"></div>
+</div>
+<p>Source:</p>
+<div class="highlight"><pre><span class="c">&lt;!-- relevant HTML --&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"loadTableViaAjax();"</span><span class="nt">&gt;</span>Load Table<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+<div class="highlight"><pre><span class="c1">// relevant JavaScript</span>
+<span class="kd">function</span> <span class="nx">loadTableViaAjax</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">"#api-example-data"</span><span class="p">).</span><span class="nx">empty</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">"loading"</span><span class="p">).</span><span class="nx">load</span><span class="p">(</span><span class="s2">"table.html"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+    <span class="nx">HighTables</span><span class="p">.</span><span class="nx">renderChart</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"api-example-chart"</span><span class="p">));</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
     </section></article>
 </body>
 </html>
