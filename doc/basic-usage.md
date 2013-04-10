@@ -6,17 +6,17 @@ To render a chart from any table on your page using HighTables, you have two opt
 ### Table-based approach
 
 ```html
-<table class="render-to-[_____]-chart">
+<table class="render-to-[type]-chart">
   <!-- ... -->
 </table>
 ```
 
-Fill in the blank above with a valid chart type, e.g. `line`. A chart will be rendered automatically, just above the table, when the page loads.
+Replace `[type]` above with a valid chart type, e.g. `line`. A chart will be rendered automatically, just above the table, when the page loads.
 
 ### Div-based approach
 
 ```html
-<div class="[_____]-chart" data-source="#chart-data"></div>
+<div class="[type]-chart" data-source="#chart-data"></div>
 
 <!-- elsewhere on the page -->
 <table id="chart-data">

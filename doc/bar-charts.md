@@ -6,10 +6,12 @@ Bar & Column Charts
   <!-- ... -->
 </table>
 
-<!-- or: -->
+<!-- OR: -->
+
 <div class="bar-chart" data-source="#bar-chart-source"></div>
-<table id="bar-chart-source">
-</table>
+
+<!-- elsewhere -->
+<table id="bar-chart-source"><!-- ... --></table>
 ```
 
 By default, the first column of the table will be used for bar labels, and each remaining column will be rendered as a group of bars.

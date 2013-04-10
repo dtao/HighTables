@@ -12,17 +12,17 @@ To render a chart from any table on your page using HighTables, you have two opt
 ### Table-based approach
 
 ```html
-<table class="render-to-[_____]-chart">
+<table class="render-to-[type]-chart">
   <!-- ... -->
 </table>
 ```
 
-Fill in the blank above with a valid chart type, e.g. `line`. A chart will be rendered automatically, just above the table, when the page loads.
+Replace `[type]` above with a valid chart type, e.g. `line`. A chart will be rendered automatically, just above the table, when the page loads.
 
 ### Div-based approach
 
 ```html
-<div class="[_____]-chart" data-source="#chart-data"></div>
+<div class="[type]-chart" data-source="#chart-data"></div>
 
 <!-- elsewhere on the page -->
 <table id="chart-data">
@@ -42,10 +42,12 @@ Line Charts
   <!-- ... -->
 </table>
 
-<!-- or: -->
+<!-- OR: -->
+
 <div class="line-chart" data-source="#line-chart-source"></div>
-<table id="line-chart-source">
-</table>
+
+<!-- elsewhere -->
+<table id="line-chart-source"><!-- ... --></table>
 ```
 
 By default, the first column will be used to label the X-axis of the chart, and each column after that will be represented as a data series.
@@ -60,10 +62,12 @@ Area Charts
   <!-- ... -->
 </table>
 
-<!-- or: -->
+<!-- OR: -->
+
 <div class="area-chart" data-source="#area-chart-source"></div>
-<table id="area-chart-source">
-</table>
+
+<!-- elsewhere -->
+<table id="area-chart-source"><!-- ... --></table>
 ```
 
 Area charts work basically the same as line charts. For a stack chart, use `stack` instead of `area`.
@@ -76,10 +80,12 @@ Bar & Column Charts
   <!-- ... -->
 </table>
 
-<!-- or: -->
+<!-- OR: -->
+
 <div class="bar-chart" data-source="#bar-chart-source"></div>
-<table id="bar-chart-source">
-</table>
+
+<!-- elsewhere -->
+<table id="bar-chart-source"><!-- ... --></table>
 ```
 
 By default, the first column of the table will be used for bar labels, and each remaining column will be rendered as a group of bars.
@@ -94,10 +100,12 @@ Pie Charts
   <!-- ... -->
 </table>
 
-<!-- or: -->
+<!-- OR: -->
+
 <div class="pie-chart" data-source="#pie-chart-source"></div>
-<table id="pie-chart-source">
-</table>
+
+<!-- elsewhere -->
+<table id="pie-chart-source"><!-- ... --></table>
 ```
 
 By default, the first column of the table will be used to name the slices of the pie, and the values in the last column will be used to determine the width of each slice.

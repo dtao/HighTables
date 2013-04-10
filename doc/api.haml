@@ -15,3 +15,22 @@
 .side-by-side
   #api-example-chart.line-chart(data-source="#api-example-data table")
   #api-example-data
+
+%p Source:
+
+%pre
+  %code.html
+    :preserve
+      &lt;!-- relevant HTML --&gt;
+      &lt;button onclick="loadTableViaAjax();"&gt;Load Table&lt;/button&gt;
+
+%pre
+  %code.javascript
+    :preserve
+      // relevant JavaScript
+      function loadTableViaAjax() {
+        $("#api-example-data").empty().addClass("loading").load("table.html", function() {
+          this.className = "";
+          HighTables.renderChart(document.getElementById("api-example-chart"));
+        });
+      }
