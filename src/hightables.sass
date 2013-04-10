@@ -21,6 +21,7 @@ $black:  #000
 body
   margin: 0
   padding: 0
+  padding-bottom: 100px
 
 img.github-ribbon
   position: fixed
@@ -137,8 +138,10 @@ th, td
   padding: 5px 15px
   text-align: right
 
-.side-by-side-charts
-  div[class*='-chart']
+.side-by-side
+  min-height: 400px
+
+  div
     float: left
     width: 50%
     box-sizing: border-box
@@ -148,3 +151,6 @@ th, td
 
 .hidden
   display: none
+
+.loading
+  background: url("loading.gif") no-repeat center

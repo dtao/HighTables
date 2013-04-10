@@ -2,8 +2,15 @@
   Quick Example
 
 :javascript
-  function showBatmanBoxOfficePerformanceTable() {
-    $(".batman-box-office-performance").parent().slideDown(500);
+  function showOrHideBatmanBoxOfficePerformanceTable(link) {
+    var $table = $(".batman-box-office-performance");
+    if ($table.is(":visible")) {
+      $table.parent().slideUp(500);
+      $(link).text("show");
+    } else {
+      $table.parent().slideDown(500);
+      $(link).text("hide");
+    }
   }
 
 %p Here's a quick example of what you can do with HighTables.
@@ -11,14 +18,12 @@
 %h3
   Domestic Box Office Performance of the <em>Batman</em> Movie Franchise
 
-.side-by-side-charts
+.side-by-side
   .spline-chart(data-source=".batman-box-office-performance" data-title="Daily Revenue" data-y-min="0" data-value-columns="1,3,5")
   .spline-chart(data-source=".batman-box-office-performance" data-title="Total Revenue" data-y-min="0" data-value-columns="2,4,6")
 
 %p
-  The graphs above were rendered automatically (i.e., without any custom JavaScript) from
-  <a href="javascript:void(0);" onclick="showBatmanBoxOfficePerformanceTable()">a hidden HTML
-  table</a>.
+  The graphs above were rendered automatically (i.e., without any custom JavaScript) from a hidden HTML (<a href="javascript:void(0);" onclick="showOrHideBatmanBoxOfficePerformanceTable(this);">show</a>).
 
 .hidden
   %table.batman-box-office-performance

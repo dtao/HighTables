@@ -1,0 +1,17 @@
+%h3 API Example
+
+:javascript
+  function loadTableViaAjax() {
+    $("#api-example-data").empty().addClass("loading").load("table.html", function() {
+      this.className = "";
+      HighTables.renderChart(document.getElementById("api-example-chart"));
+    });
+  }
+
+%p
+  Click the button below to load an HTML table via AJAX and render a chart from it.
+  %button(onclick="loadTableViaAjax();") Load Table
+
+.side-by-side
+  #api-example-chart.line-chart(data-source="#api-example-data table")
+  #api-example-data

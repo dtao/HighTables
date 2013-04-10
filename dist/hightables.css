@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  padding-bottom: 100px; }
 
 img.github-ribbon {
   position: fixed;
@@ -109,15 +110,20 @@ th, td {
   padding: 5px 15px;
   text-align: right; }
 
-.side-by-side-charts div[class*='-chart'] {
-  float: left;
-  width: 50%;
-  box-sizing: border-box; }
-.side-by-side-charts:after {
-  clear: both; }
+.side-by-side {
+  min-height: 400px; }
+  .side-by-side div {
+    float: left;
+    width: 50%;
+    box-sizing: border-box; }
+  .side-by-side:after {
+    clear: both; }
 
 .hidden {
   display: none; }
+
+.loading {
+  background: url("loading.gif") no-repeat center; }
 
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
