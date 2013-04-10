@@ -73,7 +73,7 @@ namespace :build do
     hdoc = Nokogiri::HTML.parse(html)
     hdoc.css("pre").each do |node|
       lang = node.css("code").attribute("class")
-      node.inner_html = Pygments.highlight(node.content, :lexer => lang)
+      node.replace(Pygments.highlight(node.content, :lexer => lang))
     end
     write_file("dist", "index.html", hdoc.to_html)
   end
