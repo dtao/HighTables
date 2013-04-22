@@ -6,12 +6,10 @@ Line Charts
   <!-- ... -->
 </table>
 
-<!-- OR: -->
-
+<!-- or: -->
 <div class="line-chart" data-source="#line-chart-source"></div>
-
-<!-- elsewhere -->
-<table id="line-chart-source"><!-- ... --></table>
+<table id="line-chart-source">
+</table>
 ```
 
 By default, the first column will be used to label the X-axis of the chart, and each column after that will be represented as a data series.

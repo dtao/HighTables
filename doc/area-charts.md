@@ -6,12 +6,10 @@ Area Charts
   <!-- ... -->
 </table>
 
-<!-- OR: -->
-
+<!-- or: -->
 <div class="area-chart" data-source="#area-chart-source"></div>
-
-<!-- elsewhere -->
-<table id="area-chart-source"><!-- ... --></table>
+<table id="area-chart-source">
+</table>
 ```
 
 Area charts work basically the same as line charts. For a stack chart, use `stack` instead of `area`.
