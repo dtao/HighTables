@@ -382,7 +382,7 @@
       <h3>
         Mobile OS Market Share
       </h3>
-      <table class="render-to-stack-chart">
+      <table class="render-to-stack-chart" data-order="descending">
 <tr>
 <th>Quarter</th>
           <th>iOS</th>
@@ -391,39 +391,11 @@
           <th>Windows Phone</th>
         </tr>
 <tr>
-<td>2011 Q1</td>
-          <td>16,883</td>
-          <td>36,350</td>
-          <td>13,004</td>
-          <td>1,600</td>
-        </tr>
-<tr>
-<td>2011 Q2</td>
-          <td>19,629</td>
-          <td>46,776</td>
-          <td>12,652</td>
-          <td>1,724</td>
-        </tr>
-<tr>
-<td>2011 Q3</td>
-          <td>17,295</td>
-          <td>60,490</td>
-          <td>12,701</td>
-          <td>1,702</td>
-        </tr>
-<tr>
-<td>2011 Q4</td>
-          <td>35,456</td>
-          <td>75,906</td>
-          <td>13,185</td>
-          <td>2,759</td>
-        </tr>
-<tr>
-<td>2012 Q1</td>
-          <td>33,121</td>
-          <td>81,067</td>
-          <td>9,939</td>
-          <td>2,713</td>
+<td>2012 Q3</td>
+          <td>23,550</td>
+          <td>122,480</td>
+          <td>8,947</td>
+          <td>4,058</td>
         </tr>
 <tr>
 <td>2012 Q2</td>
@@ -433,11 +405,39 @@
           <td>4,087</td>
         </tr>
 <tr>
-<td>2012 Q3</td>
-          <td>23,550</td>
-          <td>122,480</td>
-          <td>8,947</td>
-          <td>4,058</td>
+<td>2012 Q1</td>
+          <td>33,121</td>
+          <td>81,067</td>
+          <td>9,939</td>
+          <td>2,713</td>
+        </tr>
+<tr>
+<td>2011 Q4</td>
+          <td>35,456</td>
+          <td>75,906</td>
+          <td>13,185</td>
+          <td>2,759</td>
+        </tr>
+<tr>
+<td>2011 Q3</td>
+          <td>17,295</td>
+          <td>60,490</td>
+          <td>12,701</td>
+          <td>1,702</td>
+        </tr>
+<tr>
+<td>2011 Q2</td>
+          <td>19,629</td>
+          <td>46,776</td>
+          <td>12,652</td>
+          <td>1,724</td>
+        </tr>
+<tr>
+<td>2011 Q1</td>
+          <td>16,883</td>
+          <td>36,350</td>
+          <td>13,004</td>
+          <td>1,600</td>
         </tr>
 </table></section><section id="bar-charts"><h2>Bar &amp; Column Charts</h2>
 
@@ -549,6 +549,8 @@
 <ul>
 <li>
 <strong>Title</strong>: to give a chart a title, add the <code>data-title</code> attribute to the element responsible for rendering the element (the <code>&lt;table&gt;</code> or the <code>&lt;div&gt;</code>).</li>
+<li>
+<strong>Order</strong>: to render series in the opposite order they appear in a table, set the <code>data-order</code> attribute to "descending".</li>
 <li>
 <strong>X-Axis</strong>: to specify a minimum and tick interval for the X-axis, use the <code>data-x-min</code> and <code>data-x-interval</code> attributes.</li>
 <li>

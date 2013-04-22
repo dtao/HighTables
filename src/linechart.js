@@ -3,7 +3,7 @@ HighTables.LineChart = function() {
 
   function getCategories(table, options) {
     var labelColumn = options.labelColumn || 0;
-    return table.getColumnData(0, { numeric: false });
+    return table.getColumnData(0, $.extend({}, options, { numeric: false }));
   }
 
   function getSeries(table, options) {
@@ -13,7 +13,7 @@ HighTables.LineChart = function() {
       for (var i = 0; i < valueColumns.length; ++i) {
         series.push({
           name: table.getColumnHeader(valueColumns[i]),
-          data: table.getColumnData(valueColumns[i])
+          data: table.getColumnData(valueColumns[i], options)
         });
       }
 
@@ -21,7 +21,7 @@ HighTables.LineChart = function() {
       for (var i = 1; i < table.columnCount(); i++) {
         series.push({
           name: table.getColumnHeader(i),
-          data: table.getColumnData(i)
+          data: table.getColumnData(i, options)
         });
       }
     }

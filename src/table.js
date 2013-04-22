@@ -18,6 +18,13 @@ HighTables.Table = function(element) {
     }
   }
 
+  function getValueOrDefault(object, key, defaultValue) {
+    if (key in object) {
+      return object[key];
+    }
+    return defaultValue;
+  }
+
   this.getCellValue = getCellValue;
 
   this.getOrCreateChart = function() {
@@ -62,14 +69,19 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnData = function(index, options) {
-    options = options || { numeric: true };
+    options = options || {};
 
     // Ugh -- jQuery removes items when the function passed to map returns null.
     var columnData = [];
     this.bodyRows().each(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      columnData.push(getCellValue(cell, options.numeric));
+      columnData.push(getCellValue(cell, getValueOrDefault(options, "numeric", true)));
     });
+
+    if (options.order === "descending") {
+      columnData.reverse();
+    }
+
     return columnData;
   };
 
@@ -78,12 +90,12 @@ HighTables.Table = function(element) {
   };
 
   this.getRowData = function(index, options) {
-    options = options || { numeric: true };
+    options = options || {};
 
     // See comment from getColumnData.
     var rowData = [];
     table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
-      rowData.push(getCellValue($(this), options.numeric));
+      rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
     });
     return rowData;
   };

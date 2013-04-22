@@ -16,5 +16,9 @@ describe("HighTables.Table", function() {
     it("returns an array of values (not including header) for the given column", function() {
       test(0, [1, 3, 5]);
     });
+
+    it("supports data in descending order", function() {
+      test([0, { order: "descending" }], [5, 3, 1]);
+    });
   });
 });
