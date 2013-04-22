@@ -81,7 +81,8 @@ $(document).ready(function() {
 
 HighTables.Parse = function() {
   function parseNumber(number) {
-    return parseFloat(number && number.replace(/^\$|,/g, ""));
+    var result = parseFloat(number && number.replace(/^\$|,/g, ""));
+    return isNaN(result) ? null : result;
   }
 
   function parseIntegers(integers) {
@@ -108,6 +109,7 @@ HighTables.Base = function(element) {
   var CHART_OPTIONS_MAP = {
     "options": function(value) { return safeEval(value); },
     "title": function(value) { return { title: { text: value } }; },
+    "order": function(value) { return { order: value }; },
     "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; },
     "x-min": function(value) { return { xAxis: { min: parseInt(value) } }; },
     "y-interval": function(value) { return { yAxis: { tickInterval: parseInt(value) } }; },
@@ -203,6 +205,13 @@ HighTables.Table = function(element) {
     }
   }
 
+  function getValueOrDefault(object, key, defaultValue) {
+    if (key in object) {
+      return object[key];
+    }
+    return defaultValue;
+  }
+
   this.getCellValue = getCellValue;
 
   this.getOrCreateChart = function() {
@@ -247,11 +256,20 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnData = function(index, options) {
-    options = options || { numeric: true };
-    return this.bodyRows().map(function() {
+    options = options || {};
+
+    // Ugh -- jQuery removes items when the function passed to map returns null.
+    var columnData = [];
+    this.bodyRows().each(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      return getCellValue(cell, options.numeric) || 0.0;
+      columnData.push(getCellValue(cell, getValueOrDefault(options, "numeric", true)));
     });
+
+    if (options.order === "descending") {
+      columnData.reverse();
+    }
+
+    return columnData;
   };
 
   this.getRowHeader = function(index) {
@@ -259,10 +277,14 @@ HighTables.Table = function(element) {
   };
 
   this.getRowData = function(index, options) {
-    options = options || { numeric: true };
-    return table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").map(function() {
-      return getCellValue($(this), options.numeric) || 0.0;
+    options = options || {};
+
+    // See comment from getColumnData.
+    var rowData = [];
+    table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
+      rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
     });
+    return rowData;
   };
 };
 
@@ -285,7 +307,7 @@ HighTables.LineChart = function() {
 
   function getCategories(table, options) {
     var labelColumn = options.labelColumn || 0;
-    return table.getColumnData(0, { numeric: false });
+    return table.getColumnData(0, $.extend({}, options, { numeric: false }));
   }
 
   function getSeries(table, options) {
@@ -295,7 +317,7 @@ HighTables.LineChart = function() {
       for (var i = 0; i < valueColumns.length; ++i) {
         series.push({
           name: table.getColumnHeader(valueColumns[i]),
-          data: table.getColumnData(valueColumns[i])
+          data: table.getColumnData(valueColumns[i], options)
         });
       }
 
@@ -303,7 +325,7 @@ HighTables.LineChart = function() {
       for (var i = 1; i < table.columnCount(); i++) {
         series.push({
           name: table.getColumnHeader(i),
-          data: table.getColumnData(i)
+          data: table.getColumnData(i, options)
         });
       }
     }
