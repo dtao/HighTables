@@ -1,6 +1,7 @@
 HighTables.Parse = function() {
   function parseNumber(number) {
-    return parseFloat(number && number.replace(/^\$|,/g, ""));
+    var result = parseFloat(number && number.replace(/^\$|,/g, ""));
+    return isNaN(result) ? null : result;
   }
 
   function parseIntegers(integers) {

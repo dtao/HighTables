@@ -81,7 +81,8 @@ $(document).ready(function() {
 
 HighTables.Parse = function() {
   function parseNumber(number) {
-    return parseFloat(number && number.replace(/^\$|,/g, ""));
+    var result = parseFloat(number && number.replace(/^\$|,/g, ""));
+    return isNaN(result) ? null : result;
   }
 
   function parseIntegers(integers) {
@@ -248,10 +249,14 @@ HighTables.Table = function(element) {
 
   this.getColumnData = function(index, options) {
     options = options || { numeric: true };
-    return this.bodyRows().map(function() {
+
+    // Ugh -- jQuery removes items when the function passed to map returns null.
+    var columnData = [];
+    this.bodyRows().each(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      return getCellValue(cell, options.numeric) || 0.0;
+      columnData.push(getCellValue(cell, options.numeric));
     });
+    return columnData;
   };
 
   this.getRowHeader = function(index) {
@@ -260,9 +265,13 @@ HighTables.Table = function(element) {
 
   this.getRowData = function(index, options) {
     options = options || { numeric: true };
-    return table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").map(function() {
-      return getCellValue($(this), options.numeric) || 0.0;
+
+    // See comment from getColumnData.
+    var rowData = [];
+    table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
+      rowData.push(getCellValue($(this), options.numeric));
     });
+    return rowData;
   };
 };
 
