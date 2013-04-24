@@ -3,22 +3,52 @@
 describe("HighTables.Table", function() {
   var table;
 
-  beforeEach(function() {
-    table = table || new HighTables.Table(document.getElementById("spec-table"));
+  describe("basic usage", function() {
+    beforeEach(function() {
+      table = new HighTables.Table(document.getElementById("basic-table"));
+    });
+
+    describe("getColumnData", function() {
+      beforeEach(function() {
+        window.context = table;
+        window.func = table.getColumnData;
+      });
+
+      it("returns an array of values (not including header) for the given column", function() {
+        test(0, [1, 3, 5]);
+      });
+
+      it("supports data in descending order", function() {
+        test([0, { order: "descending" }], [5, 3, 1]);
+      });
+    });
+
+    describe("getRowData", function() {
+      beforeEach(function() {
+        window.context = table;
+        window.func = table.getRowData;
+      });
+
+      it("returns an array of values (not including header) for the given row", function() {
+        test(1, [2]);
+      });
+    });
   });
 
-  describe("getColumnData", function() {
+  describe("more advanced usage", function() {
     beforeEach(function() {
-      window.context = table;
-      window.func = table.getColumnData;
+      table = new HighTables.Table(document.getElementById("advanced-table"));
     });
 
-    it("returns an array of values (not including header) for the given column", function() {
-      test(0, [1, 3, 5]);
-    });
+    describe("getRowData", function() {
+      beforeEach(function() {
+        window.context = table;
+        window.func = table.getRowData;
+      });
 
-    it("supports data in descending order", function() {
-      test([0, { order: "descending" }], [5, 3, 1]);
+      it("returns an array of values (not including header) for the given row", function() {
+        test(1, [3]);
+      });
     });
   });
 });

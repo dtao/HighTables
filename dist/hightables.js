@@ -283,7 +283,7 @@ HighTables.Table = function(element) {
   };
 
   this.getRowData = function(index, options) {
-    options = options || {};
+    options = options || this.options() || {};
 
     // See comment from getColumnData.
     var rowData = [];
