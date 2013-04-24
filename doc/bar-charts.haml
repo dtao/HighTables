@@ -1,7 +1,10 @@
 %h3
   World's Top Oil Producers
 
-%table.render-to-bar-chart.render-to-column-chart
+.bar-chart(data-source="#top-oil-producers" data-value-columns="2")
+.column-chart(data-source="#top-oil-producers" data-value-columns="3")
+
+%table#top-oil-producers
   %tr
     %th Nation
     %th Oil Produced

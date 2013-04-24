@@ -18,6 +18,12 @@ HighTables.Table = function(element) {
     }
   }
 
+  function getCellValueAt(rowIndex, columnIndex, numeric) {
+    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
+      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
+    return getCellValue(cell, numeric);
+  }
+
   function getValueOrDefault(object, key, defaultValue) {
     if (key in object) {
       return object[key];
@@ -94,9 +100,15 @@ HighTables.Table = function(element) {
 
     // See comment from getColumnData.
     var rowData = [];
-    table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
-      rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
-    });
+    if (options.valueColumns) {
+      for (var i = 0; i < options.valueColumns.length; ++i) {
+        rowData.push(getCellValueAt(index, options.valueColumns[i], getValueOrDefault(options, "numeric", true)));
+      }
+    } else {
+      table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
+        rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
+      });
+    }
     return rowData;
   };
 };

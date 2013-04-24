@@ -1,16 +1,16 @@
 HighTables.BarChart = function() {
   var barCharts = HighTables.charts["bar"] = [];
 
-  function getCategories(table) {
-    return table.getRowData(0, { numeric: false });
+  function getCategories(table, options) {
+    return table.getRowData(0, $.extend({}, options, { numeric: false }));
   }
 
-  function getSeries(table) {
+  function getSeries(table, options) {
     var series = [];
     for (var i = 1; i < table.rowCount(); i++) {
       series.push({
         name: table.getRowHeader(i),
-        data: table.getRowData(i)
+        data: table.getRowData(i, options)
       });
     }
     return series;
@@ -19,8 +19,8 @@ HighTables.BarChart = function() {
   function render(table, chart, options) {
     options = options || {};
 
-    var categories = getCategories(table);
-    var series     = getSeries(table);
+    var categories = getCategories(table, options);
+    var series     = getSeries(table, options);
 
     barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {

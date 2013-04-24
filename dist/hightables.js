@@ -205,6 +205,12 @@ HighTables.Table = function(element) {
     }
   }
 
+  function getCellValueAt(rowIndex, columnIndex, numeric) {
+    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
+      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
+    return getCellValue(cell, numeric);
+  }
+
   function getValueOrDefault(object, key, defaultValue) {
     if (key in object) {
       return object[key];
@@ -281,9 +287,15 @@ HighTables.Table = function(element) {
 
     // See comment from getColumnData.
     var rowData = [];
-    table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
-      rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
-    });
+    if (options.valueColumns) {
+      for (var i = 0; i < options.valueColumns.length; ++i) {
+        rowData.push(getCellValueAt(index, options.valueColumns[i], getValueOrDefault(options, "numeric", true)));
+      }
+    } else {
+      table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
+        rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
+      });
+    }
     return rowData;
   };
 };
@@ -371,16 +383,16 @@ HighTables.LineChart = function() {
 HighTables.BarChart = function() {
   var barCharts = HighTables.charts["bar"] = [];
 
-  function getCategories(table) {
-    return table.getRowData(0, { numeric: false });
+  function getCategories(table, options) {
+    return table.getRowData(0, $.extend({}, options, { numeric: false }));
   }
 
-  function getSeries(table) {
+  function getSeries(table, options) {
     var series = [];
     for (var i = 1; i < table.rowCount(); i++) {
       series.push({
         name: table.getRowHeader(i),
-        data: table.getRowData(i)
+        data: table.getRowData(i, options)
       });
     }
     return series;
@@ -389,8 +401,8 @@ HighTables.BarChart = function() {
   function render(table, chart, options) {
     options = options || {};
 
-    var categories = getCategories(table);
-    var series     = getSeries(table);
+    var categories = getCategories(table, options);
+    var series     = getSeries(table, options);
 
     barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
