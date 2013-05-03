@@ -93,9 +93,30 @@ HighTables.Parse = function() {
     return results;
   }
 
+  function parseIntegersWithRanges(sequence, max) {
+    var current = 0;
+    var next;
+
+    var values = [];
+    for (i = 0; i < sequence.length; ++i) {
+      if (sequence[i] === "...") {
+        next = sequence[i + 1] || max + 1;
+        while (current < next) {
+          values.push(current++);
+        }
+      } else {
+        current = parseInt(sequence[i]);
+        values.push(current++);
+      }
+    }
+
+    return values;
+  }
+
   return {
     number: parseNumber,
-    integers: parseIntegers
+    integers: parseIntegers,
+    integersWithRanges: parseIntegersWithRanges
   };
 }();
 
@@ -105,6 +126,7 @@ HighTables.Base = function(element) {
   var options;
   var labelColumn;
   var valueColumns;
+  var table;
 
   var CHART_OPTIONS_MAP = {
     "options": function(value) { return safeEval(value); },
@@ -125,6 +147,17 @@ HighTables.Base = function(element) {
     return (typeof result === "function") ? result() : result;
   }
 
+  function getTable() {
+    if (!table) {
+      if (element.is("table")) {
+        table = element;
+      } else {
+        table = $(element.attr("data-source"));
+      }
+    }
+    return table;
+  };
+
   function getChartOptions() {
     var options = {};
 
@@ -138,7 +171,8 @@ HighTables.Base = function(element) {
 
     return $.extend(options, {
       labelColumn: getLabelColumn(),
-      valueColumns: getValueColumns()
+      valueColumns: getValueColumns(),
+      limit: getLimit()
     });
   };
 
@@ -148,13 +182,22 @@ HighTables.Base = function(element) {
 
   function getValueColumns() {
     var attr = element.attr("data-value-columns");
-
     if (attr) {
-      return HighTables.Parse.integers(attr.split(","));
+      return HighTables.Parse.integersWithRanges(
+        attr.split(","),
+        getTable().find("tr:first th, tr:first td").length - 1
+      );
+
     } else {
       return null;
     }
   }
+
+  function getLimit() {
+    return parseInt(element.attr("data-limit"));
+  }
+
+  this.getTable = getTable;
 
   this.options = function() {
     if (!options) {
@@ -203,6 +246,12 @@ HighTables.Table = function(element) {
     } else {
       return text;
     }
+  }
+
+  function getCellValueAt(rowIndex, columnIndex, numeric) {
+    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
+      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
+    return getCellValue(cell, numeric);
   }
 
   function getValueOrDefault(object, key, defaultValue) {
@@ -269,6 +318,10 @@ HighTables.Table = function(element) {
       columnData.reverse();
     }
 
+    if (options.limit) {
+      columnData = columnData.slice(0, options.limit);
+    }
+
     return columnData;
   };
 
@@ -277,29 +330,25 @@ HighTables.Table = function(element) {
   };
 
   this.getRowData = function(index, options) {
-    options = options || {};
+    options = options || this.options() || {};
 
     // See comment from getColumnData.
     var rowData = [];
-    table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
-      rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
-    });
+    if (options.valueColumns) {
+      for (var i = 0; i < options.valueColumns.length; ++i) {
+        rowData.push(getCellValueAt(index, options.valueColumns[i], getValueOrDefault(options, "numeric", true)));
+      }
+    } else {
+      table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
+        rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
+      });
+    }
     return rowData;
   };
 };
 
 HighTables.Chart = function(element) {
   $.extend(this, new HighTables.Base(element));
-
-  var chart = this.element;
-  var table;
-
-  this.getTable = function() {
-    if (!table) {
-      table = $(chart.attr("data-source"));
-    }
-    return table;
-  };
 };
 
 HighTables.LineChart = function() {
@@ -371,16 +420,16 @@ HighTables.LineChart = function() {
 HighTables.BarChart = function() {
   var barCharts = HighTables.charts["bar"] = [];
 
-  function getCategories(table) {
-    return table.getRowData(0, { numeric: false });
+  function getCategories(table, options) {
+    return table.getRowData(0, $.extend({}, options, { numeric: false }));
   }
 
-  function getSeries(table) {
+  function getSeries(table, options) {
     var series = [];
     for (var i = 1; i < table.rowCount(); i++) {
       series.push({
         name: table.getRowHeader(i),
-        data: table.getRowData(i)
+        data: table.getRowData(i, options)
       });
     }
     return series;
@@ -389,8 +438,8 @@ HighTables.BarChart = function() {
   function render(table, chart, options) {
     options = options || {};
 
-    var categories = getCategories(table);
-    var series     = getSeries(table);
+    var categories = getCategories(table, options);
+    var series     = getSeries(table, options);
 
     barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
