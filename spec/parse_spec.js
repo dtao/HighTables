@@ -33,4 +33,23 @@ describe("HighTables.Parse", function() {
       test("foo", null);
     });
   });
+
+  describe("integersWithRanges", function() {
+    beforeEach(function() {
+      window.context = null;
+      window.func = HighTables.Parse.integersWithRanges;
+    });
+
+    it("treats '...' as all of the numbers between two endpoints", function() {
+      test([["2", "..." , "5"]], [2, 3, 4, 5]);
+    });
+
+    it("starts from 0 if '...' starts the sequence", function() {
+      test([["...", "4", "7"]], [0, 1, 2, 3, 4, 7]);
+    });
+
+    it("ends before a specified max if '...' ends the sequence", function() {
+      test([["3", "5", "..."], 8], [3, 5, 6, 7, 8]);
+    });
+  });
 });

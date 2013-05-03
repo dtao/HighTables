@@ -93,9 +93,30 @@ HighTables.Parse = function() {
     return results;
   }
 
+  function parseIntegersWithRanges(sequence, max) {
+    var current = 0;
+    var next;
+
+    var values = [];
+    for (i = 0; i < sequence.length; ++i) {
+      if (sequence[i] === "...") {
+        next = sequence[i + 1] || max + 1;
+        while (current < next) {
+          values.push(current++);
+        }
+      } else {
+        current = parseInt(sequence[i]);
+        values.push(current++);
+      }
+    }
+
+    return values;
+  }
+
   return {
     number: parseNumber,
-    integers: parseIntegers
+    integers: parseIntegers,
+    integersWithRanges: parseIntegersWithRanges
   };
 }();
 
@@ -155,27 +176,6 @@ HighTables.Base = function(element) {
     });
   };
 
-  function readValueColumns(sequence) {
-    var current = 0;
-    var next;
-    var max = getTable().find("tr:first th, tr:first td").length;
-
-    var values = [];
-    for (i = 0; i < sequence.length; ++i) {
-      if (sequence[i] === "...") {
-        next = sequence[i + 1] || max;
-        while (current < next) {
-          values.push(current++);
-        }
-      } else {
-        current = parseInt(sequence[i]);
-        values.push(current++);
-      }
-    }
-
-    return values;
-  }
-
   function getLabelColumn() {
     return parseInt(element.attr("data-label-column"));
   }
@@ -183,7 +183,11 @@ HighTables.Base = function(element) {
   function getValueColumns() {
     var attr = element.attr("data-value-columns");
     if (attr) {
-      return readValueColumns(attr.split(","));
+      return HighTables.Parse.integersWithRanges(
+        attr.split(","),
+        getTable().find("tr:first th, tr:first td").length - 1
+      );
+
     } else {
       return null;
     }
