@@ -560,7 +560,19 @@
 <li>
 <strong>Y-Axis</strong>: to specify a minimum and tick interval for the Y-axis, use the <code>data-y-min</code> and <code>data-y-interval</code> attributes.</li>
 <li>
-<strong>Columns</strong>: to use only certain columns for a table's data, set the <code>data-value-columns</code> attribute to a comma-delimited list of the (zero-based) column indices you want to use.</li>
+<strong>Columns</strong>: to use only certain columns for a table's data, set the <code>data-value-columns</code> attribute to a comma-delimited list of the (zero-based) column indices you want to use. Use <code>"..."</code> to represent a range; for example:
+
+<ul>
+<li>
+<code>"5,6"</code> would use columns 5 and 6 (obviously)</li>
+<li>
+<code>"2,...,5"</code> would use columns 2, 3, 4, and 5</li>
+<li>
+<code>"3,..."</code> would use every column starting with column 3</li>
+<li>
+<code>"...,3"</code> would use every column from 0 to 3</li>
+</ul>
+</li>
 </ul>
 <p>In addition to these options, there is support for a more general customization mechanism: add the <code>data-options</code> attribute, and specify the name of a JavaScript function which returns an object with any Highcharts options you like.</p>
       <h3>Options Example</h3>
