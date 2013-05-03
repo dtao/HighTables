@@ -37,7 +37,8 @@ HighTables.Base = function(element) {
 
     return $.extend(options, {
       labelColumn: getLabelColumn(),
-      valueColumns: getValueColumns()
+      valueColumns: getValueColumns(),
+      limit: getLimit()
     });
   };
 
@@ -47,12 +48,11 @@ HighTables.Base = function(element) {
 
   function getValueColumns() {
     var attr = element.attr("data-value-columns");
+    return attr ? HighTables.Parse.integers(attr.split(",")) : null;
+  }
 
-    if (attr) {
-      return HighTables.Parse.integers(attr.split(","));
-    } else {
-      return null;
-    }
+  function getLimit() {
+    return parseInt(element.attr("data-limit"));
   }
 
   this.options = function() {

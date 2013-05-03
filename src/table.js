@@ -82,6 +82,9 @@ HighTables.Table = function(element) {
     this.bodyRows().each(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
       columnData.push(getCellValue(cell, getValueOrDefault(options, "numeric", true)));
+      if (options.limit && (columnData.length === options.limit)) {
+        return false;
+      }
     });
 
     if (options.order === "descending") {
