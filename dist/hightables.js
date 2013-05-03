@@ -105,6 +105,7 @@ HighTables.Base = function(element) {
   var options;
   var labelColumn;
   var valueColumns;
+  var table;
 
   var CHART_OPTIONS_MAP = {
     "options": function(value) { return safeEval(value); },
@@ -125,6 +126,17 @@ HighTables.Base = function(element) {
     return (typeof result === "function") ? result() : result;
   }
 
+  function getTable() {
+    if (!table) {
+      if (element.is("table")) {
+        table = element;
+      } else {
+        table = $(element.attr("data-source"));
+      }
+    }
+    return table;
+  };
+
   function getChartOptions() {
     var options = {};
 
@@ -143,18 +155,45 @@ HighTables.Base = function(element) {
     });
   };
 
+  function readValueColumns(sequence) {
+    var current = 0;
+    var next;
+    var max = getTable().find("tr:first th, tr:first td").length;
+
+    var values = [];
+    for (i = 0; i < sequence.length; ++i) {
+      if (sequence[i] === "...") {
+        next = sequence[i + 1] || max;
+        while (current < next) {
+          values.push(current++);
+        }
+      } else {
+        current = parseInt(sequence[i]);
+        values.push(current++);
+      }
+    }
+
+    return values;
+  }
+
   function getLabelColumn() {
     return parseInt(element.attr("data-label-column"));
   }
 
   function getValueColumns() {
     var attr = element.attr("data-value-columns");
-    return attr ? HighTables.Parse.integers(attr.split(",")) : null;
+    if (attr) {
+      return readValueColumns(attr.split(","));
+    } else {
+      return null;
+    }
   }
 
   function getLimit() {
     return parseInt(element.attr("data-limit"));
   }
+
+  this.getTable = getTable;
 
   this.options = function() {
     if (!options) {
@@ -306,16 +345,6 @@ HighTables.Table = function(element) {
 
 HighTables.Chart = function(element) {
   $.extend(this, new HighTables.Base(element));
-
-  var chart = this.element;
-  var table;
-
-  this.getTable = function() {
-    if (!table) {
-      table = $(chart.attr("data-source"));
-    }
-    return table;
-  };
 };
 
 HighTables.LineChart = function() {
