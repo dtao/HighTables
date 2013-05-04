@@ -7,7 +7,10 @@ HighTables.BarChart = function() {
 
   function getSeries(table, options) {
     var series = [];
-    for (var i = 1; i < table.rowCount(); i++) {
+    var limit = options.limit ?
+      Math.min(options.limit + 1, table.rowCount()) :
+      table.rowCount();
+    for (var i = 1; i < limit; i++) {
       series.push({
         name: table.getRowHeader(i),
         data: table.getRowData(i, options)
