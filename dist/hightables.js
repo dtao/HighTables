@@ -315,7 +315,9 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnHeader = function(index) {
-    return getCellValue(this.firstRow().find("td:nth-child(" + (index + 1) + "),th:nth-child(" + (index + 1) + ")"));
+    return getCellValue(this.firstRow().find("td:nth-child(" + (index + 1) + "),th:nth-child(" + (index + 1) + ")"), {
+      numeric: false
+    });
   };
 
   this.getColumnData = function(index, options) {
@@ -340,7 +342,7 @@ HighTables.Table = function(element) {
   };
 
   this.getRowHeader = function(index) {
-    return getCellValue(table.find("tr:nth-child(" + (index + 1) + ")").find("td:first"));
+    return getCellValue(table.find("tr:nth-child(" + (index + 1) + ")").find("td:first"), { numeric: false });
   };
 
   this.getRowData = function(index, options) {
