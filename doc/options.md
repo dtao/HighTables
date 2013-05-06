@@ -6,6 +6,7 @@ Support for custom chart options is pretty limited right now:
 - **Title**: to give a chart a title, add the `data-title` attribute to the element responsible for rendering the element (the `<table>` or the `<div>`).
 - **Order**: to render series in the opposite order they appear in a table, set the `data-order` attribute to "descending".
 - **Limit**: to only render the first *N* records in a chart, set `data-limit="[N]"`.
+- **Threshold**: to skip values below a certain threshold, use the `data-threshold` attribute.
 - **X-Axis**: to specify a minimum and tick interval for the X-axis, use the `data-x-min` and `data-x-interval` attributes.
 - **Y-Axis**: to specify a minimum and tick interval for the Y-axis, use the `data-y-min` and `data-y-interval` attributes.
 - **Columns**: to use only certain columns for a table's data, set the `data-value-columns` attribute to a comma-delimited list of the (zero-based) column indices you want to use. Use `"..."` to represent a range; for example:

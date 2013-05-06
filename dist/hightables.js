@@ -172,7 +172,8 @@ HighTables.Base = function(element) {
     return $.extend(options, {
       labelColumn: getLabelColumn(),
       valueColumns: getValueColumns(),
-      limit: getLimit()
+      limit: getLimit(),
+      threshold: getThreshold()
     });
   };
 
@@ -426,10 +427,7 @@ HighTables.BarChart = function() {
 
   function getSeries(table, options) {
     var series = [];
-    var limit = options.limit ?
-      Math.min(options.limit + 1, table.rowCount()) :
-      table.rowCount();
-    for (var i = 1; i < limit; i++) {
+    for (var i = 1; i < table.rowCount(); i++) {
       series.push({
         name: table.getRowHeader(i),
         data: table.getRowData(i, options)

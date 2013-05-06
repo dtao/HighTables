@@ -10,15 +10,15 @@ HighTables.PieChart = function() {
   }
 
   function getSeriesName(table, options) {
-    return table.getCellValue(table.firstRow().find("th:" + getCellSelector(options)));
+    return table.getCellValue(table.firstRow().find("th:" + getCellSelector(options)), { numeric: false });
   }
 
   function getLabel(table, row) {
-    return table.getCellValue($(row).find("td:first"));
+    return table.getCellValue($(row).find("td:first"), { numeric: false });
   }
 
   function getValue(table, row, options) {
-    return table.getCellValue($(row).find("td:" + getCellSelector(options)), { numeric: true });
+    return table.getCellValue($(row).find("td:" + getCellSelector(options)));
   }
 
   function getSeriesData(table, options) {
@@ -26,8 +26,7 @@ HighTables.PieChart = function() {
     table.bodyRows().each(function() {
       var label = getLabel(table, this);
       var value = getValue(table, this, options);
-
-      if (label && !isNaN(value)) {
+      if (label && value) {
         seriesData.push([label, value]);
       }
     });

@@ -14,7 +14,10 @@ HighTables.BarChart = function() {
       series.push({
         name: table.getRowHeader(i),
         data: table.getRowData(i, options)
-      });
+      };
+      if (anyValues(dataPoint.data)) {
+        series.push(dataPoint);
+      }
     }
     return series;
   }

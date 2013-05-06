@@ -50,7 +50,8 @@ HighTables.Base = function(element) {
     return $.extend(options, {
       labelColumn: getLabelColumn(),
       valueColumns: getValueColumns(),
-      limit: getLimit()
+      limit: getLimit(),
+      threshold: getThreshold()
     });
   };
 
@@ -75,6 +76,10 @@ HighTables.Base = function(element) {
     return parseInt(element.attr("data-limit"));
   }
 
+  function getThreshold() {
+    return parseFloat(element.attr("data-threshold"));
+  }
+
   this.getTable = getTable;
 
   this.options = function() {
@@ -82,6 +87,8 @@ HighTables.Base = function(element) {
       options = getChartOptions();
       options.labelColumn = this.labelColumn();
       options.valueColumns = this.valueColumns();
+      options.limit = getLimit();
+      options.threshold = getThreshold();
     }
 
     return options;

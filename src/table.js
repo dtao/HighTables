@@ -8,27 +8,34 @@ HighTables.Table = function(element) {
   var columnCount;
   var rowCount;
 
-  function getCellValue(cell, numeric) {
-    var text = cell.text() || cell.find("input").val();
-
-    if (numeric) {
-      return HighTables.Parse.number(text);
-    } else {
-      return text;
-    }
-  }
-
-  function getCellValueAt(rowIndex, columnIndex, numeric) {
-    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
-      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
-    return getCellValue(cell, numeric);
-  }
-
   function getValueOrDefault(object, key, defaultValue) {
     if (key in object) {
       return object[key];
     }
     return defaultValue;
+  }
+
+  function getCellValue(cell, options) {
+    options = options || {};
+    var text = cell.text() || cell.find("input").val();
+    var number;
+
+    if (getValueOrDefault(options, "numeric", true)) {
+      number = HighTables.Parse.number(text);
+      if (!options.threshold || number >= options.threshold) {
+        return number;
+      } else {
+        return null;
+      }
+    } else {
+      return text;
+    }
+  }
+
+  function getCellValueAt(rowIndex, columnIndex, options) {
+    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
+      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
+    return getCellValue(cell, options);
   }
 
   this.getCellValue = getCellValue;
@@ -81,7 +88,7 @@ HighTables.Table = function(element) {
     var columnData = [];
     this.bodyRows().each(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      columnData.push(getCellValue(cell, getValueOrDefault(options, "numeric", true)));
+      columnData.push(getCellValue(cell, options));
     });
 
     if (options.order === "descending") {
@@ -106,11 +113,11 @@ HighTables.Table = function(element) {
     var rowData = [];
     if (options.valueColumns) {
       for (var i = 0; i < options.valueColumns.length; ++i) {
-        rowData.push(getCellValueAt(index, options.valueColumns[i], getValueOrDefault(options, "numeric", true)));
+        rowData.push(getCellValueAt(index, options.valueColumns[i], options));
       }
     } else {
       table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
-        rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
+        rowData.push(getCellValue($(this), options));
       });
     }
     return rowData;
