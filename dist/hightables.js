@@ -198,6 +198,10 @@ HighTables.Base = function(element) {
     return parseInt(element.attr("data-limit"));
   }
 
+  function getThreshold() {
+    return parseFloat(element.attr("data-threshold"));
+  }
+
   this.getTable = getTable;
 
   this.options = function() {
@@ -205,6 +209,8 @@ HighTables.Base = function(element) {
       options = getChartOptions();
       options.labelColumn = this.labelColumn();
       options.valueColumns = this.valueColumns();
+      options.limit = getLimit();
+      options.threshold = getThreshold();
     }
 
     return options;
@@ -239,27 +245,34 @@ HighTables.Table = function(element) {
   var columnCount;
   var rowCount;
 
-  function getCellValue(cell, numeric) {
-    var text = cell.text() || cell.find("input").val();
-
-    if (numeric) {
-      return HighTables.Parse.number(text);
-    } else {
-      return text;
-    }
-  }
-
-  function getCellValueAt(rowIndex, columnIndex, numeric) {
-    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
-      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
-    return getCellValue(cell, numeric);
-  }
-
   function getValueOrDefault(object, key, defaultValue) {
     if (key in object) {
       return object[key];
     }
     return defaultValue;
+  }
+
+  function getCellValue(cell, options) {
+    options = options || {};
+    var text = cell.text() || cell.find("input").val();
+    var number;
+
+    if (getValueOrDefault(options, "numeric", true)) {
+      number = HighTables.Parse.number(text);
+      if (!options.threshold || number >= options.threshold) {
+        return number;
+      } else {
+        return null;
+      }
+    } else {
+      return text;
+    }
+  }
+
+  function getCellValueAt(rowIndex, columnIndex, options) {
+    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
+      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
+    return getCellValue(cell, options);
   }
 
   this.getCellValue = getCellValue;
@@ -312,7 +325,7 @@ HighTables.Table = function(element) {
     var columnData = [];
     this.bodyRows().each(function() {
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      columnData.push(getCellValue(cell, getValueOrDefault(options, "numeric", true)));
+      columnData.push(getCellValue(cell, options));
     });
 
     if (options.order === "descending") {
@@ -337,11 +350,11 @@ HighTables.Table = function(element) {
     var rowData = [];
     if (options.valueColumns) {
       for (var i = 0; i < options.valueColumns.length; ++i) {
-        rowData.push(getCellValueAt(index, options.valueColumns[i], getValueOrDefault(options, "numeric", true)));
+        rowData.push(getCellValueAt(index, options.valueColumns[i], options));
       }
     } else {
       table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
-        rowData.push(getCellValue($(this), getValueOrDefault(options, "numeric", true)));
+        rowData.push(getCellValue($(this), options));
       });
     }
     return rowData;
@@ -425,13 +438,29 @@ HighTables.BarChart = function() {
     return table.getRowData(0, $.extend({}, options, { numeric: false }));
   }
 
+  function anyValues(data) {
+    for (var i = 0; i < data.length; ++i) {
+      if (data[i]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function getSeries(table, options) {
     var series = [];
-    for (var i = 1; i < table.rowCount(); i++) {
-      series.push({
+    var limit = options.limit ?
+      Math.min(options.limit + 1, table.rowCount()) :
+      table.rowCount();
+    var dataPoint;
+    for (var i = 1; i < limit; i++) {
+      dataPoint = {
         name: table.getRowHeader(i),
         data: table.getRowData(i, options)
-      });
+      };
+      if (anyValues(dataPoint.data)) {
+        series.push(dataPoint);
+      }
     }
     return series;
   }
@@ -484,15 +513,15 @@ HighTables.PieChart = function() {
   }
 
   function getSeriesName(table, options) {
-    return table.getCellValue(table.firstRow().find("th:" + getCellSelector(options)));
+    return table.getCellValue(table.firstRow().find("th:" + getCellSelector(options)), { numeric: false });
   }
 
   function getLabel(table, row) {
-    return table.getCellValue($(row).find("td:first"));
+    return table.getCellValue($(row).find("td:first"), { numeric: false });
   }
 
   function getValue(table, row, options) {
-    return table.getCellValue($(row).find("td:" + getCellSelector(options)), { numeric: true });
+    return table.getCellValue($(row).find("td:" + getCellSelector(options)));
   }
 
   function getSeriesData(table, options) {
@@ -500,8 +529,7 @@ HighTables.PieChart = function() {
     table.bodyRows().each(function() {
       var label = getLabel(table, this);
       var value = getValue(table, this, options);
-
-      if (label && !isNaN(value)) {
+      if (label && value) {
         seriesData.push([label, value]);
       }
     });

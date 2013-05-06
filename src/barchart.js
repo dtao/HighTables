@@ -5,13 +5,23 @@ HighTables.BarChart = function() {
     return table.getRowData(0, $.extend({}, options, { numeric: false }));
   }
 
+  function anyValues(data) {
+    for (var i = 0; i < data.length; ++i) {
+      if (data[i]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function getSeries(table, options) {
     var series = [];
     var limit = options.limit ?
       Math.min(options.limit + 1, table.rowCount()) :
       table.rowCount();
+    var dataPoint;
     for (var i = 1; i < limit; i++) {
-      series.push({
+      dataPoint = {
         name: table.getRowHeader(i),
         data: table.getRowData(i, options)
       };
