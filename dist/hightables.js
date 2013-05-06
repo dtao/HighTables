@@ -330,12 +330,12 @@ HighTables.Table = function(element) {
       columnData.push(getCellValue(cell, options));
     });
 
-    if (options.order === "descending") {
-      columnData.reverse();
-    }
-
     if (options.limit) {
       columnData = columnData.slice(0, options.limit);
+    }
+
+    if (options.order === "descending") {
+      columnData.reverse();
     }
 
     return columnData;
