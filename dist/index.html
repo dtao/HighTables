@@ -19,6 +19,25 @@
           "#6AF9C4"
         ]
       });
+      
+      $(document).ready(function() {
+        $("div[class*='-chart'], table[class*='render-to-']").each(function() {
+          var chartClass = (/[^\s]*-chart|render-to-[^\s]*/).exec(this.className);
+          var dataAttributes = ["." + chartClass];
+      
+          $.each(this.attributes, function(i, attr) {
+            if (attr.name.indexOf("data-") === 0) {
+              if (attr.name.lastIndexOf("highcharts-chart") === -1) {
+                dataAttributes.push(attr.name + '="' + attr.value + '"');
+              }
+            }
+          });
+      
+          $(this)
+            .addClass("has-options")
+            .attr("data-attributes", dataAttributes.join(" "));
+        });
+      });
     //]]>
   </script>
 </head>
@@ -451,14 +470,14 @@
 <span class="nt">&lt;/table&gt;</span>
 </pre></div>
 
-<p>By default, the first column of the table will be used for bar labels, and each remaining column will be rendered as a group of bars.</p>
+<p>By default, the first column of the table will be used for bar labels, and each remaining column will be rendered as a group of bars. The <code>data-transpose</code> option reverses this, using the first <em>row</em> for labels and each subsequent <em>row</em> as a group of bars.</p>
 
 <p>Use <code>column</code> instead of <code>bar</code> to produce a bar chart with vertical bars, i.e., a column chart.</p>
       <h3>
         World's Top Oil Producers
       </h3>
       <div class="bar-chart" data-source="#top-oil-producers" data-value-columns="2"></div>
-      <div class="column-chart" data-source="#top-oil-producers" data-value-columns="3"></div>
+      <div class="column-chart" data-source="#top-oil-producers" data-transpose="true"></div>
       <table id="top-oil-producers">
 <tr>
 <th>Nation</th>

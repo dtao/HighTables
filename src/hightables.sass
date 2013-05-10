@@ -117,7 +117,7 @@ ul.table-of-contents
 table
   border-collapse: collapse
   min-width: 75%
-  margin: auto
+  margin: 25px auto
 
 tr
   &:first-child,
@@ -137,6 +137,25 @@ th, td
   min-width: 150px
   padding: 5px 15px
   text-align: right
+
+.has-options
+  position: relative
+
+  &:hover:after
+    @include data
+
+    content: attr(data-attributes)
+    display: block
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    padding: 5px
+    background-color: $black
+    color: $white
+    opacity: 0.85
+    filter: alpha(opacity=85)
+    text-align: center
 
 .side-by-side
   min-height: 400px

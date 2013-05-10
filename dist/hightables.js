@@ -156,8 +156,11 @@ HighTables.Base = function(element) {
       }
     }
     return table;
-  };
+  }
 
+  /* TODO: This is stupid. Options and chart options should not be conflated
+   * like this; chartOptions should be a property OF options instead.
+   */
   function getChartOptions() {
     var options = {};
 
@@ -173,9 +176,10 @@ HighTables.Base = function(element) {
       labelColumn: getLabelColumn(),
       valueColumns: getValueColumns(),
       limit: getLimit(),
-      threshold: getThreshold()
+      threshold: getThreshold(),
+      transpose: getTranspose()
     });
-  };
+  }
 
   function getLabelColumn() {
     return parseInt(element.attr("data-label-column"));
@@ -202,6 +206,10 @@ HighTables.Base = function(element) {
     return parseFloat(element.attr("data-threshold"));
   }
 
+  function getTranspose() {
+    return element.attr("data-transpose") === "true";
+  }
+
   this.getTable = getTable;
 
   this.options = function() {
@@ -211,6 +219,7 @@ HighTables.Base = function(element) {
       options.valueColumns = this.valueColumns();
       options.limit = getLimit();
       options.threshold = getThreshold();
+      options.transpose = getTranspose();
     }
 
     return options;
@@ -437,7 +446,11 @@ HighTables.BarChart = function() {
   var barCharts = HighTables.charts["bar"] = [];
 
   function getCategories(table, options) {
-    return table.getRowData(0, $.extend({}, options, { numeric: false }));
+    if (options.transpose) {
+      return table.getColumnData(0, $.extend({}, options, { numeric: false }));
+    } else {
+      return table.getRowData(0, $.extend({}, options, { numeric: false }));
+    }
   }
 
   function anyValues(data) {
@@ -451,15 +464,30 @@ HighTables.BarChart = function() {
 
   function getSeries(table, options) {
     var series = [];
-    var limit = options.limit ?
-      Math.min(options.limit + 1, table.rowCount()) :
+
+    var recordCount = options.transpose ?
+      table.columnCount() :
       table.rowCount();
+
+    var limit = options.limit ?
+      Math.min(options.limit + 1, recordCount) :
+      recordCount;
+
     var dataPoint;
     for (var i = 1; i < limit; i++) {
-      dataPoint = {
-        name: table.getRowHeader(i),
-        data: table.getRowData(i, options)
-      };
+      if (options.transpose) {
+        dataPoint = {
+          name: table.getColumnHeader(i),
+          data: table.getColumnData(i, options)
+        };
+
+      } else {
+        dataPoint = {
+          name: table.getRowHeader(i),
+          data: table.getRowData(i, options)
+        };
+      }
+
       if (anyValues(dataPoint.data)) {
         series.push(dataPoint);
       }

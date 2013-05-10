@@ -2,7 +2,11 @@ HighTables.BarChart = function() {
   var barCharts = HighTables.charts["bar"] = [];
 
   function getCategories(table, options) {
-    return table.getRowData(0, $.extend({}, options, { numeric: false }));
+    if (options.transpose) {
+      return table.getColumnData(0, $.extend({}, options, { numeric: false }));
+    } else {
+      return table.getRowData(0, $.extend({}, options, { numeric: false }));
+    }
   }
 
   function anyValues(data) {
@@ -16,15 +20,30 @@ HighTables.BarChart = function() {
 
   function getSeries(table, options) {
     var series = [];
-    var limit = options.limit ?
-      Math.min(options.limit + 1, table.rowCount()) :
+
+    var recordCount = options.transpose ?
+      table.columnCount() :
       table.rowCount();
+
+    var limit = options.limit ?
+      Math.min(options.limit + 1, recordCount) :
+      recordCount;
+
     var dataPoint;
     for (var i = 1; i < limit; i++) {
-      dataPoint = {
-        name: table.getRowHeader(i),
-        data: table.getRowData(i, options)
-      };
+      if (options.transpose) {
+        dataPoint = {
+          name: table.getColumnHeader(i),
+          data: table.getColumnData(i, options)
+        };
+
+      } else {
+        dataPoint = {
+          name: table.getRowHeader(i),
+          data: table.getRowData(i, options)
+        };
+      }
+
       if (anyValues(dataPoint.data)) {
         series.push(dataPoint);
       }

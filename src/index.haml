@@ -21,6 +21,25 @@
       ]
     });
 
+    $(document).ready(function() {
+      $("div[class*='-chart'], table[class*='render-to-']").each(function() {
+        var chartClass = (/[^\s]*-chart|render-to-[^\s]*/).exec(this.className);
+        var dataAttributes = ["." + chartClass];
+
+        $.each(this.attributes, function(i, attr) {
+          if (attr.name.indexOf("data-") === 0) {
+            if (attr.name.lastIndexOf("highcharts-chart") === -1) {
+              dataAttributes.push(attr.name + '="' + attr.value + '"');
+            }
+          }
+        });
+
+        $(this)
+          .addClass("has-options")
+          .attr("data-attributes", dataAttributes.join(" "));
+      });
+    });
+
 %body
   %a(href="https://github.com/dtao/HighTables")
     %img.github-ribbon(src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub")

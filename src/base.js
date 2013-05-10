@@ -34,8 +34,11 @@ HighTables.Base = function(element) {
       }
     }
     return table;
-  };
+  }
 
+  /* TODO: This is stupid. Options and chart options should not be conflated
+   * like this; chartOptions should be a property OF options instead.
+   */
   function getChartOptions() {
     var options = {};
 
@@ -51,9 +54,10 @@ HighTables.Base = function(element) {
       labelColumn: getLabelColumn(),
       valueColumns: getValueColumns(),
       limit: getLimit(),
-      threshold: getThreshold()
+      threshold: getThreshold(),
+      transpose: getTranspose()
     });
-  };
+  }
 
   function getLabelColumn() {
     return parseInt(element.attr("data-label-column"));
@@ -80,6 +84,10 @@ HighTables.Base = function(element) {
     return parseFloat(element.attr("data-threshold"));
   }
 
+  function getTranspose() {
+    return element.attr("data-transpose") === "true";
+  }
+
   this.getTable = getTable;
 
   this.options = function() {
@@ -89,6 +97,7 @@ HighTables.Base = function(element) {
       options.valueColumns = this.valueColumns();
       options.limit = getLimit();
       options.threshold = getThreshold();
+      options.transpose = getTranspose();
     }
 
     return options;
