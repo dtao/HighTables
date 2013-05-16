@@ -59,7 +59,6 @@ HighTables.BarChart = function() {
 
     barCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
-        backgroundColor: "transparent",
         renderTo: chart[0],
         type: "bar"
       },

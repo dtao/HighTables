@@ -36,7 +36,6 @@ HighTables.LineChart = function() {
 
     lineCharts.push(new Highcharts.Chart($.extend(true, {
       chart: {
-        backgroundColor: "transparent",
         renderTo: chart[0],
         type: "line"
       },
