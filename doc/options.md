@@ -9,10 +9,11 @@ Support for custom chart options is pretty limited right now:
 - **Threshold**: to skip values below a certain threshold, use the `data-threshold` attribute.
 - **X-Axis**: to specify a minimum and tick interval for the X-axis, use the `data-x-min` and `data-x-interval` attributes.
 - **Y-Axis**: to specify a minimum and tick interval for the Y-axis, use the `data-y-min` and `data-y-interval` attributes.
-- **Columns**: to use only certain columns for a table's data, set the `data-value-columns` attribute to a comma-delimited list of the (zero-based) column indices you want to use. Use `"..."` to represent a range; for example:
+- **Columns**: to use only certain columns for a chart's data, set the `data-value-columns` attribute to a comma-delimited list of the (zero-based) column indices you want to use. Use `"..."` to represent a range; for example:
   - `"5,6"` would use columns 5 and 6 (obviously)
   - `"2,...,5"` would use columns 2, 3, 4, and 5
   - `"3,..."` would use every column starting with column 3
   - `"...,3"` would use every column from 0 to 3
+- **Row Filtering**: to filter which rows to use for a chart's data, you can set the `data-row-filter` attribute to the name of a JavaScript function which accepts a row element as an argument and can return `true` to include the row or `false` to exclude it.
 
 In addition to these options, there is support for a more general customization mechanism: add the `data-options` attribute, and specify the name of a JavaScript function which returns an object with any Highcharts options you like.
