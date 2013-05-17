@@ -7,7 +7,7 @@ HighTables.Base = function(element) {
   var table;
 
   var CHART_OPTIONS_MAP = {
-    "options": function(value) { return safeEval(value); },
+    "options": function(value) { return safeEval(value, true); },
     "title": function(value) { return { title: { text: value } }; },
     "order": function(value) { return { order: value }; },
     "x-interval": function(value) { return { xAxis: { tickInterval: parseInt(value) } }; },
@@ -16,13 +16,13 @@ HighTables.Base = function(element) {
     "y-min": function(value) { return { yAxis: { min: parseInt(value) } }; }
   };
 
-  function safeEval(name) {
+  function safeEval(name, exec) {
     var parts = name.split(".");
     var result = window;
     while (parts.length > 0) {
       result = result[parts.shift()];
     }
-    return (typeof result === "function") ? result() : result;
+    return (typeof result === "function" && exec) ? result() : result;
   }
 
   function getTable() {
@@ -55,7 +55,8 @@ HighTables.Base = function(element) {
       valueColumns: getValueColumns(),
       limit: getLimit(),
       threshold: getThreshold(),
-      transpose: getTranspose()
+      transpose: getTranspose(),
+      rowFilter: getRowFilter()
     });
   }
 
@@ -86,6 +87,13 @@ HighTables.Base = function(element) {
 
   function getTranspose() {
     return element.attr("data-transpose") === "true";
+  }
+
+  function getRowFilter() {
+    var attr = element.attr("data-row-filter");
+    if (attr) {
+      return safeEval(attr);
+    }
   }
 
   this.getTable = getTable;

@@ -84,11 +84,15 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnData = function(index, options) {
-    options = options || {};
+    options = options || this.options() || {};
 
     // Ugh -- jQuery removes items when the function passed to map returns null.
     var columnData = [];
     this.bodyRows().each(function() {
+      if (options.rowFilter && options.rowFilter(this) === false) {
+        return;
+      }
+
       var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
       columnData.push(getCellValue(cell, options));
     });
