@@ -7,4 +7,5 @@ group :development do
   gem "pygments.rb"
   gem "redcarpet"
   gem "yui-compressor"
+  gem "win32-open3-19", :platforms => :mingw
 end
