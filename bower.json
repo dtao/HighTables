@@ -1,0 +1,26 @@
+{
+  "name": "HighTables",
+  "version": "0.1.0",
+  "homepage": "http://danieltao.com/HighTables",
+  "authors": [
+    "Dan Tao <daniel.tao@gmail.com>"
+  ],
+  "description": "Makes it trivial to render charts from existing HTML tables using jQuery and Highcharts",
+  "main": "dist/hightables.js",
+  "keywords": [
+    "charts",
+    "charting",
+    "tables"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "doc",
+    "src"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "highcharts.com": "*"
+  }
+}
