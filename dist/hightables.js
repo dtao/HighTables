@@ -70,7 +70,7 @@ $(document).ready(function() {
   };
 
   HighTables.renderChartFromTable = function(table) {
-    var chartType = getChartTypeFromTable(chart);
+    var chartType = getChartTypeFromTable(table);
     var engine    = chartConfigs[chartType].engine;
     var options   = chartConfigs[chartType].options;
     engine.renderFromTable(table, options);
