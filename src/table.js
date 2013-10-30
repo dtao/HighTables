@@ -33,9 +33,9 @@ HighTables.Table = function(element) {
   }
 
   function getCellValueAt(rowIndex, columnIndex, options) {
-    var cell = table.find("tr:nth-child(" + (rowIndex + 1) + ")")
-      .find("th:nth-child(" + columnIndex + "), td:nth-child(" + columnIndex + ")");
-    return getCellValue(cell, options);
+    var row  = table.find("tr").get(rowIndex),
+        cell = $(row).find("th, td").get(columnIndex);
+    return getCellValue($(cell), options);
   }
 
   this.getCellValue = getCellValue;
@@ -78,7 +78,7 @@ HighTables.Table = function(element) {
   };
 
   this.getColumnHeader = function(index) {
-    return getCellValue(this.firstRow().find("td:nth-child(" + (index + 1) + "),th:nth-child(" + (index + 1) + ")"), {
+    return getCellValue($(this.firstRow().find("th,td").get(index)), {
       numeric: false
     });
   };
@@ -93,8 +93,8 @@ HighTables.Table = function(element) {
         return;
       }
 
-      var cell = $(this).find("td:nth-child(" + (index + 1) + ")");
-      columnData.push(getCellValue(cell, options));
+      var cell = $(this).find("td").get(index);
+      columnData.push(getCellValue($(cell), options));
     });
 
     if (options.limit) {
@@ -109,7 +109,7 @@ HighTables.Table = function(element) {
   };
 
   this.getRowHeader = function(index) {
-    return getCellValue(table.find("tr:nth-child(" + (index + 1) + ")").find("td:first"), { numeric: false });
+    return getCellValue($(table.find("tr").get(index)).find("td:first"), { numeric: false });
   };
 
   this.getRowData = function(index, options) {
@@ -122,7 +122,7 @@ HighTables.Table = function(element) {
         rowData.push(getCellValueAt(index, options.valueColumns[i], options));
       }
     } else {
-      table.find("tr:nth-child(" + (index + 1) + ")").find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
+      $(table.find("tr").get(index)).find("td:gt(0):not(.exclude-from-chart),th:gt(0):not(.exclude-from-chart)").each(function() {
         rowData.push(getCellValue($(this), options));
       });
     }

@@ -2,12 +2,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>HighTables</title>
-  <link href="hightables.min.css" rel="stylesheet">
-  <script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
-  <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
-  <script src="hightables.min.js" type="text/javascript"></script>
-  <script type="text/javascript">
+<title>HighTables</title>
+<link href="hightables.min.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script><script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script><script src="hightables.min.js" type="text/javascript"></script><script type="text/javascript">
     //<![CDATA[
       Highcharts.setOptions({
         colors: [
@@ -46,15 +43,13 @@
 </head>
 <body>
   <a href="https://github.com/dtao/HighTables">
-    <img alt="Fork me on GitHub" class="github-ribbon" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
-  </a>
-  <article>
-    <h1>HighTables</h1>
+    <img alt="Fork me on GitHub" class="github-ribbon" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+  <article><h1>HighTables</h1>
     
     <p>HighTables makes it trivial to render charts from existing HTML tables using
     <a href="http://jquery.com/">jQuery</a> and <a href="http://www.highcharts.com">Highcharts</a>.</p>
     <ul class="table-of-contents">
-      <li>
+<li>
         <a href="#quick-example">Quick Example</a>
       </li>
       <li>
@@ -82,9 +77,7 @@
         <a href="#api">API</a>
       </li>
     </ul>
-    <section id="quick-example">
-      
-      <h2>
+<section id="quick-example"><h2>
         Quick Example
       </h2>
       <script type="text/javascript">
@@ -100,8 +93,7 @@
             }
           }
         //]]>
-      </script>
-      <p>Here's a quick example of what you can do with HighTables.</p>
+      </script><p>Here's a quick example of what you can do with HighTables.</p>
       <h3>
         Domestic Box Office Performance of the <em>Batman</em> Movie Franchise
       </h3>
@@ -114,164 +106,164 @@
       </p>
       <div class="hidden">
         <table class="batman-box-office-performance">
-          <tr>
-            <th>Day</th>
-            <th>Batman Begins</th>
-            <th>Batman Begins (Total)</th>
-            <th>The Dark Knight</th>
-            <th>The Dark Knight (Total)</th>
-            <th>The Dark Knight Rises</th>
-            <th>The Dark Knight Rises (Total)</th>
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td>$15,068,368</td>
-            <td>$15,068,368</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td>$9,083,178</td>
-            <td>$24,151,546</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Friday</td>
-            <td>$15,072,242</td>
-            <td>$39,223,788</td>
-            <td>$67,165,092</td>
-            <td>$67,165,092</td>
-            <td>$75,754,897</td>
-            <td>$75,754,897</td>
-          </tr>
-          <tr>
-            <td>Saturday</td>
-            <td>$18,017,047</td>
-            <td>$57,240,835</td>
-            <td>$47,650,240</td>
-            <td>$114,815,332</td>
-            <td>$44,931,966</td>
-            <td>$120,686,863</td>
-          </tr>
-          <tr>
-            <td>Sunday</td>
-            <td>$15,656,151</td>
-            <td>$72,896,986</td>
-            <td>$43,596,151</td>
-            <td>$158,411,483</td>
-            <td>$40,200,432</td>
-            <td>$160,887,295</td>
-          </tr>
-          <tr>
-            <td>Monday</td>
-            <td>$6,627,412</td>
-            <td>$79,524,398</td>
-            <td>$24,493,313</td>
-            <td>$182,904,796</td>
-            <td>$19,389,129</td>
-            <td>$180,276,424</td>
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td>$5,404,419</td>
-            <td>$84,928,817</td>
-            <td>$20,868,722</td>
-            <td>$203,773,518</td>
-            <td>$17,762,472</td>
-            <td>$198,038,896</td>
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td>$5,518,167</td>
-            <td>$90,446,984</td>
-            <td>$18,377,288</td>
-            <td>$222,150,806</td>
-            <td>$13,770,092</td>
-            <td>$211,808,988</td>
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td>$4,475,440</td>
-            <td>$94,922,424</td>
-            <td>$16,464,405</td>
-            <td>$238,615,211</td>
-            <td>$13,202,371</td>
-            <td>$225,011,359</td>
-          </tr>
-          <tr>
-            <td>Friday</td>
-            <td>$8,269,743</td>
-            <td>$103,192,167</td>
-            <td>$23,232,292</td>
-            <td>$261,847,503</td>
-            <td>$17,734,545</td>
-            <td>$242,745,904</td>
-          </tr>
-          <tr>
-            <td>Saturday</td>
-            <td>$10,664,330</td>
-            <td>$113,856,497</td>
-            <td>$28,272,494</td>
-            <td>$290,119,997</td>
-            <td>$24,712,417</td>
-            <td>$267,458,321</td>
-          </tr>
-          <tr>
-            <td>Sunday</td>
-            <td>$8,655,316</td>
-            <td>$122,511,813</td>
-            <td>$23,661,680</td>
-            <td>$313,781,677</td>
-            <td>$19,654,489</td>
-            <td>$287,112,810</td>
-          </tr>
-          <tr>
-            <td>Monday</td>
-            <td>$4,010,038</td>
-            <td>$126,521,851</td>
-            <td>$10,518,116</td>
-            <td>$324,299,793</td>
-            <td>$8,160,046</td>
-            <td>$295,272,856</td>
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td>$3,727,338</td>
-            <td>$130,249,189</td>
-            <td>$9,629,366</td>
-            <td>$333,929,159</td>
-            <td>$8,773,116</td>
-            <td>$304,045,972</td>
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td>$2,574,479</td>
-            <td>$132,823,668</td>
-            <td>$8,755,141</td>
-            <td>$342,684,300</td>
-            <td>$7,333,325</td>
-            <td>$311,379,297</td>
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td>$2,637,269</td>
-            <td>$135,460,937</td>
-            <td>$8,402,546</td>
-            <td>$351,086,846</td>
-            <td>$6,818,467</td>
-            <td>$318,197,764</td>
-          </tr>
-        </table>
-      </div>
-    </section>
-    <section id="basic-usage">
-      <h2>Basic Usage</h2>
+<thead><tr>
+<th>Day</th>
+              <th>Batman Begins</th>
+              <th>Batman Begins (Total)</th>
+              <th>The Dark Knight</th>
+              <th>The Dark Knight (Total)</th>
+              <th>The Dark Knight Rises</th>
+              <th>The Dark Knight Rises (Total)</th>
+            </tr></thead>
+<tbody>
+<tr>
+<td>Wednesday</td>
+              <td>$15,068,368</td>
+              <td>$15,068,368</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+<tr>
+<td>Thursday</td>
+              <td>$9,083,178</td>
+              <td>$24,151,546</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+<tr>
+<td>Friday</td>
+              <td>$15,072,242</td>
+              <td>$39,223,788</td>
+              <td>$67,165,092</td>
+              <td>$67,165,092</td>
+              <td>$75,754,897</td>
+              <td>$75,754,897</td>
+            </tr>
+<tr>
+<td>Saturday</td>
+              <td>$18,017,047</td>
+              <td>$57,240,835</td>
+              <td>$47,650,240</td>
+              <td>$114,815,332</td>
+              <td>$44,931,966</td>
+              <td>$120,686,863</td>
+            </tr>
+<tr>
+<td>Sunday</td>
+              <td>$15,656,151</td>
+              <td>$72,896,986</td>
+              <td>$43,596,151</td>
+              <td>$158,411,483</td>
+              <td>$40,200,432</td>
+              <td>$160,887,295</td>
+            </tr>
+<tr>
+<td>Monday</td>
+              <td>$6,627,412</td>
+              <td>$79,524,398</td>
+              <td>$24,493,313</td>
+              <td>$182,904,796</td>
+              <td>$19,389,129</td>
+              <td>$180,276,424</td>
+            </tr>
+<tr>
+<td>Tuesday</td>
+              <td>$5,404,419</td>
+              <td>$84,928,817</td>
+              <td>$20,868,722</td>
+              <td>$203,773,518</td>
+              <td>$17,762,472</td>
+              <td>$198,038,896</td>
+            </tr>
+<tr>
+<td>Wednesday</td>
+              <td>$5,518,167</td>
+              <td>$90,446,984</td>
+              <td>$18,377,288</td>
+              <td>$222,150,806</td>
+              <td>$13,770,092</td>
+              <td>$211,808,988</td>
+            </tr>
+<tr>
+<td>Thursday</td>
+              <td>$4,475,440</td>
+              <td>$94,922,424</td>
+              <td>$16,464,405</td>
+              <td>$238,615,211</td>
+              <td>$13,202,371</td>
+              <td>$225,011,359</td>
+            </tr>
+<tr>
+<td>Friday</td>
+              <td>$8,269,743</td>
+              <td>$103,192,167</td>
+              <td>$23,232,292</td>
+              <td>$261,847,503</td>
+              <td>$17,734,545</td>
+              <td>$242,745,904</td>
+            </tr>
+<tr>
+<td>Saturday</td>
+              <td>$10,664,330</td>
+              <td>$113,856,497</td>
+              <td>$28,272,494</td>
+              <td>$290,119,997</td>
+              <td>$24,712,417</td>
+              <td>$267,458,321</td>
+            </tr>
+<tr>
+<td>Sunday</td>
+              <td>$8,655,316</td>
+              <td>$122,511,813</td>
+              <td>$23,661,680</td>
+              <td>$313,781,677</td>
+              <td>$19,654,489</td>
+              <td>$287,112,810</td>
+            </tr>
+<tr>
+<td>Monday</td>
+              <td>$4,010,038</td>
+              <td>$126,521,851</td>
+              <td>$10,518,116</td>
+              <td>$324,299,793</td>
+              <td>$8,160,046</td>
+              <td>$295,272,856</td>
+            </tr>
+<tr>
+<td>Tuesday</td>
+              <td>$3,727,338</td>
+              <td>$130,249,189</td>
+              <td>$9,629,366</td>
+              <td>$333,929,159</td>
+              <td>$8,773,116</td>
+              <td>$304,045,972</td>
+            </tr>
+<tr>
+<td>Wednesday</td>
+              <td>$2,574,479</td>
+              <td>$132,823,668</td>
+              <td>$8,755,141</td>
+              <td>$342,684,300</td>
+              <td>$7,333,325</td>
+              <td>$311,379,297</td>
+            </tr>
+<tr>
+<td>Thursday</td>
+              <td>$2,637,269</td>
+              <td>$135,460,937</td>
+              <td>$8,402,546</td>
+              <td>$351,086,846</td>
+              <td>$6,818,467</td>
+              <td>$318,197,764</td>
+            </tr>
+</tbody>
+</table>
+</div>
+    </section><section id="basic-usage"><h2>Basic Usage</h2>
 
 <p>To render a chart from any table on your page using HighTables, you have two options.</p>
 
@@ -298,9 +290,7 @@
 
 <p>The second approach is more flexible than the first as it allows you to render multiple charts from the same table with different custom options. It also decouples the logic used to render your tables from your charting logic, making it possible to (for example) load tables asynchronously from one website and render charts from them on a completely different website.</p>
       
-    </section>
-    <section id="line-charts">
-      <h2>Line Charts</h2>
+    </section><section id="line-charts"><h2>Line Charts</h2>
 
 <div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-line-chart"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- ... --&gt;</span>
@@ -319,88 +309,85 @@
         Web Browser Market Share
       </h3>
       <table class="render-to-line-chart">
-        <tr>
-          <th>Month</th>
+<tr>
+<th>Month</th>
           <th>IE</th>
           <th>Firefox</th>
           <th>Chrome</th>
         </tr>
-        <tr>
-          <td>2012-01</td>
+<tr>
+<td>2012-01</td>
           <td>37.45</td>
           <td>24.78</td>
           <td>28.4</td>
         </tr>
-        <tr>
-          <td>2012-02</td>
+<tr>
+<td>2012-02</td>
           <td>35.75</td>
           <td>24.88</td>
           <td>29.84</td>
         </tr>
-        <tr>
-          <td>2012-03</td>
+<tr>
+<td>2012-03</td>
           <td>34.81</td>
           <td>24.98</td>
           <td>30.87</td>
         </tr>
-        <tr>
-          <td>2012-04</td>
+<tr>
+<td>2012-04</td>
           <td>34.07</td>
           <td>24.87</td>
           <td>31.23</td>
         </tr>
-        <tr>
-          <td>2012-05</td>
+<tr>
+<td>2012-05</td>
           <td>32.12</td>
           <td>25.55</td>
           <td>32.43</td>
         </tr>
-        <tr>
-          <td>2012-06</td>
+<tr>
+<td>2012-06</td>
           <td>32.31</td>
           <td>24.56</td>
           <td>32.76</td>
         </tr>
-        <tr>
-          <td>2012-07</td>
+<tr>
+<td>2012-07</td>
           <td>32.04</td>
           <td>23.73</td>
           <td>33.81</td>
         </tr>
-        <tr>
-          <td>2012-08</td>
+<tr>
+<td>2012-08</td>
           <td>32.85</td>
           <td>22.85</td>
           <td>33.59</td>
         </tr>
-        <tr>
-          <td>2012-09</td>
+<tr>
+<td>2012-09</td>
           <td>32.7</td>
           <td>22.4</td>
           <td>34.21</td>
         </tr>
-        <tr>
-          <td>2012-10</td>
+<tr>
+<td>2012-10</td>
           <td>32.08</td>
           <td>22.32</td>
           <td>34.77</td>
         </tr>
-        <tr>
-          <td>2012-11</td>
+<tr>
+<td>2012-11</td>
           <td>31.23</td>
           <td>22.37</td>
           <td>35.72</td>
         </tr>
-        <tr>
-          <td>2012-12</td>
+<tr>
+<td>2012-12</td>
           <td>29.84</td>
           <td>22.24</td>
           <td>36.66</td>
         </tr>
-      </table>
-    </section>
-    <section id="area-charts">
-      <h2>Area Charts</h2>
+</table></section><section id="area-charts"><h2>Area Charts</h2>
 
 <div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-area-chart"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- ... --&gt;</span>
@@ -417,66 +404,63 @@
         Mobile OS Market Share
       </h3>
       <table class="render-to-stack-chart" data-order="descending">
-        <tr>
-          <th>Quarter</th>
+<tr>
+<th>Quarter</th>
           <th>iOS</th>
           <th>Android</th>
           <th>BlackBerry</th>
           <th>Windows Phone</th>
         </tr>
-        <tr>
-          <td>2012 Q3</td>
+<tr>
+<td>2012 Q3</td>
           <td>23,550</td>
           <td>122,480</td>
           <td>8,947</td>
           <td>4,058</td>
         </tr>
-        <tr>
-          <td>2012 Q2</td>
+<tr>
+<td>2012 Q2</td>
           <td>28,935</td>
           <td>98,529</td>
           <td>7,991</td>
           <td>4,087</td>
         </tr>
-        <tr>
-          <td>2012 Q1</td>
+<tr>
+<td>2012 Q1</td>
           <td>33,121</td>
           <td>81,067</td>
           <td>9,939</td>
           <td>2,713</td>
         </tr>
-        <tr>
-          <td>2011 Q4</td>
+<tr>
+<td>2011 Q4</td>
           <td>35,456</td>
           <td>75,906</td>
           <td>13,185</td>
           <td>2,759</td>
         </tr>
-        <tr>
-          <td>2011 Q3</td>
+<tr>
+<td>2011 Q3</td>
           <td>17,295</td>
           <td>60,490</td>
           <td>12,701</td>
           <td>1,702</td>
         </tr>
-        <tr>
-          <td>2011 Q2</td>
+<tr>
+<td>2011 Q2</td>
           <td>19,629</td>
           <td>46,776</td>
           <td>12,652</td>
           <td>1,724</td>
         </tr>
-        <tr>
-          <td>2011 Q1</td>
+<tr>
+<td>2011 Q1</td>
           <td>16,883</td>
           <td>36,350</td>
           <td>13,004</td>
           <td>1,600</td>
         </tr>
-      </table>
-    </section>
-    <section id="bar-charts">
-      <h2>Bar &amp; Column Charts</h2>
+</table></section><section id="bar-charts"><h2>Bar &amp; Column Charts</h2>
 
 <div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-bar-chart"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- ... --&gt;</span>
@@ -497,40 +481,37 @@
       <div class="bar-chart" data-source="#top-oil-producers" data-value-columns="2"></div>
       <div class="column-chart" data-source="#top-oil-producers" data-transpose="true"></div>
       <table id="top-oil-producers">
-        <tr>
-          <th>Nation</th>
+<tr>
+<th>Nation</th>
           <th>Oil Produced</th>
           <th>CO<sub>2</sub> Emissions</th>
         </tr>
-        <tr>
-          <td>Russia</td>
+<tr>
+<td>Russia</td>
           <td>10,540,000</td>
           <td>1,688,688</td>
         </tr>
-        <tr>
-          <td>Saudi Arabia</td>
+<tr>
+<td>Saudi Arabia</td>
           <td>10,270,000</td>
           <td>493,726</td>
         </tr>
-        <tr>
-          <td>United States</td>
+<tr>
+<td>United States</td>
           <td>9,688,000</td>
           <td>5,492,170</td>
         </tr>
-        <tr>
-          <td>Iran</td>
+<tr>
+<td>Iran</td>
           <td>4,252,000</td>
           <td>574,667</td>
         </tr>
-        <tr>
-          <td>China</td>
+<tr>
+<td>China</td>
           <td>4,073,000</td>
           <td>8,240,958</td>
         </tr>
-      </table>
-    </section>
-    <section id="pie-charts">
-      <h2>Pie Charts</h2>
+</table></section><section id="pie-charts"><h2>Pie Charts</h2>
 
 <div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"render-to-pie-chart"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- ... --&gt;</span>
@@ -547,38 +528,35 @@
         U.S. National Budget
       </h3>
       <table class="render-to-pie-chart">
-        <tr>
-          <th>Category</th>
+<tr>
+<th>Category</th>
           <th>Budget (in billions)</th>
         </tr>
-        <tr>
-          <td>Medicare/Medicaid</td>
+<tr>
+<td>Medicare/Medicaid</td>
           <td>$835</td>
         </tr>
-        <tr>
-          <td>Social Security</td>
+<tr>
+<td>Social Security</td>
           <td>$725</td>
         </tr>
-        <tr>
-          <td>Defense</td>
+<tr>
+<td>Defense</td>
           <td>$700</td>
         </tr>
-        <tr>
-          <td>Discretionary</td>
+<tr>
+<td>Discretionary</td>
           <td>$646</td>
         </tr>
-        <tr>
-          <td>Other Mandatory</td>
+<tr>
+<td>Other Mandatory</td>
           <td>$465</td>
         </tr>
-        <tr>
-          <td>Net Interest</td>
+<tr>
+<td>Net Interest</td>
           <td>$227</td>
         </tr>
-      </table>
-    </section>
-    <section id="installation">
-      <h2>Installation</h2>
+</table></section><section id="installation"><h2>Installation</h2>
 
 <p>To use HighTables on your website, simply include <a href="http://dtao.github.com/HighTables/hightables.min.js">hightables.min.js</a> (or <a href="http://dtao.github.com/HighTables/hightables.js">hightables.js</a>) <em>after</em> including jQuery and Highcharts:</p>
 
@@ -587,9 +565,7 @@
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"hightables.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
       
-    </section>
-    <section id="options">
-      <h2>Options</h2>
+    </section><section id="options"><h2>Options</h2>
 
 <p>Support for custom chart options is pretty limited right now:</p>
 
@@ -623,7 +599,6 @@
 <li>
 <strong>Row Filtering</strong>: to filter which rows to use for a chart's data, you can set the <code>data-row-filter</code> attribute to the name of a JavaScript function which accepts a row element as an argument and can return <code>true</code> to include the row or <code>false</code> to exclude it.</li>
 </ul>
-
 <p>In addition to these options, there is support for a more general customization mechanism: add the <code>data-options</code> attribute, and specify the name of a JavaScript function which returns an object with any Highcharts options you like.</p>
       <h3>Options Example</h3>
 <script type="text/javascript">
@@ -643,8 +618,7 @@
       };
     }
   //]]>
-</script>
-<p>For instance, the chart on the right below is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
+</script><p>For instance, the chart on the right below is rendered with the attribute <code>data-options="customOptions"</code>, where <code>customOptions</code> is the following JavaScript function:</p>
 <div class="highlight"><pre><span class="kd">function</span> <span class="nx">customOptions</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">{</span>
     <span class="nx">title</span><span class="o">:</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"Gloomy Autumn Donut Version"</span> <span class="p">},</span>
@@ -665,38 +639,35 @@
   <div class="pie-chart" data-options="customOptions" data-source=".us-national-budget"></div>
 </div>
 <table class="us-national-budget">
-  <tr>
-    <th>Category</th>
+<tr>
+<th>Category</th>
     <th>Budget (in billions)</th>
   </tr>
-  <tr>
-    <td>Medicare/Medicaid</td>
+<tr>
+<td>Medicare/Medicaid</td>
     <td>$835</td>
   </tr>
-  <tr>
-    <td>Social Security</td>
+<tr>
+<td>Social Security</td>
     <td>$725</td>
   </tr>
-  <tr>
-    <td>Defense</td>
+<tr>
+<td>Defense</td>
     <td>$700</td>
   </tr>
-  <tr>
-    <td>Discretionary</td>
+<tr>
+<td>Discretionary</td>
     <td>$646</td>
   </tr>
-  <tr>
-    <td>Other Mandatory</td>
+<tr>
+<td>Other Mandatory</td>
     <td>$465</td>
   </tr>
-  <tr>
-    <td>Net Interest</td>
+<tr>
+<td>Net Interest</td>
     <td>$227</td>
   </tr>
-</table>
-    </section>
-    <section id="api">
-      <h2>API</h2>
+</table></section><section id="api"><h2>API</h2>
 
 <p>HighTables will automatically render charts when the page loads. However, you can also render charts manually, e.g. if the content of your page is dynamic and/or you want to make charts update and re-render based on user actions.</p>
 
@@ -720,8 +691,7 @@
             });
           }
         //]]>
-      </script>
-      <p>
+      </script><p>
         Click the button below to load an HTML table via AJAX and render a chart from it.
         <button onclick="loadTableViaAjax();">Load Table</button>
       </p>
@@ -729,7 +699,6 @@
         <div class="line-chart" data-source="#api-example-data table" id="api-example-chart"></div>
         <div id="api-example-data"></div>
       </div>
-    </section>
-  </article>
+    </section></article>
 </body>
 </html>
